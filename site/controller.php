@@ -7,3 +7,7 @@
  **/
 
 defined('_JEXEC') or die;
+
+class DD_Maps_LocationsController extends JControllerLegacy{
+
+}
