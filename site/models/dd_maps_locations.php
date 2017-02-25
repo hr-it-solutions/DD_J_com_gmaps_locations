@@ -8,6 +8,6 @@
 
 defined('_JEXEC') or die;
 
-class DD_Maps_LocationsModel extends JModelLegacy {
+class DD_GMaps_LocationsModel extends JModelLegacy {
 
 }
