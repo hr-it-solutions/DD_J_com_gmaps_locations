@@ -8,7 +8,7 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_Maps_LocationsViewDefault extends JViewLegacy {
+class DD_GMaps_LocationsViewDefault extends JViewLegacy {
     protected $items;
     function display($tpl = null)
     {
