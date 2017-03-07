@@ -19,4 +19,27 @@
 			label="JCONFIG_PERMISSIONS_LABEL"
 			section="component" />
 	</fieldset>
+
+	<fieldset
+			name="google_api_settings"
+			label="COM_DD_GMAPS_LOCATIONS_API_SETTINGS_LABEL"
+            description="COM_DD_GMAPS_LOCATIONS_API_SETTINGS_DESC"
+	>
+
+        <!-- Google API Key from https://console.developers.google.com/apis/library	-->
+
+		<field
+			name="google_api_key_js_places"
+			type="text"
+			label="COM_DD_GMAPS_LOCATIONS_API_KEY_JS_PLACES_LABEL"
+			description="COM_DD_GMAPS_LOCATIONS_API_KEY_JS_PLACES_DESC"
+		/>
+		<field
+			name="google_api_key_geocode"
+			type="text"
+			label="COM_DD_GMAPS_LOCATIONS_API_KEY_GEOCODE_LABEL"
+			description="COM_DD_GMAPS_LOCATIONS_API_KEY_GEOCODE_DESC"
+		/>
+
+	</fieldset>
 </config>
