@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 
             <!-- Component Version Info -->
             <div class="alert text-center">
-                <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION',
+                <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION',
                     DD_GMaps_LocationsHelper::getComponentVersion());
                 ?>
             </div>
