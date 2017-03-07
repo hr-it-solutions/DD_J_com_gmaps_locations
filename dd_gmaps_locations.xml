@@ -21,7 +21,7 @@
     </languages>
 
     <administration>
-        <menu view="default">COM_DD_GMAPS_LOCATIONS</menu>
+        <menu view="default">COM_DD_GMAPS_LOCATIONS_MENU</menu>
         <files folder="admin">
             <filename>controller.php</filename>
             <filename>dd_gmaps_locations.php</filename>
