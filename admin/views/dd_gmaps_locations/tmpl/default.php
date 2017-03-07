@@ -21,13 +21,23 @@ defined('_JEXEC') or die;
 		<div class="row-fluid">
             
             <!-- Component Description -->
-            <p><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION'); ?></p>
+            <div class="text-center">
+                <p><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION'); ?></p>
+            </div>
 
             <!-- Component Version Info -->
             <div class="alert text-center">
                 <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION',
                     DD_GMaps_LocationsHelper::getComponentVersion());
                 ?>
+            </div>
+
+            <hr>
+            <!-- Component Credits -->
+            <div class="text-center">
+                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS',
+                        DD_GMaps_LocationsHelper::getComponentCoyright()));
+                ?></small></p>
             </div>
 		</div>
 	</div>

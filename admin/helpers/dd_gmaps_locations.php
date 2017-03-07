@@ -13,12 +13,24 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 
 	/**
 	 * @return string component version
+	 * @since Version 3.6.5
 	 */
 	public static function getComponentVersion()
 	{
 		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
 		$version = (string)$xml->version;
 		return $version;
+	}
+
+	/**
+	 * @return string component copyright
+	 * @since Version 3.6.5
+	 */
+	public static function getComponentCoyright()
+	{
+		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
+		$copyright = (string)$xml->copyright;
+		return $copyright;
 	}
 
 }
