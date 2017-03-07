@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="component"
-		label="COM_DD_GMAPS_LOCATIONS_COMPONENT_LABEL"
-		description="COM_DD_GMAPS_LOCATIONS_COMPONENT_DESC"
-	>
+    <!-- Component -->
+    <fieldset
+            name="component"
+            label="COM_DD_GMAPS_LOCATIONS_COMPONENT_LABEL"
+            description="COM_DD_GMAPS_LOCATIONS_COMPONENT_DESC"
+    >
 
-	</fieldset>
+    </fieldset>
 
-	<fieldset name="permissions"
-		description="JCONFIG_PERMISSIONS_DESC"
-		label="JCONFIG_PERMISSIONS_LABEL"
-	>
+    <!-- Google API Settings -->
+    <fieldset
+            name="google_api_settings"
+            label="COM_DD_GMAPS_LOCATIONS_API_SETTINGS_LABEL"
+            description="COM_DD_GMAPS_LOCATIONS_API_SETTINGS_DESC"
+    >
+        <field
+                name="google_api_key_js_places"
+                type="text"
+                label="COM_DD_GMAPS_LOCATIONS_API_KEY_JS_PLACES_LABEL"
+                description="COM_DD_GMAPS_LOCATIONS_API_KEY_JS_PLACES_DESC"
+        />
+        <field
+                name="google_api_key_geocode"
+                type="text"
+                label="COM_DD_GMAPS_LOCATIONS_API_KEY_GEOCODE_LABEL"
+                description="COM_DD_GMAPS_LOCATIONS_API_KEY_GEOCODE_DESC"
+        />
 
-		<field name="rules" type="rules"
-			component="com_folio"
-			filter="rules"
-			validate="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
-			section="component" />
-	</fieldset>
+    </fieldset>
+
+    <!-- Permmissions -->
+    <fieldset
+            name="permissions"
+            description="JCONFIG_PERMISSIONS_DESC"
+            label="JCONFIG_PERMISSIONS_LABEL"
+    >
+        <field name="rules" type="rules"
+               component="com_folio"
+               filter="rules"
+               validate="rules"
+               label="JCONFIG_PERMISSIONS_LABEL"
+               section="component"
+        />
+    </fieldset>
 </config>
