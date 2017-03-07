@@ -11,5 +11,14 @@ defined('_JEXEC') or die;
 class  DD_GMaps_LocationsHelper extends JHelperContent
 {
 
+	/**
+	 * @return string component version
+	 */
+	public static function getComponentVersion()
+	{
+		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
+		$version = (string)$xml->version;
+		return $version;
+	}
 
 }
