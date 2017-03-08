@@ -19,18 +19,6 @@ defined('_JEXEC') or die;
 	<div id="j-main-container" class="span12">
 	<?php endif; ?>
 		<div class="row-fluid">
-            
-            <!-- Component Description -->
-            <div class="text-center">
-                <p><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION'); ?></p>
-            </div>
-
-            <!-- Component Version Info -->
-            <div class="alert text-center">
-                <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION',
-                    DD_GMaps_LocationsHelper::getComponentVersion());
-                ?>
-            </div>
 
             <hr>
             <!-- Component Credits -->
