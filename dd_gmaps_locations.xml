@@ -37,6 +37,21 @@
 
     <administration>
         <menu view="default">COM_DD_GMAPS_LOCATIONS_MENU</menu>
+        <submenu>
+            <menu link="option=com_dd_gmaps_locations"
+                  img="class:generic"
+                  alt="DD_GMaps_Locations">com_dd_gmaps_locations</menu>
+            <menu link="option=com_dd_gmaps_locations"
+                  view="adresses"
+                  img="class:generic"
+                  alt="DD_GMaps_Locations/Adresses">com_dd_gmaps_locations_adresses</menu>
+            <menu link="option=com_categories&amp;extension=com_dd_gmaps_locations"
+                  view="categories"
+                  img="class:categories"
+                  alt="DD_GMaps_Locations/Categories">com_dd_gmaps_locations_categories</menu>
+        </submenu>
+
+
         <files folder="admin">
             <filename>access.xml</filename>
             <filename>config.xml</filename>
