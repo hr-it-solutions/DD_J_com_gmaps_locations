@@ -39,6 +39,10 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			$query->where('(a.state IN (0, 1))');
 		}
 
+		// Join over categories
+		$query->select('c.title AS category_title');
+		$query->join('LEFT', '#__categories c ON c.id = a.catid');
+
 		return $query;
 	}
 }
