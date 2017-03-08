@@ -38,6 +38,8 @@
     <administration>
         <menu view="default">COM_DD_GMAPS_LOCATIONS_MENU</menu>
         <files folder="admin">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
             <filename>controller.php</filename>
             <filename>dd_gmaps_locations.php</filename>
             <folder>controllers</folder>
