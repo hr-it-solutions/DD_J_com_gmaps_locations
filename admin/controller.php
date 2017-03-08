@@ -11,6 +11,27 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsController extends JControllerLegacy{
 
 	protected $default_view = 'dasboard';
-	
+
+	public function display($cachable = false, $urlparams = false)
+	{
+
+		$view   = $this->input->get('view', 'locations');
+		$layout = $this->input->get('layout', 'default');
+		$id     = $this->input->getInt('id');
+
+		// Prevent edit form from directly access
+		if ($view == 'location' && $layout == 'edit' && !$this->checkEditId('com_dd_gmaps_locations.edit.location', $id))
+		{
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+			$this->setMessage($this->getError(), 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_dd_gmaps_locations&view=dashboard', false));
+
+			return false;
+		}
+
+		parent::display();
+
+		return $this;
+	}
 
 }
