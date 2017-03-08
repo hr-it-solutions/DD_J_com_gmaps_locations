@@ -11,4 +11,24 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsModelLocations extends JModelList
 {
 
+	/**
+	 * @return mixed
+	 * @since Version 3.6.5
+	 */
+	protected function getListQuery()
+	{
+
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+
+		$query->select($this->getState(
+			'list.select', 'a.id, a.title, a.catid, a.state,' .
+			'a.company, a.street, a.location, a.zip, a.country, a.federalstate,' .
+			'a.publish_up, a.publish_down, a.ordering')
+		);
+
+		$query->from($db->quoteName('#__dd_gmaps_locations'),'a');
+
+		return $query;
+	}
 }
