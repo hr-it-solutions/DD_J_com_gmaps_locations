@@ -7,3 +7,11 @@
  **/
 
 defined('_JEXEC') or die;
+class DD_GMaps_LocationsViewDashboard extends JViewLegacy {
+    protected $items;
+    function display($tpl = null)
+    {
+        $this->items = $this->get('items');
+        return parent::display($tpl);
+    }
+}

@@ -13,6 +13,9 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_dd_gmaps_locations'))
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
+
+JLoader::import('helpers.dd_gmaps_locations', JPATH_COMPONENT_ADMINISTRATOR);
+
 $controller	= JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
