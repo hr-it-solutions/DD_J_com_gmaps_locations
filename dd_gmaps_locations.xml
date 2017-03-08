@@ -46,7 +46,6 @@
                   alt="DD_GMaps_Locations/Categories">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_CATEGORIES</menu>
         </submenu>
 
-
         <files folder="admin">
             <filename>access.xml</filename>
             <filename>config.xml</filename>
