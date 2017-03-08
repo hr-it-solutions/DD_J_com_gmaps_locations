@@ -59,6 +59,16 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			}
 		}
 
+		// Ordering
+		$orderCol = $this->state->get('list.ordering');
+		$orderDir = $this->state->get('list.direction');
+		if ($orderCol == 'a.ordering')
+		{
+			$orderCol = 'c.title '.$orderDir.', a.ordering';
+		}
+		$query->order($db->escape($orderCol.' '.$orderDir));
+
+
 		return $query;
 	}
 }
