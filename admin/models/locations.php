@@ -29,6 +29,16 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 		$query->from($db->quoteName('#__dd_gmaps_locations'),'a');
 
+		// Filter by state
+		$published = $this->getState('filter.state');
+		if (is_numeric($published))
+		{
+			$query->where('a.state = '.(int) $published);
+		} elseif ($published === '')
+		{
+			$query->where('(a.state IN (0, 1))');
+		}
+
 		return $query;
 	}
 }
