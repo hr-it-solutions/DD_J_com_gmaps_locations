@@ -10,12 +10,12 @@ defined('_JEXEC') or die;
 
 class DD_GMaps_LocationsController extends JControllerLegacy{
 
-	protected $default_view = 'dasboard';
+	protected $default_view = 'dashboard';
 
 	public function display($cachable = false, $urlparams = false)
 	{
 
-		$view   = $this->input->get('view', 'locations');
+		$view   = $this->input->get('view', 'location');
 		$layout = $this->input->get('layout', 'default');
 		$id     = $this->input->getInt('id');
 

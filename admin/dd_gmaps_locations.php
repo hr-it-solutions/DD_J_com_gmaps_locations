@@ -16,6 +16,6 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_dd_gmaps_locations'))
 
 JLoader::import('helpers.dd_gmaps_locations', JPATH_COMPONENT_ADMINISTRATOR);
 
-$controller	= JControllerLegacy::getInstance('Dashboard');
+$controller	= JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
