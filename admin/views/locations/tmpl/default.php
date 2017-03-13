@@ -33,7 +33,7 @@ $listDirn = '';
                     <th style="min-width: 100px" class="nowrap title">
                         <?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="10%" class="nowrap center">
+                    <th style="min-width: 100px" width="12%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
                     </th>
                     <th width="10%" class="nowrap hidden-phone">
@@ -57,7 +57,7 @@ $listDirn = '';
                     <th width="10%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'JCATEGORY', 'c.category_title', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="10%" class="nowrap hidden-phone">
+                    <th width="14%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_SHORT_DESCRIPTION', 'a.short_description', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
@@ -70,12 +70,12 @@ $listDirn = '';
                         <td class="center hidden-phone">
                             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                         </td>
-                        <td class="nowrap has-context">
+                        <td class="nowrap">
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">
                                 <?php echo $this->escape($item->title);?>
                             </a>
                         </td>
-                        <td class="nowrap center">
+                        <td class="nowrap">
 	                        <?php echo $this->escape($item->company); ?>
                         </td>
                         <td class="nowrap hidden-phone">
