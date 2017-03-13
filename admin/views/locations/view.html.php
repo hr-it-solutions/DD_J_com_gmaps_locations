@@ -15,7 +15,20 @@ defined('_JEXEC') or die;
  */
 class DD_GMaps_LocationsViewLocations extends JViewLegacy
 {
+
+	/**
+	 * An array of items
+	 *
+	 * @var  array
+	 */
 	protected $items;
+
+	/**
+	 * The model state
+	 *
+	 * @var  object
+	 */
+	protected $state;
 
 	/**
 	 * Display the view
@@ -29,6 +42,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	public function display($tpl = null)
 	{
 		$this->items = $this->get('items');
+		$this->state = $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -37,6 +51,8 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 			return false;
 		}
+
+		$this->addToolbar();
 
 		return parent::display($tpl);
 	}
