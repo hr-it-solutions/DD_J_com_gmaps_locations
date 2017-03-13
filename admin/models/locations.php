@@ -42,6 +42,9 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
+		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
+
 		$published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $published);
 
@@ -84,7 +87,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$query->select('c.title AS category_title');
 		$query->join('LEFT', '#__categories c ON c.id = a.catid');
 
-		// Filter by search
+		// Filter by search in grid fields
 		$search = $this->getState('filter.search');
 
 		if (!empty($search))

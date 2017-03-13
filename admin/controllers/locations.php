@@ -13,16 +13,41 @@ class DD_GMaps_LocationsControllerLocations extends JControllerAdmin
 
 	/**
 	 * Call Location Model
-	 * @param string $name Name of the model
-	 * @param string $prefix Prefix of the model
-	 * @param array  $config
 	 *
-	 * @return mixed
-	 * @since Version 3.6.5
+	 * @param   string  $name    Name of the model
+	 * @param   string  $prefix  Prefix of the model
+	 * @param   array   $config  Array
+	 *
+	 * @return  mixed
+	 *
+	 * @since Version 1.1.0.0
 	 */
 	public function getModel($name = 'Location', $prefix = 'LocationModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;
+	}
+
+	/**
+	 * SaveOrderAjax from Sidebar Filter
+	 *
+	 * @since Version 1.1.0.0
+	 */
+	public function saveOrderAjax()
+	{
+		$input = JFactory::getApplication()->input;
+		$pks = (int) $input->post->get('cid', array(), 'array');
+		$order = (int) $input->post->get('order', array(), 'array');
+
+		$model = $this->getModel();
+
+		$return = $model->saveorder($pks, $order);
+
+		if ($return)
+		{
+			echo "1";
+		}
+
+		JFactory::getApplication()->close();
 	}
 }
