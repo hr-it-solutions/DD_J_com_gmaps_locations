@@ -87,7 +87,6 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			JToolbarHelper::publish('locations.publish', 'JTOOLBAR_PUBLISH', true);
 			JToolbarHelper::unpublish('locations.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 
-			JToolbarHelper::archiveList('locations.archive');
 			JToolbarHelper::checkin('locations.checkin');
 		}
 
@@ -109,10 +108,15 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		JHtmlSidebar::setAction('index.php?option=com_dd_gmaps_locations&view=locations');
 
+		// Get GridFilter Published Options for sidebar filter and unset "Archived" option
+		$jgridPublishedOptions = JHtml::_('jgrid.publishedOptions');
+		unset($jgridPublishedOptions[2]);
+
+		// Sidebar Filter
 		JHtmlSidebar::addFilter(
 			JText::_('JOPTION_SELECT_PUBLISHED'),
-			'filter_state',
-			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true)
+			'filter_language_client',
+			JHtml::_('select.options', $jgridPublishedOptions, 'value', 'text', $this->state->get('filter.state'), true)
 		);
 
 	}
