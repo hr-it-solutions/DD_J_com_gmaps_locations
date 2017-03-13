@@ -14,7 +14,23 @@ defined('_JEXEC') or die;
 		<div class="span10 form-horizontal">
 			<fieldset>
 				<?php echo JHtml::_('bootstrap.startPane', 'myTab', 'details', empty($this->item->id)) ? JText::_('COM_DD_GMAPS_LOCATIONS_NEW_LOCATION', true) : JText::sprintf('COM_DD_GMAPS_LOCATIONS_NEW_LOCATION', $this->item->id, true); ?>
-				<div class="control-group">
+                <div class="control-group">
+                    <div class="control-label">
+						<?php echo $this->form->getLabel('id'); ?>
+                    </div>
+                    <div class="controls">
+						<?php echo $this->form->getInput('id'); ?>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+						<?php echo $this->form->getLabel('state'); ?>
+                    </div>
+                    <div class="controls">
+						<?php echo $this->form->getInput('state'); ?>
+                    </div>
+                </div>
+                <div class="control-group">
 					<div class="control-label">
 						<?php echo $this->form->getLabel('title'); ?>
 					</div>
