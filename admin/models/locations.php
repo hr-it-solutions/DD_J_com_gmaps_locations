@@ -30,8 +30,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 		$query->select(
 			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
-			'a.company, a.contact_person, a.phone, a.street, a.location, a.zip, a.country, a.federalstate,' .
-			'a.short_description, a.publish_up, a.publish_down, a.ordering')
+			'a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip,' .
+			'a.country, a.federalstate, a.publish_up, a.publish_down, a.ordering')
 		);
 
 		$query->from($db->quoteName('#__dd_gmaps_locations') . 'a');

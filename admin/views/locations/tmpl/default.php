@@ -42,6 +42,9 @@ $listDirn = '';
                     <th width="6%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_PHONE', 'a.phone', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="10%" class="nowrap hidden-phone">
+	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_EMAIL', 'a.email', $listDirn, $listOrder); ?>
+                    </th>
                     <th width="10%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_STREET', 'a.street', $listDirn, $listOrder); ?>
                     </th>
@@ -56,9 +59,6 @@ $listDirn = '';
                     </th>
                     <th width="10%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'JCATEGORY', 'c.category_title', $listDirn, $listOrder); ?>
-                    </th>
-                    <th width="14%" class="nowrap hidden-phone">
-	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_SHORT_DESCRIPTION', 'a.short_description', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -84,6 +84,9 @@ $listDirn = '';
                         <td class="nowrap hidden-phone">
 		                    <?php echo $this->escape($item->phone); ?>
                         </td>
+                        <td class="nowrap hidden-phone">
+		                    <?php echo $this->escape($item->email); ?>
+                        </td>
                         <td class="nowrap">
 		                    <?php echo $this->escape($item->street); ?>
                         </td>
@@ -95,9 +98,6 @@ $listDirn = '';
                         </td>
                         <td class="nowrap">
 		                    <?php echo JText::_($this->escape($item->country)); ?>
-                        </td>
-                        <td class="nowrap hidden-phone">
-		                    <?php echo $this->escape($item->category_title); ?>
                         </td>
                         <td class="nowrap hidden-phone">
 		                    <?php echo $this->escape($item->category_title); ?>
