@@ -27,6 +27,28 @@
                description="COM_DD_GMAPS_LOCATIONS_FIELD_ALIAS_DESC"
         />
 
+
+        <field name="catid"
+               type="category"
+               extension="com_dd_gmaps_locations"
+               class="inputbox"
+               default=""
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_CATID_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_CATID_DESC"
+        >
+            <option value="0">JOPTION_SELECT_CATEGORY</option>
+        </field>
+
+        <field name="state" type="list" label="JSTATUS"
+               description="JFIELD_PUBLISHED_DESC"
+               class="inputbox small" size="1" default="1"
+        >
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+            <option value="-2">JTRASHED</option>
+        </field>
+
+
         <field name="profileimage"
                type="media"
                directory="dd_gmaps_locations"
