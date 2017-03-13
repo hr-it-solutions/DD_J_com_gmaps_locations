@@ -42,6 +42,9 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 	protected function populateState($ordering = null, $direction = null)
 	{
+		$published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
+		$this->setState('filter.state', $published);
+
 		parent::populateState('a.title', 'asc');
 	}
 
@@ -59,8 +62,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 		$query->select(
 			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
-			'a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip,' .
-			'a.country, a.federalstate, a.publish_up, a.publish_down')
+				'a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip,' .
+				'a.country, a.federalstate, a.publish_up, a.publish_down')
 		);
 
 		$query->from($db->quoteName('#__dd_gmaps_locations') . 'a');

@@ -82,10 +82,38 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			JToolbarHelper::editList('location.edit');
 		}
 
+		if ($canDo->get('core.edit.state'))
+		{
+			JToolbarHelper::publish('locations.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolbarHelper::unpublish('locations.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+
+			JToolbarHelper::archiveList('locations.archive');
+			JToolbarHelper::checkin('locations.checkin');
+		}
+
+		$state	= $this->get('State');
+
+		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
+		{
+			JToolbarHelper::deleteList('', 'locations.delete', 'JTOOLBAR_EMPTY_TRASH');
+		}
+		elseif ($canDo->get('core.edit.state'))
+		{
+			JToolbarHelper::trash('locations.trash');
+		}
+
 		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_dd_gmaps_locations');
 		}
+
+		JHtmlSidebar::setAction('index.php?option=com_dd_gmaps_locations&view=locations');
+
+		JHtmlSidebar::addFilter(
+			JText::_('JOPTION_SELECT_PUBLISHED'),
+			'filter_state',
+			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true)
+		);
 
 	}
 
@@ -100,5 +128,26 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	{
 		DD_GMaps_LocationsHelper::addSubmenu('locations');
 		$this->sidebar = JHtml::_('sidebar.render');
+	}
+
+	/**
+	 * Drop Down Filter
+	 *
+	 * @return array
+	 *
+	 * @since Version 1.1.0.0
+	 */
+	protected function getSortFields()
+	{
+		return array(
+			'a.state' => JText::_('JSTATUS'),
+			'a.title' => JText::_('JGLOBAL_TITLE'),
+			'a.company' => JText::_('COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY'),
+			'a.location' => JText::_('COM_DD_GMAPS_LOCATIONS_HEADING_LOCATION'),
+			'a.country' => JText::_('COM_DD_GMAPS_LOCATIONS_HEADING_COUNTRY'),
+			'a.zip' => JText::_('COM_DD_GMAPS_LOCATIONS_HEADING_ZIP'),
+			'a.catid' => JText::_('JCATEGORY'),
+			'a.id' => JText::_('JGRID_HEADING_ID')
+		);
 	}
 }
