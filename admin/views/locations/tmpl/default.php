@@ -30,32 +30,38 @@ $listDirn = '';
                                title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>"
                                onclick="Joomla.checkAll(this)" />
                     </th>
-                    <th class="nowrap title">
+                    <th style="min-width: 100px" class="nowrap title">
                         <?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap center">
+                    <th width="10%" class="nowrap center">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap hidden-phone">
-	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_CONTACTPERSON', 'a.contact_person', $listDirn, $listOrder); ?>
+                    <th width="10%" class="nowrap hidden-phone">
+	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_CONTACT_PERSON', 'a.contact_person', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap hidden-phone">
+                    <th width="6%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_PHONE', 'a.phone', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap">
+                    <th width="10%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_STREET', 'a.street', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap">
+                    <th width="10%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_LOCATION', 'a.location', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap">
+                    <th width="4%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_ZIP', 'a.zip', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap">
+                    <th width="10%" class="nowrap">
 	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COUNTRY', 'a.country', $listDirn, $listOrder); ?>
                     </th>
-                    <th class="nowrap hidden-phone">
+                    <th width="10%" class="nowrap hidden-phone">
 	                    <?php echo JHtml::_('grid.sort', 'JCATEGORY', 'c.category_title', $listDirn, $listOrder); ?>
+                    </th>
+                    <th width="10%" class="nowrap hidden-phone">
+	                    <?php echo JHtml::_('grid.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_SHORT_DESCRIPTION', 'a.short_description', $listDirn, $listOrder); ?>
+                    </th>
+                    <th width="1%" class="nowrap hidden-phone">
+	                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
                 </thead>
                 <tbody>
@@ -92,6 +98,12 @@ $listDirn = '';
                         </td>
                         <td class="nowrap hidden-phone">
 		                    <?php echo $this->escape($item->category_title); ?>
+                        </td>
+                        <td class="nowrap hidden-phone">
+		                    <?php echo $this->escape($item->category_title); ?>
+                        </td>
+                        <td class="nowrap hidden-phone">
+		                    <?php echo (int) $item->id; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

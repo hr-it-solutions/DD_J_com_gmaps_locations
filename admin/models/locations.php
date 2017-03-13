@@ -31,7 +31,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$query->select(
 			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
 			'a.company, a.contact_person, a.phone, a.street, a.location, a.zip, a.country, a.federalstate,' .
-			'a.publish_up, a.publish_down, a.ordering')
+			'a.short_description, a.publish_up, a.publish_down, a.ordering')
 		);
 
 		$query->from($db->quoteName('#__dd_gmaps_locations') . 'a');
@@ -68,7 +68,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 					' OR a.contact_person LIKE ' . $search . ' OR a.phone LIKE ' . $search .
 					' OR a.street LIKE ' . $search . ' OR a.location LIKE ' . $search .
 					' OR a.zip LIKE ' . $search . ' OR a.country LIKE ' . $search .
-					' OR a.federalstate LIKE ' . $search . ')');
+					' OR a.short_description LIKE ' . $search . ' OR a.federalstate LIKE ' . $search . ')');
 			}
 		}
 
