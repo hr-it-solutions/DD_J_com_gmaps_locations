@@ -30,7 +30,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 		$query->select(
 			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
-			'a.company, a.street, a.location, a.zip, a.country, a.federalstate,' .
+			'a.company, a.contact_person, a.phone, a.street, a.location, a.zip, a.country, a.federalstate,' .
 			'a.publish_up, a.publish_down, a.ordering')
 		);
 
@@ -65,6 +65,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
 				$query->where('(a.title LIKE ' . $search . ' OR a.company LIKE ' . $search .
+					' OR a.contact_person LIKE ' . $search . ' OR a.phone LIKE ' . $search .
 					' OR a.street LIKE ' . $search . ' OR a.location LIKE ' . $search .
 					' OR a.zip LIKE ' . $search . ' OR a.country LIKE ' . $search .
 					' OR a.federalstate LIKE ' . $search . ')');
@@ -73,14 +74,14 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 
 		// Ordering
 		/*$orderCol = $this->state->get('list.ordering');
-		$orderDir = $this->state->get('list.direction');
+		$orderDirn = $this->state->get('list.direction');
 
 		if ($orderCol == 'a.ordering')
 		{
-			$orderCol = 'c.title ' . $orderDir . ', a.ordering';
+			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
 		}
 
-		$query->order($db->escape($orderCol . ' ' . $orderDir));*/
+		$query->order($db->escape($orderCol . ' ' . $orderDirn));*/
 
 		return $query;
 	}
