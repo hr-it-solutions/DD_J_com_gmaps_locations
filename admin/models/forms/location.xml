@@ -48,7 +48,6 @@
             <option value="-2">JTRASHED</option>
         </field>
 
-
         <field name="profileimage"
                type="media"
                directory="dd_gmaps_locations"
