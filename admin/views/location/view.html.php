@@ -15,7 +15,9 @@ defined('_JEXEC') or die;
  */
 class DD_GMaps_LocationsViewLocation extends JViewLegacy
 {
-	protected $items;
+	protected $item;
+
+	protected $form;
 
 	/**
 	 * Display the view
@@ -28,7 +30,8 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$this->items = $this->get('items');
+		$this->item = $this->get('Item');
+		$this->form = $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -38,6 +41,34 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 			return false;
 		}
 
+		$this->addToolbar();
+
 		return parent::display($tpl);
+	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   Version  1.1.0.0
+	 */
+	protected function addToolbar()
+	{
+		JFactory::getApplication()->input->set('hidemainmenu', true);
+
+		JToolbarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATION'), '');
+
+		JToolbarHelper::save('location.save');
+
+		if (empty($this->item->id))
+		{
+			JToolbarHelper::cancel('location.cancle');
+		}
+		else
+		{
+			JToolbarHelper::cancel('location.cancle', 'JTOOLBAR_CLOSE');
+		}
+
 	}
 }
