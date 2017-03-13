@@ -38,18 +38,21 @@ class DD_GMaps_LocationsViewDashboard extends JViewLegacy
 			return false;
 		}
 
+		$this->addSidebar();
+
 		return parent::display($tpl);
 	}
 
 	/**
-	 * Add the page title and toolbar.
+	 * Add the sidebar
 	 *
 	 * @return  void
 	 *
 	 * @since   Version  1.1.0.0
 	 */
-	protected function addToolbar()
+	protected function addSidebar()
 	{
-		$this->addToolbar();
+		DD_GMaps_LocationsHelper::addSubmenu('dashboard');
+		$this->sidebar = JHtml::_('sidebar.render');
 	}
 }

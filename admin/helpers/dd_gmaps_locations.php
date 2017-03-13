@@ -15,6 +15,41 @@ defined('_JEXEC') or die;
  */
 class  DD_GMaps_LocationsHelper extends JHelperContent
 {
+
+	/**
+	 * Configure the Linkbar.
+	 *
+	 * @param   string  $vName  The name of the active view.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.1.0.0
+	 */
+	public static function addSubmenu($vName)
+	{
+		// Dashboard
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_DASHBOARD'),
+			'index.php?option=com_dd_gmaps_locations&view=dashboard',
+			$vName == 'dashboard'
+		);
+
+		// Location
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATION'),
+			'index.php?option=com_dd_gmaps_locations&view=location',
+			$vName == 'location'
+		);
+
+		// Locations
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATIONS'),
+			'index.php?option=com_dd_gmaps_locations&view=locations',
+			$vName == 'locations'
+		);
+	}
+
+
 	/**
 	 * Get Component Version
 	 *

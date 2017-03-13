@@ -41,7 +41,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$this->items = $this->get('items');
+		$this->items = $this->get('Items');
 		$this->state = $this->get('State');
 
 		// Check for errors.
@@ -53,6 +53,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		}
 
 		$this->addToolbar();
+		$this->addSidebar();
 
 		return parent::display($tpl);
 	}
@@ -86,5 +87,18 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			JToolbarHelper::preferences('com_dd_gmaps_locations');
 		}
 
+	}
+
+	/**
+	 * Add the sidebar
+	 *
+	 * @return  void
+	 *
+	 * @since   Version  1.1.0.0
+	 */
+	protected function addSidebar()
+	{
+		DD_GMaps_LocationsHelper::addSubmenu('dashboard');
+		$this->sidebar = JHtml::_('sidebar.render');
 	}
 }
