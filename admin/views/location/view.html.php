@@ -7,11 +7,37 @@
  **/
 
 defined('_JEXEC') or die;
-class DD_GMaps_LocationsViewLocation extends JViewLegacy {
-    protected $items;
-    function display($tpl = null)
-    {
-        $this->items = $this->get('items');
-        return parent::display($tpl);
-    }
+
+/**
+ * Class DD_GMaps_LocationsViewLocation
+ *
+ * @since  Version  1.1.0.0
+ */
+class DD_GMaps_LocationsViewLocation extends JViewLegacy
+{
+	protected $items;
+
+	/**
+	 * Display the view
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise an Error object.
+	 *
+	 * @since  Version  1.1.0.0
+	 */
+	public function display($tpl = null)
+	{
+		$this->items = $this->get('items');
+
+		// Check for errors.
+		if (count($errors = $this->get('Errors')))
+		{
+			JError::raiseError(500, implode("\n", $errors));
+
+			return false;
+		}
+
+		return parent::display($tpl);
+	}
 }
