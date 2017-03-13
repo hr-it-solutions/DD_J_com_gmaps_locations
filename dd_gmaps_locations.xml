@@ -10,7 +10,7 @@
     <license>GNU/GPLv2 only</license>
     <description>COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION</description>
 
-    <!-- Runs on install -->
+    <!-- Runss on install -->
     <scriptfile>script.php</scriptfile>
     <install>
         <sql>
@@ -18,12 +18,19 @@
         </sql>
     </install>
 
-    <!-- Run on uninstall-->
+    <!-- Runs on uninstall-->
     <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
         </sql>
     </uninstall>
+
+    <!-- Runs on update -->
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
 
     <files folder="site">
         <filename>controller.php</filename>
