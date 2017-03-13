@@ -29,7 +29,7 @@
               label="JCONFIG_PERMISSIONS_LABEL">
 
         <field name="rules" type="rules"
-               component="com_folio"
+               component="com_dd_gmaps_locations"
                filter="rules"
                validate="rules"
                label="JCONFIG_PERMISSIONS_LABEL"

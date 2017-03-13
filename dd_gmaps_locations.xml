@@ -43,7 +43,7 @@
     </languages>
 
     <administration>
-        <menu view="default">COM_DD_GMAPS_LOCATIONS_MENU</menu>
+        <menu view="default">COM_DD_GMAPS_LOCATIONS</menu>
         <submenu>
             <menu link="option=com_dd_gmaps_locations" img="class:generic"
                   alt="DD_GMaps_Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_DASHBOARD</menu>

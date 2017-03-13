@@ -17,7 +17,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 {
 	protected $text_prefix = 'COM_DD_GMAPS_LOCATIONS';
 
-	public function getTable($type = 'Location', $prefix = 'LocationTable', $config = array())
+	public function getTable($type = 'Location', $prefix = 'DD_GMaps_LocationsTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}

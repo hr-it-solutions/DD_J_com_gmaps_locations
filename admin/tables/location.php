@@ -16,7 +16,14 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsTableLocation extends JTable
 {
 
-	public function __construct($table, $key, JDatabaseDriver $db)
+	/**
+	 * DD_GMaps_LocationsTableLocation constructor.
+	 *
+	 * @param   JDatabaseDriver  &$db  Database connector object
+	 *
+	 * @since  Version  1.1.0.0
+	 */
+	public function __construct(&$db)
 	{
 		parent::__construct('#__dd_gmaps_locations', 'id', $db);
 	}
