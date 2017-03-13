@@ -2,9 +2,8 @@
 <config>
     <!-- Component -->
     <fieldset name="component"
-              label="COM_DD_GMAPS_LOCATIONS_COMPONENT_LABEL"
-              description="COM_DD_GMAPS_LOCATIONS_COMPONENT_DESC">
-
+              label="COM_DD_GMAPS_LOCATIONS"
+              description="COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION">
     </fieldset>
 
     <!-- Google API Settings -->
