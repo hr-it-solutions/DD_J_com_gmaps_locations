@@ -23,9 +23,7 @@ defined('_JEXEC') or die;
             <hr>
             <!-- Component Credits -->
             <div class="text-center">
-                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS',
-                        DD_GMaps_LocationsHelper::getComponentCoyright()));
-                ?></small></p>
+                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS', DD_GMaps_LocationsHelper::getComponentCoyright())); ?></small></p>
             </div>
 		</div>
 	</div>
