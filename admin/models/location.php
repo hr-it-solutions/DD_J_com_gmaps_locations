@@ -8,6 +8,11 @@
 
 defined('_JEXEC') or die;
 
+/**
+ * Class DD_GMaps_LocationsModelLocation
+ *
+ * @since  Version 1.1.0.0
+ */
 class DD_GMaps_LocationsModelLocation extends JModelAdmin
 {
 	protected $text_prefix = 'COM_DD_GMAPS_LOCATIONS';
@@ -29,6 +34,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 
 		return $form;
 	}
+
 
 	protected function loadFormData()
 	{
