@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsControllerLocation extends JControllerForm
 {
 
-	protected function allowAdd()
+	/*protected function allowAdd()
 	{
 		// todo-DD!
 	}
@@ -19,6 +19,6 @@ class DD_GMaps_LocationsControllerLocation extends JControllerForm
 	protected function allowEdit()
 	{
 		// todo-DD!
-	}
+	}*/
 
 }
