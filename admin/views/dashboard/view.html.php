@@ -40,4 +40,16 @@ class DD_GMaps_LocationsViewDashboard extends JViewLegacy
 
 		return parent::display($tpl);
 	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   Version  1.1.0.0
+	 */
+	protected function addToolbar()
+	{
+		$this->addToolbar();
+	}
 }

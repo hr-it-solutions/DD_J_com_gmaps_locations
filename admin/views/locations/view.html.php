@@ -40,4 +40,35 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		return parent::display($tpl);
 	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   Version  1.1.0.0
+	 */
+	protected function addToolbar()
+	{
+		$canDo = JHelperContent::getActions('com_dd_gmaps_locations', 'category', $this->state->get('filter.category_id'));
+		$user  = JFactory::getUser();
+
+		// Get the toolbar object instance
+		$bar = JToolbar::getInstance('toolbar');
+
+		JToolbarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), '');
+
+		JToolbarHelper::addNew('location.edit');
+
+		if ($canDo->get('core.edit'))
+		{
+			JToolbarHelper::editList('location.edit');
+		}
+
+		if ($canDo->get('core.admin'))
+		{
+			JToolbarHelper::preferences('com_dd_gmaps_locations');
+		}
+
+	}
 }

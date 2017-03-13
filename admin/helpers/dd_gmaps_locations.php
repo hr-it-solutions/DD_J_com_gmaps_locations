@@ -8,29 +8,40 @@
 
 defined('_JEXEC') or die;
 
+/**
+ * Class DD_GMaps_LocationsHelper
+ *
+ * @since  Version 1.1.0.0
+ */
 class  DD_GMaps_LocationsHelper extends JHelperContent
 {
-
 	/**
+	 * Get Component Version
+	 *
 	 * @return string component version
-	 * @since Version 3.6.5
+	 *
+	 * @since  Version  1.1.0.0
 	 */
 	public static function getComponentVersion()
 	{
-		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
-		$version = (string)$xml->version;
+		$xml = JFactory::getXML(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
+		$version = (string) $xml->version;
+
 		return $version;
 	}
 
 	/**
+	 * Get Component Coyright
+	 *
 	 * @return string component copyright
-	 * @since Version 3.6.5
+	 *
+	 * @since  Version  1.1.0.0
 	 */
 	public static function getComponentCoyright()
 	{
-		$xml = JFactory::getXML(JPATH_ADMINISTRATOR .'/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
-		$copyright = (string)$xml->copyright;
+		$xml = JFactory::getXML(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.xml');
+		$copyright = (string) $xml->copyright;
+
 		return $copyright;
 	}
-
 }
