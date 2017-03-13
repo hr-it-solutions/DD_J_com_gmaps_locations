@@ -98,7 +98,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	protected function addSidebar()
 	{
-		DD_GMaps_LocationsHelper::addSubmenu('dashboard');
+		DD_GMaps_LocationsHelper::addSubmenu('locations');
 		$this->sidebar = JHtml::_('sidebar.render');
 	}
 }

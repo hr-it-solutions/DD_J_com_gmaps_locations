@@ -34,18 +34,17 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			$vName == 'dashboard'
 		);
 
-		// Location
-		JHtmlSidebar::addEntry(
-			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATION'),
-			'index.php?option=com_dd_gmaps_locations&view=location',
-			$vName == 'location'
-		);
-
 		// Locations
 		JHtmlSidebar::addEntry(
 			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATIONS'),
 			'index.php?option=com_dd_gmaps_locations&view=locations',
 			$vName == 'locations'
+		);
+
+		// Categories
+		JHtmlSidebar::addEntry(
+			JText::_('JCATEGORIES'),
+			'index.php?option=com_categories&extension=com_dd_gmaps_locations'
 		);
 	}
 
