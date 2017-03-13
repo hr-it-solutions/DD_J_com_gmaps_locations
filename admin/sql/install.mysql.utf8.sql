@@ -5,15 +5,10 @@
 -- Table structure for table `#__dd_gmaps_locations`
 --
 
---
--- Tabellenstruktur für Tabelle `hl2sx_dd_gmaps_locations`
---
-
 CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
   `id` int(11) unsigned NOT NULL,
   `title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-
   `catid` int(11) NOT NULL DEFAULT '0',
   `state` tinyint(1) NOT NULL DEFAULT '0',
 
@@ -83,15 +78,15 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
     'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UNITEDSTATES') COLLATE utf8mb4_unicode_ci NOT NULL,
   `federalstate` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
 
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `short_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-
   `latitude` float(10,6) NOT NULL DEFAULT '255.000000',
   `longitude` float(10,6) NOT NULL DEFAULT '255.000000',
 
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `short_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) NOT NULL DEFAULT '0',
+
   `checked_out` int(11) NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(11) NOT NULL DEFAULT '1',
@@ -104,8 +99,6 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `hl2sx_dd_gmaps_locations` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;

@@ -60,7 +60,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$query->select(
 			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
 			'a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip,' .
-			'a.country, a.federalstate, a.publish_up, a.publish_down, a.ordering')
+			'a.country, a.federalstate, a.publish_up, a.publish_down')
 		);
 
 		$query->from($db->quoteName('#__dd_gmaps_locations') . 'a');
@@ -104,11 +104,6 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		// Ordering
 		$orderCol = $this->state->get('list.ordering');
 		$orderDirn = $this->state->get('list.direction');
-
-		if ($orderCol == 'a.ordering')
-		{
-			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
-		}
 
 		$query->order($db->escape($orderCol . ' ' . $orderDirn));
 
