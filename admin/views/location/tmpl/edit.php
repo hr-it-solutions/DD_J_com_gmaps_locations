@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_location&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
 		<div class="span10 form-horizontal">
 			<fieldset>
@@ -124,14 +124,6 @@ defined('_JEXEC') or die;
 					</div>
 					<div class="controls">
 						<?php echo $this->form->getInput('zip'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('country'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('country'); ?>
 					</div>
 				</div>
 				<div class="control-group">

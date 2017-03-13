@@ -16,6 +16,35 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsModelLocations extends JModelList
 {
 
+	public function __construct($config = array())
+	{
+		if(empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+				'id', 'a.id',
+				'title', 'a.title',
+				'company', 'a.company',
+				'contact_person', 'a.contact_person',
+				'phone', 'a.phone',
+				'email', 'a.email',
+				'street', 'a.street',
+				'location', 'a.location',
+				'zip', 'a.zip',
+				'country', 'a.country',
+				'category_title', 'a.catid',
+				'publish_up', 'a.publish_up',
+			    'publish_down', 'a.publish_down'
+			);
+		}
+
+		parent::__construct($config);
+	}
+
+	protected function populateState($ordering = null, $direction = null)
+	{
+		parent::populateState('a.title', 'asc');
+	}
+
 	/**
 	 * getListQuery
 	 *
@@ -73,7 +102,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		}
 
 		// Ordering
-		/*$orderCol = $this->state->get('list.ordering');
+		$orderCol = $this->state->get('list.ordering');
 		$orderDirn = $this->state->get('list.direction');
 
 		if ($orderCol == 'a.ordering')
@@ -81,7 +110,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
 		}
 
-		$query->order($db->escape($orderCol . ' ' . $orderDirn));*/
+		$query->order($db->escape($orderCol . ' ' . $orderDirn));
 
 		return $query;
 	}

@@ -7,9 +7,10 @@
  **/
 
 defined('_JEXEC') or die;
+$user = JFactory::getUser();
 
-$listOrder = '';
-$listDirn = '';
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn  = $this->escape($this->state->get('list.direction'));
 
 ?>
 <div id="dd_gmaps_locations-locations" class="row-fluid dd_gmaps_locations">
@@ -29,6 +30,9 @@ $listDirn = '';
                         <input type="checkbox" name="check-toggle" value=""
                                title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>"
                                onclick="Joomla.checkAll(this)" />
+                    </th>
+                    <th width="1%" style="min-width: 55px;" class="nowrap center">
+                        <?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
                     </th>
                     <th style="min-width: 100px" class="nowrap title">
                         <?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
@@ -65,10 +69,16 @@ $listDirn = '';
                     </th>
                 </thead>
                 <tbody>
-                <?php foreach ($this->items as $i => $item): ?>
+                <?php foreach ($this->items as $i => $item):
+	                $canCheckin = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
+	                $canChange  = $user->authorise('core.edit.state', 'com_dd_gmaps_locations') && $canCheckin;
+	                ?>
                     <tr class="row<?php echo $i % 2; ?>">
                         <td class="center hidden-phone">
                             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
+                        </td>
+                        <td class="center">
+                            <?php echo JHtml::_('jgrid.published', $item->state, $i, 'locations.', $canChange, 'cb', $item->published_up, $item->published_down); ?>
                         </td>
                         <td class="nowrap">
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">
