@@ -31,6 +31,12 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	protected $state;
 
 	/**
+	 * The Pagination
+	 *
+	 */
+	protected $pagination;
+
+	/**
 	 * Display the view
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -39,10 +45,12 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 *
 	 * @since  Version  1.1.0.0
 	 */
+
 	public function display($tpl = null)
 	{
-		$this->items = $this->get('Items');
-		$this->state = $this->get('State');
+		$this->items        = $this->get('Items');
+		$this->state        = $this->get('State');
+		$this->pagination   = $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
