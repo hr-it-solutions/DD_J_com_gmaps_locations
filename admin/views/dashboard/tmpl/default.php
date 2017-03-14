@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 ?>
 
 <div class="row-fluid">
-	<?php if (!empty($this->sidebar)) : ?>
+	<?php if (!empty($this->sidebar)): ?>
 	<div id="j-sidebar-container" class="span2">
 	<?php echo $this->sidebar; ?>
 	</div>
@@ -27,17 +27,13 @@ defined('_JEXEC') or die;
 
             <!-- Component Version Info -->
             <div class="alert text-center">
-                <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION',
-                    DD_GMaps_LocationsHelper::getComponentVersion());
-                ?>
+                <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION', DD_GMaps_LocationsHelper::getComponentVersion()); ?>
             </div>
 
             <hr>
             <!-- Component Credits -->
             <div class="text-center">
-                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS',
-                        DD_GMaps_LocationsHelper::getComponentCoyright()));
-                ?></small></p>
+                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS', DD_GMaps_LocationsHelper::getComponentCoyright())); ?></small></p>
             </div>
 		</div>
 	</div>

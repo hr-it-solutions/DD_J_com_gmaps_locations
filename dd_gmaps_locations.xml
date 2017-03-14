@@ -10,7 +10,7 @@
     <license>GNU/GPLv2 only</license>
     <description>COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION</description>
 
-    <!-- Runs on install -->
+    <!-- Runss on install -->
     <scriptfile>script.php</scriptfile>
     <install>
         <sql>
@@ -18,12 +18,19 @@
         </sql>
     </install>
 
-    <!-- Run on uninstall-->
+    <!-- Runs on uninstall-->
     <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
         </sql>
     </uninstall>
+
+    <!-- Runs on update -->
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
 
     <files folder="site">
         <filename>controller.php</filename>
@@ -36,14 +43,14 @@
     </languages>
 
     <administration>
-        <menu view="default">COM_DD_GMAPS_LOCATIONS_MENU</menu>
+        <menu view="default">COM_DD_GMAPS_LOCATIONS</menu>
         <submenu>
             <menu link="option=com_dd_gmaps_locations" img="class:generic"
                   alt="DD_GMaps_Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_DASHBOARD</menu>
             <menu link="option=com_dd_gmaps_locations&amp;view=locations" view="locations" img="class:categories"
                   alt="DD_GMaps_Locations/Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_LOCATIONS</menu>
             <menu link="option=com_categories&amp;extension=com_dd_gmaps_locations" view="categories" img="class:categories"
-                  alt="DD_GMaps_Locations/Categories">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_CATEGORIES</menu>
+                  alt="DD_GMaps_Locations/Categories">JCATEGORIES</menu>
         </submenu>
 
         <files folder="admin">
