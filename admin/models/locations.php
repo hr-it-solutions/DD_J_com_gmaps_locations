@@ -63,13 +63,28 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 
-		$query->select(
-			$this->getState('list.select', 'a.id, a.title, a.catid, a.state,' .
-				'a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip,' .
-				'a.country, a.federalstate, a.publish_up, a.publish_down')
+		$select = $db->quoteName(
+			array(
+				'a.id',
+				'a.title',
+				'a.catid',
+				'a.state',
+				'a.company',
+				'a.contact_person',
+				'a.phone',
+				'a.email',
+				'a.street',
+				'a.location',
+				'a.zip',
+				'a.country',
+				'a.federalstate',
+				'a.publish_up',
+				'a.publish_down'
+			)
 		);
 
-		$query->from($db->quoteName('#__dd_gmaps_locations') . 'a');
+		$query  ->select($select)
+				->from($db->quoteName('#__dd_gmaps_locations', 'a'));
 
 		// Filter by state
 		$published = $this->getState('filter.state');
@@ -84,8 +99,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		}
 
 		// Join over categories
-		$query->select('c.title AS category_title');
-		$query->join('LEFT', '#__categories c ON c.id = a.catid');
+		$query  ->select($db->quoteName('c.title', 'category_title'))
+				->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
 
 		// Filter by search in grid fields
 		$search = $this->getState('filter.search');
