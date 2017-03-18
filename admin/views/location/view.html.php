@@ -63,11 +63,11 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('location.cancle');
+			JToolbarHelper::cancel('location.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('location.cancle', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('location.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 	}
