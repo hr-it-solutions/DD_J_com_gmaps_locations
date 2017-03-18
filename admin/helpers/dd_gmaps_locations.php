@@ -23,7 +23,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 *
 	 * @return  void
 	 *
-	 * @since   1.1.0.0
+	 * @since   Version 1.1.0.0
 	 */
 	public static function addSubmenu($vName)
 	{
@@ -46,6 +46,46 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			JText::_('JCATEGORIES'),
 			'index.php?option=com_categories&extension=com_dd_gmaps_locations'
 		);
+	}
+
+	/**
+	 * Get latitude and longitude by address from Google GeoCode API
+	 *
+	 * @param   array  $data  The form data which must include 'street' 'zip' 'location' 'federalstate' and 'country'
+	 *
+	 * @return  array         latitude and longitude
+	 *
+	 * @since   Version 1.1.0.0
+	 */
+	public static function Geocode_Location_To_LatLng($data)
+	{
+		// Get Location Data
+		$address = array(
+			'street'        => $data['street'],
+			'zip'           => $data['zip'],
+			'location'      => $data['location'],
+			'federalstate'  => $data['federalstate'],
+			'country'       => JText::_($data['country']) // Convert language string to country name
+		);
+
+		// Get API Key
+		$google_api_key_geocode = JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_geocode', false);
+
+		$google_api_URL_pram    = '&key=' . $google_api_key_geocode;
+
+		// Prepare Address
+		$prepAddr = implode('+', $address);
+
+		// Get Contents and decode
+		$geoCode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address=' . $prepAddr . '&sensor=false' . $google_api_URL_pram);
+		$output  = json_decode($geoCode);
+
+		// Build array latitude and longitude
+		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
+		                "longitude" => $output->results[0]->geometry->location->lng);
+
+		// Return Array
+		return $latlng;
 	}
 
 

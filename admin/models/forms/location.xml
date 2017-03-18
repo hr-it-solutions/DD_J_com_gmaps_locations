@@ -157,6 +157,24 @@
                label="COM_DD_GMAPS_LOCATIONS_FIELD_FEDERALSTATE_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_FEDERALSTATE_DESC"/>
 
+        <field name="latitude"
+               type="text"
+               default="255.000000"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LABEL"
+               readonly="true"
+               class="readonly"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_DESC"
+        />
+
+        <field name="longitude"
+               type="text"
+               default="255.000000"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_LABEL"
+               readonly="true"
+               class="readonly"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_DESC"
+        />
+
         <field name="description"
                type="textarea"
                class="inputbox"
