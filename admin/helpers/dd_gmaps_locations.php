@@ -68,16 +68,19 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			'country'       => JText::_($data['country']) // Convert language string to country name
 		);
 
-		// Get API Key
+		// Get API Key if key is set
+		$google_api_URL_pram = '';
 		$google_api_key_geocode = JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_geocode', false);
 
-		$google_api_URL_pram    = '&key=' . $google_api_key_geocode;
-
+		if ($google_api_key_geocode)
+		{
+			$google_api_URL_pram    = '&key=' . trim($google_api_key_geocode);
+		}
 		// Prepare Address
 		$prepAddr = implode('+', $address);
 
 		// Get Contents and decode
-		$geoCode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address=' . $prepAddr . '&sensor=false' . $google_api_URL_pram);
+		$geoCode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($prepAddr) . '&sensor=false' . $google_api_URL_pram);
 		$output  = json_decode($geoCode);
 
 		// Build array latitude and longitude

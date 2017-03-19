@@ -159,7 +159,7 @@
 
         <field name="latitude"
                type="text"
-               default="255.000000"
+               default="000.000000"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LABEL"
                readonly="true"
                class="readonly"
@@ -168,7 +168,7 @@
 
         <field name="longitude"
                type="text"
-               default="255.000000"
+               default="000.000000"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_LABEL"
                readonly="true"
                class="readonly"

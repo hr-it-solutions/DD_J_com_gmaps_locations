@@ -38,10 +38,11 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 	public function save($data)
 	{
 
-		// Get latitude and longtitude
+		// Generate latitude and longitude
 		$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
+
 		$data['latitude']   = $latlng['latitude'];
-		$data['longtitude'] = $latlng['longtitude'];
+		$data['longitude'] = $latlng['longitude'];
 
 		return parent::save($data);
 	}
