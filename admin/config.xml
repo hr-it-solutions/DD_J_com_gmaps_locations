@@ -4,6 +4,18 @@
     <fieldset name="component"
               label="COM_DD_GMAPS_LOCATIONS"
               description="COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION">
+
+            <field
+                    name="countries_reduced_selection"
+                    type="radio"
+                    class="btn-group btn-group-yesno"
+                    default="0"
+                    label="COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_REDUCED_SELECTION_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_REDUCED_SELECTION_DESC" >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+
     </fieldset>
 
     <!-- Google API Settings -->

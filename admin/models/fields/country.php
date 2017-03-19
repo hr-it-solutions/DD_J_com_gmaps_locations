@@ -22,6 +22,8 @@ class JFormFieldCountry extends JFormFieldList {
 		$countries = array();
 		$options = array();
 
+		$reduced_selection = JComponentHelper::getParams('com_dd_gmaps_locations')->get('countries_reduced_selection', 0);
+
 		if (JFile::exists(JPATH_COMPONENT . $this->countries_json))
 		{
 			$json = file_get_contents(JPATH_COMPONENT . $this->countries_json);
@@ -33,8 +35,14 @@ class JFormFieldCountry extends JFormFieldList {
 		$options[0]->text = JText::_('JGLOBAL_USE_GLOBAL');
 
 		$i = 1;
+
 		foreach ($countries as $country)
 		{
+			if ($reduced_selection && $country->selection == 'extended')
+			{
+				continue;
+			}
+
 			$options[$i]->value = 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_' . $country->name;
 			$options[$i]->text  = JText::_('COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_' . $country->name);
 			++$i;

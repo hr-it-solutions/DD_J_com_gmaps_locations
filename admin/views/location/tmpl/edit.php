@@ -9,6 +9,10 @@
 defined('_JEXEC') or die;
 
 ?>
+<style>
+    .green { color: green}
+    .red { color: red}
+</style>
 <form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
 		<div class="span10 form-horizontal">
@@ -143,6 +147,18 @@ defined('_JEXEC') or die;
 					</div>
 				</div>
 				<div class="control-group">
+                    <p>
+                    <?php
+                    if (JComponentHelper::getParams('com_dd_gmaps_locations')->get('countries_reduced_selection', 0))
+                    {
+                        echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_REDUCED');
+                    }
+                    else
+                    {
+                        echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_EXTENDED');
+                    }
+                    ?>
+                    </p>
 					<div class="control-label">
 						<?php echo $this->form->getLabel('country'); ?>
 					</div>
