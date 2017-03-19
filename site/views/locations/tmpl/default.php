@@ -25,7 +25,8 @@ foreach ($this->items as $item):?>
                 <strong><a href=""><?php echo $item->title; ?></a></strong>
                 <span class="view-icon"></span>
                 <span class="views">10k</span>
-                <span class="new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
+                <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
+                <span class="label featured"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED'); ?></span>
             </div>
             <div class="row-span">
                 <div class="span6">
@@ -49,12 +50,13 @@ foreach ($this->items as $item):?>
                         </a>
                     </div>
                     <img src="<?php echo JUri::base() . $item->image; ?>"
-                         alt="<?php $item->title; ?>">
+                         alt="<?php echo $item->title; ?>">
                 </div>
             </div>
 
             <div class="row-span">
                 <hr>
+                <a href="" class="btn pull-right btn-primary"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?></a>
                 <p>
                     <?php echo $item->short_description; ?>
                     <?php echo $item->description; ?>
