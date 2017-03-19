@@ -83,6 +83,11 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		$geoCode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($prepAddr) . '&sensor=false' . $google_api_URL_pram);
 		$output  = json_decode($geoCode);
 
+		if ($output->error_message != "") // If Error on API Connection, display error not
+		{
+			JFactory::getApplication()->enqueueMessage($output->error_message, 'Note');
+		}
+
 		// Build array latitude and longitude
 		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
 		                "longitude" => $output->results[0]->geometry->location->lng);
