@@ -19,10 +19,6 @@ class JFormFieldCountry extends JFormFieldList {
 
 	public function getOptions() {
 
-		$app = JFactory::getApplication();
-
-		// $country = $app->input->get('country'); //country is the dynamic value which is being used in the view
-
 		$countries = array();
 		$options = array();
 
@@ -33,8 +29,10 @@ class JFormFieldCountry extends JFormFieldList {
 			$countries = $obj->extension->countries->country;
 		}
 
-		$i = 0;
+		// Default field
+		$options[0]->text = JText::_('JGLOBAL_USE_GLOBAL');
 
+		$i = 1;
 		foreach ($countries as $country)
 		{
 			$options[$i]->value = 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_' . $country->name;
