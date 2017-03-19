@@ -32,7 +32,7 @@ class JFormFieldCountry extends JFormFieldList {
 		}
 
 		// Default field
-		$options[0]->text = JText::_('JGLOBAL_USE_GLOBAL');
+		$options[0]->text = JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_COUNTRY_SELECT');
 
 		$i = 1;
 
