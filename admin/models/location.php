@@ -38,6 +38,9 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 	public function save($data)
 	{
 
+		// Check and prepare Alias for saving
+		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
+
 		// Generate latitude and longitude
 		$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
 

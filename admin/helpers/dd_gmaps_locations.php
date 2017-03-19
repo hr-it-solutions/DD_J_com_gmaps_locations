@@ -96,6 +96,47 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		return $latlng;
 	}
 
+	/**
+	 * Checks plausibility of alias and prepare for URLSafe
+	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
+	 *
+	 * @param $data
+	 *
+	 * @return string alias
+	 */
+	public static function prepareAlias($data){
+
+		// Get alias
+		if ($data['alias'] != '')
+		{
+			$alias = $data['alias'];
+		}
+		else
+		{
+			$alias = $data['title'];
+		}
+
+		// Prepare alias for URLSafe
+		$alias = JFilterOutput::stringURLSafe($alias);
+
+		// Plausibility check unique alias
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('alias')
+			->from($db->quoteName('#__dd_gmaps_locations'))
+			->where($db->quoteName('alias') . " ='$alias' AND " . $db->quoteName('id') . " <> " . $data['id']);
+		$db->setQuery($query);
+
+		if ($db->loadResult())
+		{
+			JFactory::getApplication()->enqueueMessage('COM_DD_GMAPS_LOCATIONS_CHECKALIAS_ALIAS_UNIQUE', 'notice');
+			$alias = $data['id'] . '-' . $alias;
+		}
+
+		return $alias;
+
+	}
+
 
 	/**
 	 * Get Component Version

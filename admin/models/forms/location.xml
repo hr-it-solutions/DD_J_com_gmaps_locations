@@ -21,8 +21,8 @@
 
         <field name="alias"
                type="text"
-               class="inputbox"
                size="40"
+               class="inputbox"
                label="JFIELD_ALIAS_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_ALIAS_DESC"
         />
