@@ -8,11 +8,20 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_LocationsViewDefault extends JViewLegacy {
-    protected $items;
-    function display($tpl = null)
+class DD_GMaps_LocationsViewLocations extends JViewLegacy {
+
+	protected $items;
+
+	function display($tpl = null)
     {
-        $this->items = $this->get('items');
+      $this->items = $this->get('Items');
+
+        if (count($errors = $this->get('Errors')))
+        {
+            JError::raise(500, implode("\n", $errors));
+            return false;
+        }
+
         return parent::display($tpl);
     }
 }

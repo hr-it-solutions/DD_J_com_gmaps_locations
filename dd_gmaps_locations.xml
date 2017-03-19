@@ -72,7 +72,7 @@
         </languages>
     </administration>
 
-    <media destination="com_gmaps_location" folder="media">
+    <media destination="com_dd_gmaps_location" folder="media">
         <folder>css</folder>
         <folder>js</folder>
     </media>
