@@ -22,7 +22,7 @@ foreach ($this->items as $item):?>
 <?php endif; ?>
         <address class="span6 location well">
             <div class="page-header">
-                <strong><a href=""><?php echo $item->title; ?></a></strong>
+                <strong><a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=2')?>"><?php echo $item->title; ?></a></strong>
                 <span class="view-icon"></span>
                 <span class="views">10k</span>
                 <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
