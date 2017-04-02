@@ -59,15 +59,17 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 
 		JToolbarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATION'), '');
 
+		JToolbarHelper::apply('location.apply');
 		JToolbarHelper::save('location.save');
+		JToolbarHelper::save2new('location.save2new');
 
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('location.cancle');
+			JToolbarHelper::cancel('location.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('location.cancle', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('location.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 	}

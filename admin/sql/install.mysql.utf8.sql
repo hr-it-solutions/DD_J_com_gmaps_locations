@@ -25,57 +25,7 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
   `street` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `zip` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` enum(
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_AUSTRALIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_AUSTRIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_BELGIUM',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_BOSNIAANDHERZEGOVINA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_BRAZIL',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_BULGARIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CANADA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CHINA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CROATIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CUBA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CYPRUS',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_CZECHREPUBLIC',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_DENMARK',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_ESTONIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_FINLAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_FRANCE',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_GERMANY',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_GREECE',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_GREENLAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_HUNGARY',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_ICELAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_INDIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_IRELAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_ISRAEL',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_ITALY',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_LATVIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_LIECHTENSTEIN',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_LITHUANIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_LUXEMBOURG',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_MACEDONIATHEFORMERYUGOSLAVREPUBLICOF',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_MALTA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_MONACO',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_MONTENEGRO',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_NETHERLANDS',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_NEWZEALAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_NORWAY',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_POLAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_PORTUGAL',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_ROMANIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_RUSSIANFEDERATION',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SERBIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SLOVAKIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SLOVENIA',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SPAIN',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SWEDEN',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SWITZERLAND',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_TURKEY',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UKRAINE',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UNITEDKINGDOM',
-    'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UNITEDSTATES') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `federalstate` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
 
   `latitude` float(10,6) NOT NULL DEFAULT '255.000000',
@@ -101,4 +51,26 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
 
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for table `#__dd_gmaps_locations`
+--
+ALTER TABLE `#__dd_gmaps_locations`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for table `#__dd_gmaps_locations`
+--
+ALTER TABLE `#__dd_gmaps_locations`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Sample data for table `#__dd_gmaps_locations`
+--
+INSERT INTO `#__dd_gmaps_locations` (`title`, `alias`, `catid`, `state`, `profileimage`, `image`, `company`, `contact_person`, `phone`, `mobile`, `fax`, `email`, `url`, `street`, `location`, `zip`, `country`, `federalstate`, `latitude`, `longitude`, `description`, `short_description`, `publish_up`, `publish_down`, `checked_out`, `checked_out_time`, `access`, `language`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `params`, `featured`) VALUES
+('Champ de Mars', 'toureiffel-paris', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', 'Champ de Mars', '', '0033 00 00 00 00', '0033 00 00 00 00', '', '', '', 'Avenue Anatole 5', 'Paris', '75007 ', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_FRANCE', '', 48.858887, 2.294486, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 0),
+('Brandenburger Tor', 'brandenburger-tor', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0049 00 00 00', '0049 00 00 00', '', '', '', 'Pariser Platz', 'Berlin', '10117', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_GERMANY', 'Berlin', 52.515858, 13.378428, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 0),
+('Tower of London', 'tower-of-london', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0044 000 000 000', '', '', '', '', 'St Katharine''s & Wapping', 'London', 'EC3N', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UNITEDKINGDOM', '', 51.510384, -0.077027, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 0),
+('Vasa Museum', 'vasa-museum', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0046 000 000 000', '', '', '', '', 'Galärvarvsvägen 14', 'Stockholm', '11521', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SWEDEN', '', 59.328262, 18.091682, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 0);

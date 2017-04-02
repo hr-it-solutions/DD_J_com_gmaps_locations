@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-03-08
+ * @version    1-1-0-1 // Y-m-d 2017-04-02
  * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -120,7 +120,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                         </td>
                         <td class="center">
-                            <?php echo JHtml::_('jgrid.published', $item->state, $i, 'locations.', $canChange, 'cb', $item->published_up, $item->published_down); ?>
+                            <?php echo 'ERROR'.@JHtml::_('jgrid.published', $item->state, $i, 'locations.', $canChange, 'cb', $item->published_up, $item->published_down); ?>
                         </td>
                         <td class="nowrap">
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">

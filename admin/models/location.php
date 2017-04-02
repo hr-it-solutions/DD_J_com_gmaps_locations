@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-03-08
+ * @version    1-1-0-1 // Y-m-d 2017-04-02
  * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -35,6 +35,20 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		return $form;
 	}
 
+	public function save($data)
+	{
+
+		// Check and prepare Alias for saving
+		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
+
+		// Generate latitude and longitude
+		$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
+
+		$data['latitude']   = $latlng['latitude'];
+		$data['longitude'] = $latlng['longitude'];
+
+		return parent::save($data);
+	}
 
 	protected function loadFormData()
 	{

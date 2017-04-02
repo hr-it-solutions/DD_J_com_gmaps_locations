@@ -27,7 +27,7 @@ Location entries, location profile pages, location search, geolocation distance 
 ##### Profile pages for individual map locations
 - Profile details
 - Customize URL alias
-- linked to the map
+- Linked to the map
 
 **and much more...**
 

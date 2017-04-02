@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Locations" option="com_dd_gmaps_locations_locations_view_default_options">
+        <message>
+            <![CDATA[com_dd_gmaps_locations_locations_view_default_desc]]>
+        </message>
+    </layout>
+</metadata>

@@ -1,0 +1,1243 @@
+{
+    "extension": {
+        "name": "country-package",
+        "author": "HR IT-Solutions Florian Häusler",
+        "copyright": "Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions",
+        "license": "GNU/GPLv2 only",
+        "description": "Countries Package contains an extended and a reduced selection for smaller German Websites",
+        "countries": {
+            "country": [
+                {
+                    "name": "AFGHANISTAN",
+                    "code": "AF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ALANDISLANDS",
+                    "code": "AX",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ALBANIA",
+                    "code": "AL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ALGERIA",
+                    "code": "DZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "AMERICANSAMOA",
+                    "code": "AS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ANDORRA",
+                    "code": "AD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ANGOLA",
+                    "code": "AO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ANGUILLA",
+                    "code": "AI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ANTARCTICA",
+                    "code": "AQ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ANTIGUAANDBARBUDA",
+                    "code": "AG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ARGENTINA",
+                    "code": "AR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ARMENIA",
+                    "code": "AM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ARUBA",
+                    "code": "AW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "AUSTRALIA",
+                    "code": "AU",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "AUSTRIA",
+                    "code": "AT",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "AZERBAIJAN",
+                    "code": "AZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BAHAMAS",
+                    "code": "BS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BAHRAIN",
+                    "code": "BH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BANGLADESH",
+                    "code": "BD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BARBADOS",
+                    "code": "BB",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BELARUS",
+                    "code": "BY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BELGIUM",
+                    "code": "BE",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "BELIZE",
+                    "code": "BZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BENIN",
+                    "code": "BJ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BERMUDA",
+                    "code": "BM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BHUTAN",
+                    "code": "BT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BOLIVIAPLURINATIONALSTATEOF",
+                    "code": "BO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BOSNIAANDHERZEGOVINA",
+                    "code": "BA",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "BOTSWANA",
+                    "code": "BW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BOUVETISLAND",
+                    "code": "BV",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BRAZIL",
+                    "code": "BR",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "BRITISHINDIANOCEANTERRITORY",
+                    "code": "IO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BRUNEIDARUSSALAM",
+                    "code": "BN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BULGARIA",
+                    "code": "BG",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "BURKINAFASO",
+                    "code": "BF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "BURUNDI",
+                    "code": "BI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CAMBODIA",
+                    "code": "KH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CAMEROON",
+                    "code": "CM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CANADA",
+                    "code": "CA",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "CAPEVERDE",
+                    "code": "CV",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CAYMANISLANDS",
+                    "code": "KY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CENTRALAFRICANREPUBLIC",
+                    "code": "CF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CHAD",
+                    "code": "TD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CHILE",
+                    "code": "CL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CHINA",
+                    "code": "CN",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "CHRISTMASISLAND",
+                    "code": "CX",
+                    "selection": "extended"
+                },
+                {
+                    "name": "COCOSKEELINGISLANDS",
+                    "code": "CC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "COLOMBIA",
+                    "code": "CO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "COMOROS",
+                    "code": "KM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CONGO",
+                    "code": "CG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CONGOTHEDEMOCRATICREPUBLICOFTHE",
+                    "code": "CD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "COOKISLANDS",
+                    "code": "CK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "COSTARICA",
+                    "code": "CR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CTEDIVOIRE",
+                    "code": "CI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "CROATIA",
+                    "code": "HR",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "CUBA",
+                    "code": "CU",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "CYPRUS",
+                    "code": "CY",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "CZECHREPUBLIC",
+                    "code": "CZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "DENMARK",
+                    "code": "DK",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "DJIBOUTI",
+                    "code": "DJ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "DOMINICA",
+                    "code": "DM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "DOMINICANREPUBLIC",
+                    "code": "DO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ECUADOR",
+                    "code": "EC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "EGYPT",
+                    "code": "EG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ELSALVADOR",
+                    "code": "SV",
+                    "selection": "extended"
+                },
+                {
+                    "name": "EQUATORIALGUINEA",
+                    "code": "GQ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ERITREA",
+                    "code": "ER",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ESTONIA",
+                    "code": "EE",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "ETHIOPIA",
+                    "code": "ET",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FALKLANDISLANDSMALVINAS",
+                    "code": "FK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FAROEISLANDS",
+                    "code": "FO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FIJI",
+                    "code": "FJ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FINLAND",
+                    "code": "FI",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "FRANCE",
+                    "code": "FR",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "FRENCHGUIANA",
+                    "code": "GF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FRENCHPOLYNESIA",
+                    "code": "PF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "FRENCHSOUTHERNTERRITORIES",
+                    "code": "TF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GABON",
+                    "code": "GA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GAMBIA",
+                    "code": "GM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GEORGIA",
+                    "code": "GE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GERMANY",
+                    "code": "DE",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "GHANA",
+                    "code": "GH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GIBRALTAR",
+                    "code": "GI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GREECE",
+                    "code": "GR",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "GREENLAND",
+                    "code": "GL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GRENADA",
+                    "code": "GD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUADELOUPE",
+                    "code": "GP",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUAM",
+                    "code": "GU",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUATEMALA",
+                    "code": "GT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUERNSEY",
+                    "code": "GG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUINEA",
+                    "code": "GN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUINEABISSAU",
+                    "code": "GW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "GUYANA",
+                    "code": "GY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HAITI",
+                    "code": "HT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HEARDISLANDANDMCDONALDISLANDS",
+                    "code": "HM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HOLYSEEVATICANCITYSTATE",
+                    "code": "VA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HONDURAS",
+                    "code": "HN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HONGKONG",
+                    "code": "HK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "HUNGARY",
+                    "code": "HU",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "ICELAND",
+                    "code": "IS",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "INDIA",
+                    "code": "IN",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "INDONESIA",
+                    "code": "ID",
+                    "selection": "extended"
+                },
+                {
+                    "name": "IRANISLAMICREPUBLICOF",
+                    "code": "IR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "IRAQ",
+                    "code": "IQ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "IRELAND",
+                    "code": "IE",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "ISLEOFMAN",
+                    "code": "IM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ISRAEL",
+                    "code": "IL",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "ITALY",
+                    "code": "IT",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "JAMAICA",
+                    "code": "JM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "JAPAN",
+                    "code": "JP",
+                    "selection": "extended"
+                },
+                {
+                    "name": "JERSEY",
+                    "code": "JE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "JORDAN",
+                    "code": "JO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KAZAKHSTAN",
+                    "code": "KZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KENYA",
+                    "code": "KE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KIRIBATI",
+                    "code": "KI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KOREADEMOCRATICPEOPLESREPUBLICOF",
+                    "code": "KP",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KOREAREPUBLICOF",
+                    "code": "KR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KUWAIT",
+                    "code": "KW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "KYRGYZSTAN",
+                    "code": "KG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LAOPEOPLESDEMOCRATICREPUBLIC",
+                    "code": "LA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LATVIA",
+                    "code": "LV",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "LEBANON",
+                    "code": "LB",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LESOTHO",
+                    "code": "LS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LIBERIA",
+                    "code": "LR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LIBYANARABJAMAHIRIYA",
+                    "code": "LY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "LIECHTENSTEIN",
+                    "code": "LI",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "LITHUANIA",
+                    "code": "LT",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "LUXEMBOURG",
+                    "code": "LU",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "MACAO",
+                    "code": "MO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MACEDONIATHEFORMERYUGOSLAVREPUBLICOF",
+                    "code": "MK",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "MADAGASCAR",
+                    "code": "MG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MALAWI",
+                    "code": "MW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MALAYSIA",
+                    "code": "MY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MALDIVES",
+                    "code": "MV",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MALI",
+                    "code": "ML",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MALTA",
+                    "code": "MT",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "MARSHALLISLANDS",
+                    "code": "MH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MARTINIQUE",
+                    "code": "MQ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MAURITANIA",
+                    "code": "MR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MAURITIUS",
+                    "code": "MU",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MAYOTTE",
+                    "code": "YT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MEXICO",
+                    "code": "MX",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MICRONESIAFEDERATEDSTATESOF",
+                    "code": "FM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MOLDOVAREPUBLICOF",
+                    "code": "MD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MONACO",
+                    "code": "MC",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "MONGOLIA",
+                    "code": "MN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MONTENEGRO",
+                    "code": "ME",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "MONTSERRAT",
+                    "code": "MS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MOROCCO",
+                    "code": "MA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MOZAMBIQUE",
+                    "code": "MZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "MYANMAR",
+                    "code": "MM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NAMIBIA",
+                    "code": "NA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NAURU",
+                    "code": "NR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NEPAL",
+                    "code": "NP",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NETHERLANDS",
+                    "code": "NL",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "NETHERLANDSANTILLES",
+                    "code": "AN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NEWCALEDONIA",
+                    "code": "NC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NEWZEALAND",
+                    "code": "NZ",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "NICARAGUA",
+                    "code": "NI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NIGER",
+                    "code": "NE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NIGERIA",
+                    "code": "NG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NIUE",
+                    "code": "NU",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NORFOLKISLAND",
+                    "code": "NF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NORTHERNMARIANAISLANDS",
+                    "code": "MP",
+                    "selection": "extended"
+                },
+                {
+                    "name": "NORWAY",
+                    "code": "NO",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "OMAN",
+                    "code": "OM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PAKISTAN",
+                    "code": "PK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PALAU",
+                    "code": "PW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PALESTINIANTERRITORYOCCUPIED",
+                    "code": "PS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PANAMA",
+                    "code": "PA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PAPUANEWGUINEA",
+                    "code": "PG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PARAGUAY",
+                    "code": "PY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PERU",
+                    "code": "PE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PHILIPPINES",
+                    "code": "PH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PITCAIRN",
+                    "code": "PN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "POLAND",
+                    "code": "PL",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "PORTUGAL",
+                    "code": "PT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "PUERTORICO",
+                    "code": "PR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "QATAR",
+                    "code": "QA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "REUNION",
+                    "code": "RE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ROMANIA",
+                    "code": "RO",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "RUSSIANFEDERATION",
+                    "code": "RU",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "RWANDA",
+                    "code": "RW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTBARTHELEMY",
+                    "code": "BL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTHELENAASCENSIONANDTRISTANDACUNHA",
+                    "code": "SH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTKITTSANDNEVIS",
+                    "code": "KN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTLUCIA",
+                    "code": "LC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTMARTIN",
+                    "code": "MF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTPIERREANDMIQUELON",
+                    "code": "PM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAINTVINCENTANDTHEGRENADINES",
+                    "code": "VC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAMOA",
+                    "code": "WS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SANMARINO",
+                    "code": "SM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAOTOMEANDPRINCIPE",
+                    "code": "ST",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SAUDIARABIA",
+                    "code": "SA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SENEGAL",
+                    "code": "SN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SERBIA",
+                    "code": "RS",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SEYCHELLES",
+                    "code": "SC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SIERRALEONE",
+                    "code": "SL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SINGAPORE",
+                    "code": "SG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SLOVAKIA",
+                    "code": "SK",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SLOVENIA",
+                    "code": "SI",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SOLOMONISLANDS",
+                    "code": "SB",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SOMALIA",
+                    "code": "SO=",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SOUTHAFRICA",
+                    "code": "ZA",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS",
+                    "code": "GS",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SPAIN",
+                    "code": "ES",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SRILANKA",
+                    "code": "LK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SUDAN",
+                    "code": "SD",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SURINAME",
+                    "code": "SR",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SVALBARDANDJANMAYEN",
+                    "code": "SJ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SWAZILAND",
+                    "code": "SZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "SWEDEN",
+                    "code": "SE",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SWITZERLAND",
+                    "code": "CH",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "SYRIANARABREPUBLIC",
+                    "code": "SY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TAIWANPROVINCEOFCHINA",
+                    "code": "TW",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TAJIKISTAN",
+                    "code": "TJ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TANZANIAUNITEDREPUBLICOF",
+                    "code": "TZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "THAILAND",
+                    "code": "TH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TIMORLESTE",
+                    "code": "TL",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TOGO",
+                    "code": "TG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TOKELAU",
+                    "code": "TK",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TONGA",
+                    "code": "TO",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TRINIDADANDTOBAGO",
+                    "code": "TT",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TUNISIA",
+                    "code": "TN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TURKEY",
+                    "code": "TR",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "TURKMENISTAN",
+                    "code": "TM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TURKSANDCAICOSISLANDS",
+                    "code": "TC",
+                    "selection": "extended"
+                },
+                {
+                    "name": "TUVALU",
+                    "code": "TV",
+                    "selection": "extended"
+                },
+                {
+                    "name": "UGANDA",
+                    "code": "UG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "UKRAINE",
+                    "code": "UA",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "UNITEDARABEMIRATES",
+                    "code": "AE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "UNITEDKINGDOM",
+                    "code": "GB",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "UNITEDSTATES",
+                    "code": "US",
+                    "selection": "reduced"
+                },
+                {
+                    "name": "UNITEDSTATESMINOROUTLYINGISLANDS",
+                    "code": "UM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "URUGUAY",
+                    "code": "UY",
+                    "selection": "extended"
+                },
+                {
+                    "name": "UZBEKISTAN",
+                    "code": "UZ",
+                    "selection": "extended"
+                },
+                {
+                    "name": "VANUATU",
+                    "code": "VU",
+                    "selection": "extended"
+                },
+                {
+                    "name": "VENEZUELABOLIVARIANREPUBLICOF",
+                    "code": "VE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "VIETNAM",
+                    "code": "VN",
+                    "selection": "extended"
+                },
+                {
+                    "name": "VIRGINISLANDSBRITISH",
+                    "code": "VG",
+                    "selection": "extended"
+                },
+                {
+                    "name": "VIRGINISLANDSUS",
+                    "code": "VI",
+                    "selection": "extended"
+                },
+                {
+                    "name": "WALLISANDFUTUNA",
+                    "code": "WF",
+                    "selection": "extended"
+                },
+                {
+                    "name": "WESTERNSAHARA",
+                    "code": "EH",
+                    "selection": "extended"
+                },
+                {
+                    "name": "YEMEN",
+                    "code": "YE",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ZAMBIA",
+                    "code": "ZM",
+                    "selection": "extended"
+                },
+                {
+                    "name": "ZIMBABWE",
+                    "code": "ZW",
+                    "selection": "extended"
+                }
+            ]
+        }
+    }
+}
