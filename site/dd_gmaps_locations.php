@@ -7,3 +7,11 @@
  **/
 
 defined('_JEXEC') or die;
+
+$doc = JFactory::getDocument();
+$doc->addStyleSheetVersion(JUri::base() . 'media/com_dd_gmaps_locations/css/dd_gmaps_locations.css');
+$doc->addScriptVersion(JUri::base() . 'media/com_dd_gmaps_locations/js/dd_gmaps_locations.js');
+
+$controller = JControllerLegacy::getInstance('DD_GMaps_Locations');
+$controller->execute(JFactory::getApplication()->input->get('task'));
+$controller->redirect();
