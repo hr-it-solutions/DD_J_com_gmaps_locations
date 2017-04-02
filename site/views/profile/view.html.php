@@ -10,15 +10,45 @@ defined('_JEXEC') or die;
 
 class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
-	protected $items;
+	protected $item;
 
+	protected $input;
+
+	protected $alias;
+
+	protected $profile_id;
+
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse
+	 *
+	 * @return boolean | mixed
+	 *
+	 * @since Version 1.1.0.0
+	 */
 	function display($tpl = null)
 	{
-		$this->items = $this->get('Items');
+
+		$this->input      = JFactory::getApplication()->input;
+		$this->alias      = $this->input->get('alias',      false, 'STRING');
+		$this->profile_id = $this->input->get('profile_id', false, 'STRING');
+
+		if ($this->alias && $this->alias !== 'profile' OR $this->profile_id)
+		{
+			$this->item = $this->get('Item');
+		}
+		else
+		{
+			JError::raise(404);
+
+			return false;
+		}
 
 		if (count($errors = $this->get('Errors')))
 		{
 			JError::raise(500, implode("\n", $errors));
+
 			return false;
 		}
 

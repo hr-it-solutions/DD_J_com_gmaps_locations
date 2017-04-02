@@ -11,25 +11,66 @@ defined('_JEXEC') or die;
 class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 
 	/**
-	 * @param   $alias  string
+	 * Get Profile Item Details based on sef alias or profile_id
+	 *
 	 * @return  string
+	 *
 	 * @since   Version 3.6
 	 */
-	public static function GetProfile($alias)
+	public static function GetItem()
 	{
-
 		$db = JFactory::getDbo();
-		$alias = $db->escape($alias);
 		$query = $db->getQuery(true);
-		$query->select(array('id', 'alias'))
-			->from($db->quoteName('#__dd_gmaps_locations'))
-			->where($db->quoteName('alias')." = '$alias'");
-		$db->setQuery($query);
-		$result = $db->loadObject();
+
+		// Prepare input
+		$input      = JFactory::getApplication()->input;
+		$alias      = $db->escape($input->get('alias', false, 'STRING'));
+		$profile_id = $db->escape($input->get('profile_id', false, 'INT'));
+
+		$alias      = str_replace(":", "-", $alias);
+
+		$select = $db->qn(
+			array(
+				'a.title',
+				'a.catid',
+				'a.state',
+				'a.profileimage',
+				'a.image',
+				'a.company',
+				'a.contact_person',
+				'a.phone',
+				'a.email',
+				'a.street',
+				'a.location',
+				'a.zip',
+				'a.country',
+				'a.federalstate',
+				'a.latitude',
+				'a.longitude',
+				'a.short_description',
+				'a.description',
+				'a.publish_up',
+				'a.publish_down'
+			)
+		);
+
+		$query  ->select($select)
+				->from($db->qn('#__dd_gmaps_locations', 'a'));
+
+		if ($alias)
+		{
+			$query->where($db->qn('alias') . " = '$alias'");
+		}
+		elseif($profile_id)
+		{
+			$query->where($db->qn('id') . " = '$profile_id'");
+		}
+
+		$result = $db->setQuery($query)->loadObject();
 
 		if ($result)
 		{
-			return true;
+			return $result;
 
 		}
 		else
