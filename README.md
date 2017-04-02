@@ -26,10 +26,10 @@ Location entries, location profile pages, location search, geolocation distance 
 
 ##### Profile pages for individual map locations
 - Profile details
+- Highlight options and custom category labels
+- DD Improved Hits Counter (one view per IP-address per day)
 - Customize URL alias
 - Linked to the map
-- DD Improved Hits Counter. One view per IP-address per Day
-- Highlight Labes, as New, as Featured, as custom category labeled
 
 **and much more...**
 
