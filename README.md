@@ -28,6 +28,8 @@ Location entries, location profile pages, location search, geolocation distance 
 - Profile details
 - Customize URL alias
 - Linked to the map
+- DD Improved Hits Counter. One view per IP-address per Day
+- Highlight Labes, as New, as Featured, as custom category labeled
 
 **and much more...**
 
