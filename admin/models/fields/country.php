@@ -32,7 +32,9 @@ class JFormFieldCountry extends JFormFieldList {
 		}
 
 		// Default field
-		$options[0]->text = JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_COUNTRY_SELECT');
+		$options[0] = new StdClass;
+		$options[0]->value = 0;
+		$options[0]->text  = JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_COUNTRY_SELECT');
 
 		$i = 1;
 
@@ -43,6 +45,7 @@ class JFormFieldCountry extends JFormFieldList {
 				continue;
 			}
 
+			$options[$i] = new StdClass;
 			$options[$i]->value = 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_' . $country->name;
 			$options[$i]->text  = JText::_('COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_' . $country->name);
 			++$i;
