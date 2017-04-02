@@ -17,7 +17,7 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 *
 	 * @since   Version 1.1.0.1
 	 */
-	protected function GetItem()
+	public function GetItem()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -58,7 +58,7 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 				'a.publish_down',
 				'a.metadesc',
 				'a.metakey',
-			    'a.featured'
+				'a.featured'
 			)
 		);
 
@@ -104,7 +104,9 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 * DD Hit Counter
 	 * Set Hit - One hit per IP-address per day
 	 *
-	 * @param   $profile_id  int
+	 * @param   $profile_id  int  profile id
+	 *
+	 * @return  boolean
 	 *
 	 * @since   Version  1.1.0.1
 	 */
@@ -119,7 +121,7 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 		$query = $db->getQuery(true);
 		$query->select($db->qn('visitor_ip'))
 			->from($db->qn('#__dd_gmaps_locations_iptables'))
-			->where($db->qn('visitor_ip') . "='$VisitorIP' AND " . $db->qn('profile_id') . "='$profile_id'");
+			->where($db->qn('visitor_ip') . '=' . $db->q($VisitorIP) . " AND " . $db->qn('profile_id') . "= " . $db->q($profile_id));
 		$db->setQuery($query);
 
 		// Check if IP is not in ip table!
@@ -128,8 +130,8 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 			// Inset Ip to ip table
 			$query = $db->getQuery(true);
 			$query->insert($db->qn('#__dd_gmaps_locations_iptables'))
-				->columns($db->qn(array('user_ip', 'producer')))
-				->values(implode(',', array($db->qn("$VisitorIP"), $db->qn("$profile_id"))));
+				->columns($db->qn(array('visitor_ip', 'profile_id')))
+				->values(implode(',', array($db->q($VisitorIP), $db->q($profile_id))));
 			$db->setQuery($query);
 			$db->execute();
 
@@ -137,18 +139,20 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 			$query = $db->getQuery(true);
 			$query->update($db->qn('#__dd_gmaps_locations'))
 				->set($db->qn('hits') . '=' . $db->qn('hits') . ' + 1')
-				->where($db->qn('id') . "= $profile_id");
+				->where($db->qn('id') . '=' . $db->q($profile_id));
 			$db->setQuery($query);
 			$db->execute();
 
 			// Delete rows who older than a day!
 			$sub_timestamp = date('Y-m-d H:i:s', strtotime("-1 day"));
 			$query = $db->getQuery(true);
-			$query->delete($db->qn('#__fs_social_profile_view_iptables'))
-				->where($db->qn('timestamp') . " < '$sub_timestamp'");
+			$query->delete($db->qn('#__dd_gmaps_locations_iptables'))
+				->where($db->qn('timestamp') . " < " . $db->q($sub_timestamp));
 			$db->setQuery($query);
 			$db->execute();
 		}
+
+		return true;
 
 	}
 }
