@@ -31,51 +31,55 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 
 		$select = $db->qn(
 			array(
-				'title', 'a.title',
-				'catid', 'a.catid',
-				'state', 'a.state',
-				'profileimage', 'a.profileimage',
-				'image', 'a.image',
-				'company', 'a.company',
-				'contact_person', 'a.contact_person',
-				'phone', 'a.phone',
-				'mobile', 'a.mobile',
-				'fax', 'a.fax',
-				'email', 'a.email',
-				'url', 'a.url',
-				'street', 'a.street',
-				'location', 'a.location',
-				'zip', 'a.zip',
-				'country', 'a.country',
-				'federalstate', 'a.federalstate',
-				'latitude', 'a.latitude',
-				'longitude', 'a.longitude',
-				'short_description', 'a.short_description',
-				'description', 'a.description',
-				'publish_up', 'a.publish_up',
-				'publish_down', 'a.publish_down',
-				'metadesc', 'a.metadesc',
-				'metakey', 'a.metakey',
-			    'featured', 'a.featured'
+				'a.id',
+				'a.title',
+				'a.catid',
+				'a.state',
+				'a.profileimage',
+				'a.image',
+				'a.company',
+				'a.contact_person',
+				'a.phone',
+				'a.mobile',
+				'a.fax',
+				'a.email',
+				'a.url',
+				'a.street',
+				'a.location',
+				'a.zip',
+				'a.country',
+				'a.federalstate',
+				'a.latitude',
+				'a.longitude',
+				'a.description',
+				'a.short_description',
+				'a.publish_up',
+				'a.publish_down',
+				'a.metadesc',
+				'a.metakey',
+			    'a.featured'
 			)
 		);
 
 		$query  ->select($select)
-				->from($db->qn('#__dd_gmaps_locations', 'a'));
+			->from($db->quoteName('#__dd_gmaps_locations', 'a'));
 
-		if ($alias)
-		{
-			$query->where($db->qn('alias') . " = '$alias'");
-		}
-		elseif($profile_id)
-		{
-			$query->where($db->qn('id') . " = '$profile_id'");
-		}
+		// Filter state
+		$query->where('a.state = 1');
 
 		// Join over categories
 		$query  ->select($db->quoteName('c.title', 'category_title'))
 			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
 
+		// Get Profile
+		if ($alias)
+		{
+			$query->where($db->qn('a.alias') . " = '$alias'");
+		}
+		elseif($profile_id)
+		{
+			$query->where($db->qn('a.id') . " = '$profile_id'");
+		}
 
 		$result = $db->setQuery($query)->loadObject();
 
