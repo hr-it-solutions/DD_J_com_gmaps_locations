@@ -27,10 +27,26 @@ foreach ($this->items as $item): ?>
                         <?php echo htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8'); ?>
                     </a>
                 </strong>
-                <span class="view-icon"></span>
-                <span class="views">10k</span>
-                <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
-                <span class="label featured"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED'); ?></span>
+	            <?php // Show hits
+	            if($this->params->get('show_hits')):?>
+                    <span class="view-icon"></span>
+                    <span class="views">10k</span>
+	            <?php endif; ?>
+	            <?php // Mark as new
+	            $mark_as_new = (int) $this->params->get('mark_as_new', 0);
+	            if( strtotime("-$mark_as_new days") < strtotime($item->created)):?>
+                    <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
+	            <?php endif; ?>
+	            <?php // Featured
+	            if($item->featured != 0):?>
+                <span class="label featured"><?php
+		            if ($item->featured == 1){
+			            echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED');
+		            } elseif($item->featured == 2){
+			            echo htmlspecialchars($item->category_title, ENT_QUOTES, 'UTF-8');
+		            }
+		            ?></span>
+	            <?php endif; ?>
             </div>
             <div class="row-col">
                 <div class="span6">

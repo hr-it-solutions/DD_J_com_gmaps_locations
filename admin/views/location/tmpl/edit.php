@@ -8,16 +8,42 @@
 
 defined('_JEXEC') or die;
 
+JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.keepalive');
+JHtml::_('formbehavior.chosen', '#jform_catid', null, array('disable_search_threshold' => 0));
+JHtml::_('formbehavior.chosen', 'select');
+
 ?>
 <style>
-    .green { color: green}
-    .red { color: red}
+    .green { color: green }
+    .red { color: red }
+    #jform_short_description {
+        width: 100%;
+        resize: none;
+    }
 </style>
-<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-	<div class="row-fluid">
-		<div class="span10 form-horizontal">
-			<fieldset>
-				<?php echo JHtml::_('bootstrap.startPane', 'myTab', 'details', empty($this->item->id)) ? JText::_('COM_DD_GMAPS_LOCATIONS_NEW_LOCATION', true) : JText::sprintf('COM_DD_GMAPS_LOCATIONS_NEW_LOCATION', $this->item->id, true); ?>
+<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>"
+      method="post" name="adminForm" id="adminForm" class="form-validate">
+    <div class="row-fluid">
+        <div class="span12">
+
+            <div class="form-inline form-inline-header">
+                <div class="control-group">
+                    <div class="control-label">
+						<?php echo $this->form->getLabel('title'); ?>
+                    </div>
+                    <div class="controls">
+						<?php echo $this->form->getInput('title'); ?>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+						<?php echo $this->form->getLabel('alias'); ?>
+                    </div>
+                    <div class="controls">
+						<?php echo $this->form->getInput('alias'); ?>
+                    </div>
+                </div>
                 <div class="control-group">
                     <div class="control-label">
 						<?php echo $this->form->getLabel('id'); ?>
@@ -26,198 +52,264 @@ defined('_JEXEC') or die;
 						<?php echo $this->form->getInput('id'); ?>
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('state'); ?>
-                    </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('state'); ?>
-                    </div>
-                </div>
-                <div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('title'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('title'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('alias'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('alias'); ?>
-					</div>
-				</div>
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('catid'); ?>
-                    </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('catid'); ?>
-                    </div>
-                </div>
-                <hr>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('profileimage'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('profileimage'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('image'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('image'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('company'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('company'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('contact_person'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('contact_person'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('phone'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('phone'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('mobile'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('mobile'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('fax'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('fax'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('url'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('url'); ?>
-					</div>
-				</div>
-                <hr>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('street'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('street'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('location'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('location'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('zip'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('zip'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('country'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('country'); ?>
-                        <div class="row-fluid">
-                            <small>
-                                <?php
-                                if (JComponentHelper::getParams('com_dd_gmaps_locations')->get('countries_reduced_selection', 0))
-                                {
-                                    echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_REDUCED');
-                                }
-                                else
-                                {
-                                    echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_EXTENDED');
-                                }
-                                ?>
-                            </small>
+            </div>
+
+			<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'general', JText::_('COM_DD_GMAPS_LOCATIONS_NEW_LOCATION')); ?>
+            <div class="row-fluid">
+                <div class="span9">
+                    <fieldset>
+                        <div class="control-group">
+                            <div class="control-label">
+								<?php echo $this->form->getLabel('short_description'); ?>
+                            </div>
+                            <div class="controls">
+								<?php echo $this->form->getInput('short_description'); ?>
+                            </div>
                         </div>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('federalstate'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('federalstate'); ?>
-					</div>
-				</div>
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('latitude'); ?>
+                        <div class="control-group">
+                            <div class="control-label">
+								<?php echo $this->form->getLabel('description'); ?>
+                            </div>
+                            <div class="controls">
+								<?php echo $this->form->getInput('description'); ?>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="span3">
+					<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+
+                </div>
+            </div>
+			<?php echo JHtml::_('bootstrap.endTab'); ?>
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'address', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_ADDRESS')); ?>
+            <div class="row-fluid form-horizontal-desktop">
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('street'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('street'); ?>
+                        </div>
                     </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('latitude'); ?>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('location'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('location'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('zip'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('zip'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('country'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('country'); ?>
+                            <div class="row-fluid">
+                                <small>
+									<?php
+									if (JComponentHelper::getParams('com_dd_gmaps_locations')->get('countries_reduced_selection', 0))
+									{
+										echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_REDUCED');
+									}
+									else
+									{
+										echo JText::_('COM_DD_GMAPS_LOCATIONS_COMPONENT_COUNTRIES_SELECTION_EXTENDED');
+									}
+									?>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('federalstate'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('federalstate'); ?>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('longitude'); ?>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('latitude'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('latitude'); ?>
+                        </div>
                     </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('longitude'); ?>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('longitude'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('longitude'); ?>
+                        </div>
                     </div>
                 </div>
-                <hr>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('description'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('description'); ?>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="control-label">
-						<?php echo $this->form->getLabel('short_description'); ?>
-					</div>
-					<div class="controls">
-						<?php echo $this->form->getInput('short_description'); ?>
-					</div>
-				</div>
-				<?php echo JHtml::_('bootstrap.endPanel'); ?>
+            </div>
+			<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-				<input type="hidden" name="task" value="" />
-				<?php echo JHtml::_('form.token'); ?>
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'images', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_IMAGES')); ?>
+            <div class="row-fluid form-horizontal-desktop">
+                <div class="span9">
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('profileimage'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('profileimage'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('image'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('image'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-				<?php echo JHtml::_('bootstrap.endPane'); ?>
-			</fieldset>
-		</div>
-	</div>
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-details', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_DETAILS')); ?>
+            <div class="row-fluid form-horizontal-desktop">
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('company'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('company'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('contact_person'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('contact_person'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('url'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('url'); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('phone'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('phone'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('mobile'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('mobile'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('fax'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('fax'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+							<?php echo $this->form->getLabel('email'); ?>
+                        </div>
+                        <div class="controls">
+							<?php echo $this->form->getInput('email'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_PUBLISHING')); ?>
+            <div class="row-fluid form-horizontal-desktop">
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('created'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('created'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('published_up'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('published_up'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('published_down'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('published_down'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('hits'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('hits'); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <?php echo $this->form->getLabel('metadesc'); ?>
+                        </div>
+                        <div class="controls">
+                            <?php echo $this->form->getInput('metadesc'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            <?php echo $this->form->getLabel('metakey'); ?>
+                        </div>
+                        <div class="controls">
+                            <?php echo $this->form->getInput('metakey'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+			<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+            <input type="hidden" name="task" value=""/>
+			<?php echo JHtml::_('form.token'); ?>
+        </div>
+    </div>
 </form>

@@ -70,15 +70,22 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.longitude',
 				'a.short_description',
 				'a.description',
+				'a.created',
 				'a.publish_up',
-				'a.publish_down'
+				'a.publish_down',
+				'a.featured'
 			)
 		);
 
 		$query  ->select($select)
 			->from($db->quoteName('#__dd_gmaps_locations', 'a'));
 
-		$query->where('(a.state IN (0, 1))');
+		// Filter state
+		$query->where('a.state = 1');
+
+		// Join over categories
+		$query  ->select($db->quoteName('c.title', 'category_title'))
+			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
 
 		return $query;
 	}

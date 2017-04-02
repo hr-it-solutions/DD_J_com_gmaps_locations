@@ -10,8 +10,9 @@ defined('_JEXEC') or die;
 
 class DD_GMaps_LocationsViewLocations extends JViewLegacy
 {
-
 	protected $items;
+
+	protected $params;
 
 	protected $sef_rewrite;
 
@@ -32,6 +33,9 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		$this->sef_rewrite = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = JFactory::getApplication()->getMenu()->getActive()->alias;
+
+		// Get the component configuration
+		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		if (count($errors = $this->get('Errors')))
 		{

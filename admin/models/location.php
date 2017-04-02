@@ -38,6 +38,10 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 	public function save($data)
 	{
 
+		// Set created date
+		$date = & JFactory::getDate();
+		$data['created'] = JHtml::date($date, 'Y-m-d H:M:S');
+
 		// Check and prepare Alias for saving
 		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
 

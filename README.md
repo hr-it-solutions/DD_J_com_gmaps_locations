@@ -26,6 +26,8 @@ Location entries, location profile pages, location search, geolocation distance 
 
 ##### Profile pages for individual map locations
 - Profile details
+- Highlight options and custom category labels
+- DD Improved Hits Counter (one view per IP-address per day)
 - Customize URL alias
 - Linked to the map
 

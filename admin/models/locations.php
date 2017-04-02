@@ -81,7 +81,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 				'a.latitude',
 				'a.longitude',
 				'a.publish_up',
-				'a.publish_down'
+				'a.publish_down',
 			)
 		);
 
