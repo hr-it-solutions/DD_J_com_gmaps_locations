@@ -28,28 +28,30 @@ defined('_JEXEC') or die;
                          alt="<?php echo htmlspecialchars($this->item->title, ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="clear"></div><br>
                 <?php endif; ?>
+                    <p>
 					<strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_ADDRESS'); ?>:</strong><br>
 					<?php
-                    echo htmlspecialchars($this->item->street, ENT_QUOTES, 'UTF-8') . '<br>' .
-                         htmlspecialchars($this->item->zip, ENT_QUOTES, 'UTF-8')    . ' ' .
-                         htmlspecialchars($this->item->location, ENT_QUOTES, 'UTF-8') . ', ' .
-                         $this->item->federalstate ? htmlspecialchars($this->item->federalstate, ENT_QUOTES, 'UTF-8') . ', ' : ' ' .
-                         JText::_($this->item->country) . '<br>';
-					?>
+                    echo htmlspecialchars($this->item->street, ENT_QUOTES, 'UTF-8') . '<br>';
+					echo htmlspecialchars($this->item->zip, ENT_QUOTES, 'UTF-8')    . ' ';
+                    echo htmlspecialchars($this->item->location, ENT_QUOTES, 'UTF-8') . ', ';
+					echo $this->item->federalstate ? htmlspecialchars($this->item->federalstate, ENT_QUOTES, 'UTF-8') . ', ' : ' ';
+					echo JText::_($this->item->country);
+					?></p>
                 <?php if( $this->item->contact_person || $this->item->phone || $this->item->mobile || $this->item->fax): ?>
-                    <br>
-                    <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_DETAILS'); ?>:</strong>
+                    <p>
+                    <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_DETAILS'); ?>:</strong><br>
 	                <?php
                     echo $this->item->contact_person ? htmlspecialchars($this->item->contact_person, ENT_QUOTES, 'UTF-8') . '<br>':'' .
-                         $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . htmlspecialchars($this->item->phone, ENT_QUOTES, 'UTF-8')  . '<br>' : '' .
-                         $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . htmlspecialchars($this->item->mobile, ENT_QUOTES, 'UTF-8') . '<br>' : '' .
-                         $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')  . htmlspecialchars($this->item->fax, ENT_QUOTES, 'UTF-8')    . '<br>' : '' .
-                         $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')    . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
-                    ?>
+                         $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '' .
+                         $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '' .
+                         $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')  . ' ' . $this->item->fax    . '<br>' : '' .
+                         $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
+                    ?></p>
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
+                    <p>
                     <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_WEBADDRESS'); ?>:</strong>
-                    <?php echo $this->item->url ? htmlspecialchars($this->item->url, ENT_QUOTES, 'UTF-8') :''; ?>
+                    <?php echo $this->item->url ? htmlspecialchars($this->item->url, ENT_QUOTES, 'UTF-8') :''; ?></p>
                 <?php endif; ?>
                 </div>
 				<div class="span6">
@@ -63,9 +65,7 @@ defined('_JEXEC') or die;
 			</div>
 			<div class="row-span">
 				<hr>
-				<p>
-					<?php echo htmlspecialchars($this->item->description, ENT_QUOTES, 'UTF-8'); ?>
-				</p>
+				<?php echo $this->item->description; ?>
 			</div>
 		</address>
 		<div class="clear"></div>
