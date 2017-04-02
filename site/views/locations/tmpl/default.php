@@ -34,16 +34,16 @@ foreach ($this->items as $item): ?>
 	            <?php endif; ?>
 	            <?php // Mark as new
 	            $mark_as_new = (int) $this->params->get('mark_as_new', 0);
-	            if( strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
+	            if( strtotime("-$mark_as_new days") < strtotime($item->created)):?>
                     <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
 	            <?php endif; ?>
 	            <?php // Featured
-	            if($this->item->featured != 0):?>
+	            if($item->featured != 0):?>
                 <span class="label featured"><?php
-		            if ($this->item->featured == 1){
+		            if ($item->featured == 1){
 			            echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED');
-		            } elseif($this->item->featured == 2){
-			            echo htmlspecialchars($this->item->category_title, ENT_QUOTES, 'UTF-8');
+		            } elseif($item->featured == 2){
+			            echo htmlspecialchars($item->category_title, ENT_QUOTES, 'UTF-8');
 		            }
 		            ?></span>
 	            <?php endif; ?>
