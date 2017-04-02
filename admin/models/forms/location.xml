@@ -101,22 +101,28 @@
         />
 
         <field name="phone"
-               type="text"
-               class="inputbox"
+               type="tel"
+               id="phone"
+               filter="string"
+               validate="tel"
                size="40"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_PHONE_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_PHONE_DESC"/>
 
         <field name="mobile"
-               type="text"
-               class="inputbox"
+               type="tel"
+               id="phone"
+               filter="string"
+               validate="tel"
                size="40"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_MOBILE_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_MOBILE_DESC"/>
 
         <field name="fax"
-               type="text"
-               class="inputbox"
+               type="tel"
+               id="phone"
+               filter="string"
+               validate="tel"
                size="40"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_FAX_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_FAX_DESC"/>
