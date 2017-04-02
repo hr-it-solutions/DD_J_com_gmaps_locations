@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
     <fieldset>
-        <field name="id"
-               type="text"
-               default="0"
-               label="JGLOBAL_FIELD_ID_LABEL"
-               readonly="true"
-               class="readonly"
-               description="JGLOBAL_FIELD_ID_DESC"
-        />
+    <field name="id"
+           type="text"
+           default="0"
+           label="JGLOBAL_FIELD_ID_LABEL"
+           readonly="true"
+           class="readonly"
+           description="JGLOBAL_FIELD_ID_DESC"
+    />
 
-        <field name="title"
-               type="text"
-               class="inputbox"
-               size="40"
-               label="JGLOBAL_TITLE"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_TITLE_DESC"
-               required="true"
-        />
+    <field name="title"
+           type="text"
+           class="input-xxlarge input-large-text"
+           size="40"
+           label="JGLOBAL_TITLE"
+           description="COM_DD_GMAPS_LOCATIONS_FIELD_TITLE_DESC"
+           required="true"
+    />
 
-        <field name="alias"
-               type="text"
-               size="40"
-               class="inputbox"
-               label="JFIELD_ALIAS_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_ALIAS_DESC"
-        />
+    <field name="alias"
+           type="text"
+           size="40"
+           class="inputbox"
+           label="JFIELD_ALIAS_LABEL"
+           description="COM_DD_GMAPS_LOCATIONS_FIELD_ALIAS_DESC"
+    />
 
+    <field name="state" type="list" label="JSTATUS"
+           description="JFIELD_PUBLISHED_DESC"
+           class="inputbox small" size="1" default="1"
+    >
+        <option value="1">JPUBLISHED</option>
+        <option value="0">JUNPUBLISHED</option>
+        <option value="-2">JTRASHED</option>
+    </field>
 
-        <field name="catid"
-               type="category"
-               extension="com_dd_gmaps_locations"
-               class="inputbox"
-               default=""
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_CATID_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_CATID_DESC"
-        >
-            <option value="0">JOPTION_SELECT_CATEGORY</option>
-        </field>
+    <field name="catid"
+           type="category"
+           extension="com_dd_gmaps_locations"
+           class="inputbox"
+           default=""
+           label="COM_DD_GMAPS_LOCATIONS_FIELD_CATID_LABEL"
+           description="COM_DD_GMAPS_LOCATIONS_CATID_DESC"
+    >
+        <option value="0">JOPTION_SELECT_CATEGORY</option>
+    </field>
 
-        <field name="state" type="list" label="JSTATUS"
-               description="JFIELD_PUBLISHED_DESC"
-               class="inputbox small" size="1" default="1"
-        >
-            <option value="1">JPUBLISHED</option>
-            <option value="0">JUNPUBLISHED</option>
-            <option value="-2">JTRASHED</option>
-        </field>
+    <field name="description"
+           type="editor"
+           buttons="true"
+           hide="pagebreak,readmore"
+           class="inputbox"
+           filter="JComponentHelper::filterText"
+           rows="4"
+           cols="40"
+           label="COM_DD_GMAPS_LOCATIONS_FIELD_DESCRIPTION_LABEL"
+           description="COM_DD_GMAPS_LOCATIONS_FIELD_DESCRIPTION_DESC"/>
+
+    <field name="short_description"
+           type="textarea"
+           class="inputbox"
+           rows="3"
+           label="COM_DD_GMAPS_LOCATIONS_FIELD_SHORT_DESCRIPTION_LABEL"
+           description="COM_DD_GMAPS_LOCATIONS_FIELD_SHORT_DESCRIPTION_DESC"/>
+
+    </fieldset>
+    <fieldset>
 
         <field name="profileimage"
                type="media"
@@ -175,24 +195,23 @@
                description="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_DESC"
         />
 
-        <field name="description"
-               type="editor"
-               buttons="true"
-               hide="pagebreak,readmore"
-               class="inputbox"
-               filter="JComponentHelper::filterText"
-               rows="4"
-               cols="40"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_DESCRIPTION_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_DESCRIPTION_DESC"/>
+    </fieldset>
 
-        <field name="short_description"
+    <fieldset>
+
+        <field name="metadesc"
                type="textarea"
                class="inputbox"
                rows="3"
-               cols="30"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_SHORT_DESCRIPTION_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_SHORT_DESCRIPTION_DESC"/>
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_METADESC_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_METADESC_DESC"/>
+
+        <field name="metakey"
+               type="textarea"
+               class="inputbox"
+               rows="3"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_METAKEY_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_METAKEY_DESC"/>
 
     </fieldset>
 
