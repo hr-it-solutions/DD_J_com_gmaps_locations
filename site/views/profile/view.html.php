@@ -10,6 +10,8 @@ defined('_JEXEC') or die;
 
 class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
+	protected $params;
+
 	protected $item;
 
 	protected $input;
@@ -33,6 +35,9 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		$this->input      = JFactory::getApplication()->input;
 		$this->alias      = $this->input->get('alias',      false, 'STRING');
 		$this->profile_id = $this->input->get('profile_id', false, 'STRING');
+
+		// Get the component configuration
+		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		if ($this->alias && $this->alias !== 'profile' OR $this->profile_id)
 		{
