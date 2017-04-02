@@ -176,8 +176,11 @@
         />
 
         <field name="description"
-               type="textarea"
+               type="editor"
+               buttons="true"
+               hide="pagebreak,readmore"
                class="inputbox"
+               filter="JComponentHelper::filterText"
                rows="4"
                cols="40"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_DESCRIPTION_LABEL"
