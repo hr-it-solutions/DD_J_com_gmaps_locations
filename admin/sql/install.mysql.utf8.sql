@@ -75,3 +75,14 @@ INSERT INTO `#__dd_gmaps_locations` (`title`, `alias`, `catid`, `state`, `profil
 ('Brandenburger Tor', 'brandenburger-tor', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0049 00 00 00', '0049 00 00 00', '', '', '', 'Pariser Platz', 'Berlin', '10117', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_GERMANY', 'Berlin', 52.515858, 13.378428, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 1),
 ('Tower of London', 'tower-of-london', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0044 000 000 000', '', '', '', '', 'St Katharine''s & Wapping', 'London', 'EC3N', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_UNITEDKINGDOM', '', 51.510384, -0.077027, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 1),
 ('Vasa Museum', 'vasa-museum', 0, 1, '', '/media/com_dd_gmaps_locations/img/dummy_img.png', '', '', '0046 000 000 000', '', '', '', '', 'Galärvarvsvägen 14', 'Stockholm', '11521', 'COM_DD_GMAPS_LOCATIONS_COUNTRY_NAME_SWEDEN', '', 59.328262, 18.091682, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 1, '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', 1);
+
+
+--
+-- Table structure for table `#__dd_gmaps_locations_iptables`
+--
+
+CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations_iptables` (
+  `profile_id` int(11) NOT NULL,
+  `visitor_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -15,9 +15,9 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 *
 	 * @return  string
 	 *
-	 * @since   Version 3.6
+	 * @since   Version 1.1.0.1
 	 */
-	public static function GetItem()
+	protected function GetItem()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -86,6 +86,9 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 
 		if ($result)
 		{
+			// Set Hit
+			$this->setHit($result->id);
+
 			return $result;
 
 		}
@@ -95,5 +98,57 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 
 			return false;
 		}
+	}
+
+	/**
+	 * DD Hit Counter
+	 * Set Hit - One hit per IP-address per day
+	 *
+	 * @param   $profile_id  int
+	 *
+	 * @since   Version  1.1.0.1
+	 */
+	protected function setHit($profile_id){
+
+		$profile_id = (int) $profile_id;
+
+		$db        = JFactory::getDbo();
+		$VisitorIP = substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15);
+
+		// Select Ip from Table on profile_id
+		$query = $db->getQuery(true);
+		$query->select($db->qn('visitor_ip'))
+			->from($db->qn('#__dd_gmaps_locations_iptables'))
+			->where($db->qn('visitor_ip') . "='$VisitorIP' AND " . $db->qn('profile_id') . "='$profile_id'");
+		$db->setQuery($query);
+
+		// Check if IP is not in ip table!
+		if (!$db->loadResult())
+		{
+			// Inset Ip to ip table
+			$query = $db->getQuery(true);
+			$query->insert($db->qn('#__dd_gmaps_locations_iptables'))
+				->columns($db->qn(array('user_ip', 'producer')))
+				->values(implode(',', array($db->qn("$VisitorIP"), $db->qn("$profile_id"))));
+			$db->setQuery($query);
+			$db->execute();
+
+			// Count View +1
+			$query = $db->getQuery(true);
+			$query->update($db->qn('#__dd_gmaps_locations'))
+				->set($db->qn('hits') . '=' . $db->qn('hits') . ' + 1')
+				->where($db->qn('id') . "= $profile_id");
+			$db->setQuery($query);
+			$db->execute();
+
+			// Delete rows who older than a day!
+			$sub_timestamp = date('Y-m-d H:i:s', strtotime("-1 day"));
+			$query = $db->getQuery(true);
+			$query->delete($db->qn('#__fs_social_profile_view_iptables'))
+				->where($db->qn('timestamp') . " < '$sub_timestamp'");
+			$db->setQuery($query);
+			$db->execute();
+		}
+
 	}
 }
