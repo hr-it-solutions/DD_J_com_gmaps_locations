@@ -32,7 +32,7 @@ foreach ($this->items as $item): ?>
                 <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
                 <span class="label featured"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED'); ?></span>
             </div>
-            <div class="row-span">
+            <div class="row-col">
                 <div class="span6">
                     <div class="page-header map_bar">
                         <a href="">
@@ -63,7 +63,6 @@ foreach ($this->items as $item): ?>
                 </a>
                 <p>
                     <?php echo htmlspecialchars($item->short_description, ENT_QUOTES, 'UTF-8'); ?>
-                    <?php echo htmlspecialchars($item->description, ENT_QUOTES, 'UTF-8'); ?>
                 </p>
             </div>
         </address>
