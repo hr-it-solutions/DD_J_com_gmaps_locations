@@ -44,8 +44,8 @@ defined('_JEXEC') or die;
                     echo $this->item->contact_person ? htmlspecialchars($this->item->contact_person, ENT_QUOTES, 'UTF-8') . '<br>':'' .
                          $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '' .
                          $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '' .
-                         $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')  . ' ' . $this->item->fax    . '<br>' : '' .
-                         $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
+                         $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->item->fax    . '<br>' : '' .
+                         $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
                     ?></p>
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
@@ -57,10 +57,6 @@ defined('_JEXEC') or die;
 				<div class="span6">
 					<img src="<?php echo JUri::base() . htmlspecialchars($this->item->image, ENT_QUOTES, 'UTF-8'); ?>"
 					     alt="<?php echo htmlspecialchars($this->item->title, ENT_QUOTES, 'UTF-8'); ?>">
-                    <div class="clear"></div><br>
-                    <a class="btn pull-right btn-primary" href="<?php echo JRoute::_($this->sef_rewrite ? $this->active_alias . '/' . $this->item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $this->item->id); ?>">
-						<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?>
-                    </a>
 				</div>
 			</div>
 			<div class="row-span">
