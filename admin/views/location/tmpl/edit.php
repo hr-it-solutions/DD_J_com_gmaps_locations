@@ -79,6 +79,7 @@ JHtml::_('formbehavior.chosen', 'select');
                 </div>
                 <div class="span3">
 					<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+
                 </div>
             </div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
@@ -251,20 +252,55 @@ JHtml::_('formbehavior.chosen', 'select');
 
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_PUBLISHING')); ?>
             <div class="row-fluid form-horizontal-desktop">
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('metadesc'); ?>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('created'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('created'); ?>
+                        </div>
                     </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('metadesc'); ?>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('published_up'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('published_up'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('published_down'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('published_down'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('hits'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('hits'); ?>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="control-label">
-						<?php echo $this->form->getLabel('metakey'); ?>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <?php echo $this->form->getLabel('metadesc'); ?>
+                        </div>
+                        <div class="controls">
+                            <?php echo $this->form->getInput('metadesc'); ?>
+                        </div>
                     </div>
-                    <div class="controls">
-						<?php echo $this->form->getInput('metakey'); ?>
+                    <div class="control-group">
+                        <div class="control-label">
+                            <?php echo $this->form->getLabel('metakey'); ?>
+                        </div>
+                        <div class="controls">
+                            <?php echo $this->form->getInput('metakey'); ?>
+                        </div>
                     </div>
                 </div>
             </div>

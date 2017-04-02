@@ -18,7 +18,9 @@ defined('_JEXEC') or die;
 				</h2>
 				<span class="view-icon"></span>
 				<span class="views">10k</span>
+                <?php if($this->params->get('mark_as_new')):?>
 				<span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
+                <?php endif; ?>
                 <?php if($this->item->featured != 0):?>
 				<span class="label featured"><?php
                     if ($this->item->featured == 1){
