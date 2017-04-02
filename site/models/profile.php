@@ -53,6 +53,7 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 				'a.longitude',
 				'a.description',
 				'a.short_description',
+				'a.created',
 				'a.publish_up',
 				'a.publish_down',
 				'a.metadesc',

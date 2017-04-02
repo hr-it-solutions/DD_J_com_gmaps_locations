@@ -252,6 +252,7 @@ JHtml::_('formbehavior.chosen', 'select');
 
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_PUBLISHING')); ?>
             <div class="row-fluid form-horizontal-desktop">
+                <div class="span3">
                     <div class="control-group">
                         <div class="control-label">
 			                <?php echo $this->form->getLabel('created'); ?>
