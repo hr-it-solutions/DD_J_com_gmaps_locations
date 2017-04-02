@@ -73,6 +73,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.created',
 				'a.publish_up',
 				'a.publish_down',
+				'a.hits',
 				'a.featured'
 			)
 		);

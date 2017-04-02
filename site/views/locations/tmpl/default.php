@@ -30,7 +30,13 @@ foreach ($this->items as $item): ?>
 	            <?php // Show hits
 	            if($this->params->get('show_hits')):?>
                     <span class="view-icon"></span>
-                    <span class="views">10k</span>
+                    <span class="views"><?php
+	                    if($item->hits >= 1000){
+		                    echo round($item->hits / 1000, 0) . 'k';
+	                    } else {
+		                    echo $item->hits;
+	                    }
+	                    ?></span>
 	            <?php endif; ?>
 	            <?php // Mark as new
 	            $mark_as_new = (int) $this->params->get('mark_as_new', 0);
