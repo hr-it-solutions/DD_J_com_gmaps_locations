@@ -72,3 +72,7 @@
 .dd_gmaps_locations .load-more button {
     
 }
+
+.dd_gmaps_locations.profile  h2{
+    display: contents;
+}
