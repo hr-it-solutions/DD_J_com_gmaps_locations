@@ -16,12 +16,18 @@ defined('_JEXEC') or die;
 				<h2>
 					<?php echo htmlspecialchars($this->item->title, ENT_QUOTES, 'UTF-8'); ?>
 				</h2>
-				<span class="view-icon"></span>
+				<?php // Show hits
+                if($this->params->get('show_hits')):?>
+                <span class="view-icon"></span>
 				<span class="views">10k</span>
-                <?php if($this->params->get('mark_as_new')):?>
+				<?php endif; ?>
+                <?php // Mark as new
+                $mark_as_new = (int) $this->params->get('mark_as_new', 0);
+                if( strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
 				<span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
                 <?php endif; ?>
-                <?php if($this->item->featured != 0):?>
+                <?php // Featured
+                if($this->item->featured != 0):?>
 				<span class="label featured"><?php
                     if ($this->item->featured == 1){
 	                    echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED');
