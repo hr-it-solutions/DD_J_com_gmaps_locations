@@ -55,7 +55,8 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
 				'metadesc', 'a.metadesc',
-				'metakey', 'a.metakey'
+				'metakey', 'a.metakey',
+			    'featured', 'a.featured'
 			)
 		);
 
@@ -70,6 +71,11 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 		{
 			$query->where($db->qn('id') . " = '$profile_id'");
 		}
+
+		// Join over categories
+		$query  ->select($db->quoteName('c.title', 'category_title'))
+			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
+
 
 		$result = $db->setQuery($query)->loadObject();
 

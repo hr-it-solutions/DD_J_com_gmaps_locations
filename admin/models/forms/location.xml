@@ -36,6 +36,15 @@
         <option value="-2">JTRASHED</option>
     </field>
 
+    <field name="featured" type="list" label="COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_LABEL"
+           description="COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_DESC"
+           class="inputbox small" size="1" default="0"
+    >
+        <option value="0">COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_OPTION_DEFAULT</option>
+        <option value="1">COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_OPTION_FEATURED</option>
+        <option value="2">COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_OPTION_CATEGORY</option>
+    </field>
+
     <field name="catid"
            type="category"
            extension="com_dd_gmaps_locations"

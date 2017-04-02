@@ -19,7 +19,15 @@ defined('_JEXEC') or die;
 				<span class="view-icon"></span>
 				<span class="views">10k</span>
 				<span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
-				<span class="label featured"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED'); ?></span>
+                <?php if($this->item->featured): ?>
+				<span class="label featured"><?php
+                    if ($this->item->featured == 1){
+	                    echo JText::_('COM_DD_GMAPS_LOCATIONS_FEATURED');
+                    } elseif($this->item->featured == 2){
+	                    echo htmlspecialchars($this->item->category_title, ENT_QUOTES, 'UTF-8');
+                    }
+				?></span>
+                <?php endif; ?>
 			</div>
 			<div class="row-col">
 				<div class="span6">
