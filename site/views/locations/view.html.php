@@ -8,20 +8,38 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_LocationsViewLocations extends JViewLegacy {
+class DD_GMaps_LocationsViewLocations extends JViewLegacy
+{
 
 	protected $items;
 
+	protected $sef_rewrite;
+
+	protected $active_alias;
+
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse
+	 *
+	 * @return boolean | mixed
+	 *
+	 * @since Version 1.1.0.0
+	 */
 	function display($tpl = null)
-    {
-      $this->items = $this->get('Items');
+	{
+		$this->items       = $this->get('Items');
 
-        if (count($errors = $this->get('Errors')))
-        {
-            JError::raise(500, implode("\n", $errors));
-            return false;
-        }
+		$this->sef_rewrite = JFactory::getConfig()->get('sef_rewrite');
+		$this->active_alias = JFactory::getApplication()->getMenu()->getActive()->alias;
 
-        return parent::display($tpl);
-    }
+		if (count($errors = $this->get('Errors')))
+		{
+			JError::raise(500, implode("\n", $errors));
+
+			return false;
+		}
+
+		return parent::display($tpl);
+	}
 }

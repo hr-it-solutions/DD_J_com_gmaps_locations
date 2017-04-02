@@ -120,7 +120,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                         </td>
                         <td class="center">
-                            <?php echo JHtml::_('jgrid.published', $item->state, $i, 'locations.', $canChange, 'cb', $item->published_up, $item->published_down); ?>
+                            <?php echo 'ERROR'.@JHtml::_('jgrid.published', $item->state, $i, 'locations.', $canChange, 'cb', $item->published_up, $item->published_down); ?>
                         </td>
                         <td class="nowrap">
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">

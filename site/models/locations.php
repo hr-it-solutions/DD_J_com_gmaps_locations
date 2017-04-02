@@ -52,6 +52,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			array(
 				'a.id',
 				'a.title',
+				'a.alias',
 				'a.catid',
 				'a.state',
 				'a.profileimage',

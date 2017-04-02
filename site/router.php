@@ -9,7 +9,11 @@
 function DD_GMaps_LocationsBuildRoute(&$query)
 {
     $segments = array();
-    unset($query['view']);
+
+	if(isset($query['view'])) {
+		$segments[] = $query['view'];
+		unset($query['view']);
+	};
     if(isset($query['alias'])) {
         $segments[] = $query['alias'];
         unset($query['alias']);
@@ -20,7 +24,7 @@ function DD_GMaps_LocationsBuildRoute(&$query)
 
 function DD_GMaps_LocationsParseRoute($segments)
 {
-    $vars = array();
+	$vars = array();
     $vars['alias']  = array_shift($segments);
 	$vars['view']   = 'profile';
     return $vars;
