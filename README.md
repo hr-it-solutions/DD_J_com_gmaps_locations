@@ -36,12 +36,12 @@ Location entries, location profile pages, location search, geolocation distance 
 ### Addon Module:
 Build your community which meets to your needs. The function of the component can be extended by various modules. (e.g. place locations on a map separate from the location register or place a search field on your website that is directly linked to the component.
 
-##### [GMaps Locations Search And Filter Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_search_and_filter_module)
+##### [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
 - Geolocalisation function
 - Google search suggestions
 - Location category filter
 
-##### [GMaps Maps Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_module)
+##### [GMaps Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_module)
 - Map in Popup (full size PopUp)
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Adjustable map size, position and zoom level
