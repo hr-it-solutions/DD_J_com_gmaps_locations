@@ -40,6 +40,7 @@
     </files>
     <languages folder="site">
         <language tag="en-GB">language/en-GB/en-GB.com_dd_gmaps_locations.ini</language>
+        <language tag="de-DE">language/de-DE/de-DE.com_dd_gmaps_locations.ini</language>
     </languages>
 
     <administration>
@@ -69,6 +70,8 @@
         <languages folder="admin">
             <language tag="en-GB">language/en-GB/en-GB.com_dd_gmaps_locations.ini</language>
             <language tag="en-GB">language/en-GB/en-GB.com_dd_gmaps_locations.sys.ini</language>
+            <language tag="de-DE">language/de-DE/de-DE.com_dd_gmaps_locations.ini</language>
+            <language tag="de-DE">language/de-DE/de-DE.com_dd_gmaps_locations.sys.ini</language>
         </languages>
     </administration>
 
