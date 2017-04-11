@@ -25,7 +25,7 @@
             />
 
             <field
-                    name="items_next"
+                    name="items_more"
                     type="integer"
                     first="2"
                     last="20"
