@@ -5,4 +5,35 @@
             <![CDATA[com_dd_gmaps_locations_locations_view_default_desc]]>
         </message>
     </layout>
+
+    <!-- Add fields to the parameters object for the layout. -->
+    <fields name="params">
+
+        <!-- Basic options. -->
+        <fieldset name="basic"
+                  label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_LABEL">
+
+            <field
+                    name="items_to_list"
+                    type="integer"
+                    first="4"
+                    last="40"
+                    step="2"
+                    default="6"
+                    label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_TO_LIST_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_TO_LIST_DESC"
+            />
+
+            <field
+                    name="items_next"
+                    type="integer"
+                    first="2"
+                    last="20"
+                    step="2"
+                    default="4"
+                    label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_NEXT_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_NEXT_DESC"
+            />
+        </fieldset>
+    </fields>
 </metadata>
