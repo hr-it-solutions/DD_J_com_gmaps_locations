@@ -137,10 +137,12 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	 */
 	public function bufferAjaxOutputView($items,$data)
 	{
+		$i = $data['start'];
+
 		// Output buffer
 		ob_start();
 
-		foreach ($items as $i => $item)
+		foreach ($items as $item)
 		{
 			if ($i % 2 == 0)
 			{
@@ -148,6 +150,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			}
 
 			include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+			++$i;
 		}
 
 		// Output return and filter
