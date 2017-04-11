@@ -96,24 +96,28 @@ endforeach;?>
         </div>
 
         <script language="javascript" type="text/javascript">
-            var url='index.php?option=com_dd_gmaps_locations&task=getAjax&format=json';
-            var requests = '{"data":[{"start":"STARTIDHERE","geolocate":"GEOLOCATEIDHERE","locationLatLng":"LOCATIONLATLNGHERE","fulltextsearchstring":"FULLTEXTSEARCHSTRING","fulltextProductCategory":"FULLTEXTPRODUCTCATEGORY"}]}';
+
+            var start = <?php echo (int) $this->params->get('items_to_list', 6); ?>,
+                limit = <?php echo (int) $this->params->get('items_more', 4); ?>,
+                geolocate = 'geolocate',
+                locationLatLng = '00',
+                fullText = '',
+                category = '',
+                excludeItems = '';
 
             function processAjax(val, attrVal){
                 jQuery.ajax({
-                    crossDomain: true,
+                    crossDomain: false,
                     type: "POST",
-                    url: url,
-                    data:  requests,
-                    dataType: "json",
-                    cache: false
-                })
-                    .done(function(data, textStatus, jqXHR){
-                        alert("Ajax completed: " + data.success);
-                    })
-                    .fail(function(jqXHR, textStatus, errorThrown){
-                        alert("Ajax problem: " + textStatus + ". " + errorThrown);
-                    });
+                    url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
+                    data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fullText:fullText,category:category,excludeItems:excludeItems}},
+                    cache: false,
+                    success: function (fetcheddata) {
+                        var response = fetcheddata;
+
+                        console.log(fetcheddata);
+                    }
+                });
             }
 
             jQuery('#load-more').click(function () {
