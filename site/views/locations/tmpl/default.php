@@ -13,9 +13,7 @@ defined('_JEXEC') or die;
 <div class="dd_gmaps_locations locations well">
     <div class="row-fluid">
     <?php
-$i = 0;
-
-foreach ($this->items as $item): ?>
+foreach ($this->items as $i => $item): ?>
 <?php if ($i % 2 == 0): ?>
     </div>
     <div class="row-fluid">
@@ -78,22 +76,50 @@ foreach ($this->items as $item): ?>
                 </div>
             </div>
 
-            <div class="row-span">
-                <hr>
-                <a class="btn pull-right btn-primary" href="<?php echo JRoute::_($this->sef_rewrite ? $this->active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
-	                <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?>
-                </a>
-                <p>
-                    <?php echo htmlspecialchars($item->short_description, ENT_QUOTES, 'UTF-8'); ?>
-                </p>
+            <div class="row-fluid">
+                <div class="span12">
+                    <hr>
+                    <a class="btn pull-right btn-primary" href="<?php echo JRoute::_($this->sef_rewrite ? $this->active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
+		                <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?>
+                    </a>
+                    <p>
+		                <?php echo htmlspecialchars($item->short_description, ENT_QUOTES, 'UTF-8'); ?>
+                    </p>
+                </div>
             </div>
         </address>
 <?php
-++$i;
 endforeach;?>
         <div class="clear"></div>
         <div class="load-more">
-            <button class="btn"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_LOAD_MORE'); ?></button>
+            <button id="load-more" class="btn"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_LOAD_MORE'); ?></button>
         </div>
+
+        <script language="javascript" type="text/javascript">
+            var url='index.php?option=com_dd_gmaps_locations&task=getAjax&format=json';
+            var requests = '{"data":[{"start":"STARTIDHERE","geolocate":"GEOLOCATEIDHERE","locationLatLng":"LOCATIONLATLNGHERE","fulltextsearchstring":"FULLTEXTSEARCHSTRING","fulltextProductCategory":"FULLTEXTPRODUCTCATEGORY"}]}';
+
+            function processAjax(val, attrVal){
+                jQuery.ajax({
+                    crossDomain: true,
+                    type: "POST",
+                    url: url,
+                    data:  requests,
+                    dataType: "json",
+                    cache: false
+                })
+                    .done(function(data, textStatus, jqXHR){
+                        alert("Ajax completed: " + data.success);
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown){
+                        alert("Ajax problem: " + textStatus + ". " + errorThrown);
+                    });
+            }
+
+            jQuery('#load-more').click(function () {
+                processAjax();
+            })
+        </script>
+
     </div>
 </div>
