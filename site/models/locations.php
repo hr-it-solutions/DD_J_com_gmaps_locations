@@ -39,12 +39,25 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		parent::__construct($config);
 	}
 
+	protected function populateState($ordering = null, $direction = null, $limitStart = 0)
+	{
+		parent::populateState($ordering, $direction);
+
+		$app = JFactory::getApplication();
+		$params = $app->getParams();
+		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+
+	}
+
 	/**
+	 * getListQuery
+	 *
+	 * @since Version 1.1.0.0
+	 *
 	 * @return JDatabaseQuery
 	 */
 	protected function getListQuery()
 	{
-
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 
@@ -91,5 +104,24 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		$query->order('a.id DESC');
 
 		return $query;
+	}
+
+	/**
+	 * getAjaxList
+	 *
+	 * @param   array  $data  POST params
+	 *
+	 * @since Version 1.1.0.0
+	 *
+	 * @return mixed
+	 */
+	public function getAjaxList($data)
+	{
+		$db    = $this->getDbo();
+		$query = $this->_getListQuery();
+
+		$query->order('a.id DESC LIMIT ' . (int) $data['start'] . ', ' . (int) $data['limit']);
+
+		return $db->setQuery($query)->loadObjectList();
 	}
 }
