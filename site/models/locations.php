@@ -124,4 +124,39 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		return $db->setQuery($query)->loadObjectList();
 	}
+
+	/**
+	 * bufferAjaxOutputView by rendering each data item through default_items template
+	 *
+	 * @param   array  $items items to render
+	 * @param   array  $data  POST params
+	 *
+	 * @since Version 1.1.0.0
+	 *
+	 * @return string html output string
+	 */
+	public function bufferAjaxOutputView($items,$data)
+	{
+		// Output buffer
+		ob_start();
+
+		foreach ($items as $i => $item)
+		{
+			if ($i % 2 == 0)
+			{
+				echo '</div><div class="row-fluid">';
+			}
+
+			include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+		}
+
+		// Output return and filter
+		$output = preg_replace('/\s*$^\s*/m', '', ob_get_contents());
+		$output = preg_replace('/\s*$^\s*/m', '', $output);
+
+		ob_end_clean();
+
+		return $output;
+
+	}
 }

@@ -29,10 +29,11 @@ class DD_GMaps_LocationsController extends JControllerLegacy {
 		{
 			$model = $this->getModel('Locations');
 			$items = $model->getAjaxList($data);
+			$html = $model->bufferAjaxOutputView($items,$data);
 
 			$results = array(
 				'success' => true,
-				'items' => $items
+				'html' => $html
 				);
 		}
 		else
