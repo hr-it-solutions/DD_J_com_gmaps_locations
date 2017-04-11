@@ -76,7 +76,7 @@ else
         </div>
         <div class="span6">
             <div class="page-header map_bar">
-                <a href="">
+                <a class="showOnMap" id="showID<?php echo $i; ?>" href="javascript:void()">
 					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_SHOW_ON_MAP'); ?>
                 </a>
             </div>
