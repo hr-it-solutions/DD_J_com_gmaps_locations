@@ -20,7 +20,7 @@ foreach ($this->items as $i => $item): ?>
         <?php include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php'; ?>
 <?php
 endforeach;?>
-        <div id="prependAjax" class="clear"></div>
+        <div id="InserBefore" class="clear"></div>
         <div class="load-more">
             <button id="load-more" class="btn"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_LOAD_MORE'); ?></button>
         </div>
@@ -48,8 +48,10 @@ endforeach;?>
 
                 .done(function(data, textStatus, jqXHR){
 
-                    start += start;
-                    jQuery("#prependAjax").prepend(data.html);
+                    start += limit;
+                    jQuery("#InserBefore").before(data.html);
+
+                    init_default_itemsJS();
 
                 })
                 .fail(function(jqXHR, textStatus, errorThrown){
