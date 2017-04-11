@@ -90,7 +90,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 
 		// Build array latitude and longitude
 		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
-		                "longitude" => $output->results[0]->geometry->location->lng);
+						"longitude" => $output->results[0]->geometry->location->lng);
 
 		// Return Array
 		return $latlng;
@@ -104,8 +104,8 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 *
 	 * @return string alias
 	 */
-	public static function prepareAlias($data){
-
+	public static function prepareAlias($data)
+	{
 		// Get alias
 		if ($data['alias'] != '')
 		{

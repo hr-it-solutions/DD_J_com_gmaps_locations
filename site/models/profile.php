@@ -56,20 +56,21 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 				'a.created',
 				'a.publish_up',
 				'a.publish_down',
+				'a.hits',
 				'a.metadesc',
 				'a.metakey',
 				'a.featured'
 			)
 		);
 
-		$query  ->select($select)
+		$query->select($select)
 			->from($db->quoteName('#__dd_gmaps_locations', 'a'));
 
 		// Filter state
 		$query->where('a.state = 1');
 
 		// Join over categories
-		$query  ->select($db->quoteName('c.title', 'category_title'))
+		$query->select($db->quoteName('c.title', 'category_title'))
 			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
 
 		// Get Profile
@@ -104,7 +105,7 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 * DD Hit Counter
 	 * Set Hit - One hit per IP-address per day
 	 *
-	 * @param   $profile_id  int  profile id
+	 * @param   int  $profile_id  profile id
 	 *
 	 * @return  boolean
 	 *

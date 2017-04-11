@@ -15,10 +15,18 @@ jimport('joomla.filesystem.file');
 class JFormFieldCountry extends JFormFieldList {
 
 	protected $type = 'Country';
+
 	protected $countries_json = '/models/countries/countries.json';
 
-	public function getOptions() {
-
+	/**
+	 * Get Options
+	 *
+	 * @return array
+	 *
+	 * @since Version 1.0.0.1
+	 */
+	public function getOptions()
+	{
 		$countries = array();
 		$options = array();
 

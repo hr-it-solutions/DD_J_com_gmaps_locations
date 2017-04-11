@@ -63,7 +63,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 
-		$select = $db->quoteName(
+		$select = $db->qn(
 			array(
 				'a.id',
 				'a.title',
@@ -86,7 +86,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		);
 
 		$query  ->select($select)
-				->from($db->quoteName('#__dd_gmaps_locations', 'a'));
+				->from($db->qn('#__dd_gmaps_locations', 'a'));
 
 		// Filter by state
 		$published = $this->getState('filter.state');
@@ -101,8 +101,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		}
 
 		// Join over categories
-		$query  ->select($db->quoteName('c.title', 'category_title'))
-				->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
+		$query  ->select($db->qn('c.title', 'category_title'))
+				->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		// Filter by search in grid fields
 		$search = $this->getState('filter.search');

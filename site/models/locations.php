@@ -39,16 +39,29 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		parent::__construct($config);
 	}
 
+	protected function populateState($ordering = null, $direction = null, $limitStart = 0)
+	{
+		parent::populateState($ordering, $direction);
+
+		$app = JFactory::getApplication();
+		$params = $app->getParams();
+		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+
+	}
+
 	/**
+	 * getListQuery
+	 *
+	 * @since Version 1.1.0.0
+	 *
 	 * @return JDatabaseQuery
 	 */
 	protected function getListQuery()
 	{
-
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 
-		$select = $db->quoteName(
+		$select = $db->qn(
 			array(
 				'a.id',
 				'a.title',
@@ -73,20 +86,80 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.created',
 				'a.publish_up',
 				'a.publish_down',
+				'a.hits',
 				'a.featured'
 			)
 		);
 
-		$query  ->select($select)
-			->from($db->quoteName('#__dd_gmaps_locations', 'a'));
+		$query->select($select)
+			->from($db->qn('#__dd_gmaps_locations', 'a'));
 
 		// Filter state
 		$query->where('a.state = 1');
 
 		// Join over categories
-		$query  ->select($db->quoteName('c.title', 'category_title'))
-			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
+		$query->select($db->qn('c.title', 'category_title'))
+			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
+
+		$query->order('a.id DESC');
 
 		return $query;
+	}
+
+	/**
+	 * getAjaxList
+	 *
+	 * @param   array  $data  POST params
+	 *
+	 * @since Version 1.1.0.0
+	 *
+	 * @return mixed
+	 */
+	public function getAjaxList($data)
+	{
+		$db    = $this->getDbo();
+		$query = $this->_getListQuery();
+
+		$query->order('a.id DESC LIMIT ' . (int) $data['start'] . ', ' . (int) $data['limit']);
+
+		return $db->setQuery($query)->loadObjectList();
+	}
+
+	/**
+	 * bufferAjaxOutputView by rendering each data item through default_items template
+	 *
+	 * @param   array  $items items to render
+	 * @param   array  $data  POST params
+	 *
+	 * @since Version 1.1.0.0
+	 *
+	 * @return string html output string
+	 */
+	public function bufferAjaxOutputView($items,$data)
+	{
+		$i = $data['start'];
+
+		// Output buffer
+		ob_start();
+
+		foreach ($items as $item)
+		{
+			if ($i % 2 == 0)
+			{
+				echo '</div><div class="row-fluid">';
+			}
+
+			include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+			++$i;
+		}
+
+		// Output return and filter
+		$output = preg_replace('/\s*$^\s*/m', '', ob_get_contents());
+		$output = preg_replace('/\s*$^\s*/m', '', $output);
+
+		ob_end_clean();
+
+		return $output;
+
 	}
 }

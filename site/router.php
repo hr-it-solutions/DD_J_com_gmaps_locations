@@ -8,24 +8,28 @@
 
 function DD_GMaps_LocationsBuildRoute(&$query)
 {
-    $segments = array();
+	$segments = array();
 
-	if(isset($query['view'])) {
+	if (isset($query['view']))
+	{
 		$segments[] = $query['view'];
 		unset($query['view']);
-	};
-    if(isset($query['alias'])) {
-        $segments[] = $query['alias'];
-        unset($query['alias']);
-    };
+	}
 
-    return $segments;
+	if (isset($query['alias']))
+	{
+		$segments[] = $query['alias'];
+		unset($query['alias']);
+	}
+
+	return $segments;
 }
 
 function DD_GMaps_LocationsParseRoute($segments)
 {
 	$vars = array();
-    $vars['alias']  = array_shift($segments);
+	$vars['alias']  = array_shift($segments);
 	$vars['view']   = 'profile';
-    return $vars;
+
+	return $vars;
 }

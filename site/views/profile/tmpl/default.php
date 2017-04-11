@@ -19,7 +19,13 @@ defined('_JEXEC') or die;
 				<?php // Show hits
                 if($this->params->get('show_hits')):?>
                 <span class="view-icon"></span>
-				<span class="views">10k</span>
+				<span class="views"><?php
+                    if($this->item->hits >= 1000){
+	                    echo round($this->item->hits / 1000, 0) . 'k';
+                    } else {
+	                    echo $this->item->hits;
+                    }
+                    ?></span>
 				<?php endif; ?>
                 <?php // Mark as new
                 $mark_as_new = (int) $this->params->get('mark_as_new', 0);
@@ -57,11 +63,11 @@ defined('_JEXEC') or die;
                     <p>
                     <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_DETAILS'); ?>:</strong><br>
 	                <?php
-                    echo $this->item->contact_person ? htmlspecialchars($this->item->contact_person, ENT_QUOTES, 'UTF-8') . '<br>':'' .
-                         $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '' .
-                         $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '' .
-                         $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->item->fax    . '<br>' : '' .
-                         $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
+                    echo $this->item->contact_person ? htmlspecialchars($this->item->contact_person, ENT_QUOTES, 'UTF-8') . '<br>':'';
+                    echo $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '';
+                    echo $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '';
+	                echo $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->item->fax    . '<br>' : '';
+	                echo $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
                     ?></p>
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
