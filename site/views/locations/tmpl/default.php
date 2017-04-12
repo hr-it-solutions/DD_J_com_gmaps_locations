@@ -37,6 +37,13 @@ endforeach;?>
                 activeAlias = '<?php echo $this->active_alias; ?>';
 
             function processAjax(val, attrVal){
+
+                var loadmorebutton = jQuery('#load-more');
+
+                loadmorebutton.animate({
+                    width: "100%"
+                }, 1500 );
+
                 jQuery.ajax({
                     crossDomain: false,
                     type: "POST",
@@ -52,6 +59,9 @@ endforeach;?>
                     jQuery("#InserBefore").before(data.html);
 
                     init_default_itemsJS();
+
+                    loadmorebutton.stop();
+                    loadmorebutton.css("width", "auto");
 
                 })
                 .fail(function(jqXHR, textStatus, errorThrown){
