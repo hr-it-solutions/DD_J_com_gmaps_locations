@@ -29,7 +29,7 @@ endforeach;?>
 
             var start = <?php echo (int) $this->params->get('items_to_list', 6); ?>,
                 limit = <?php echo (int) $this->params->get('items_more', 4); ?>,
-                geolocate = 'geolocate',
+                geolocate = '<?php echo $this->app->input->get('geolocate', '', 'STRING');?>',
                 locationLatLng = '<?php echo $this->app->input->get('locationLatLng', 0, 'STRING');?>',
                 fulltext_search = '<?php echo $this->app->input->get('fulltext_search', '', 'STRING');?>',
                 category_filter = '<?php echo $this->app->input->get('category_filter', '', 'STRING');?>',
