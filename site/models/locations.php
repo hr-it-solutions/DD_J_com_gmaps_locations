@@ -14,10 +14,12 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	 * DD_GMaps_LocationsModelLocations constructor.
 	 *
 	 * @param array $config
+	 *
+	 * @since Version 1.1.0.0
 	 */
 	public function __construct($config = array())
 	{
-		if(empty($config['filter_fields']))
+		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
 				'id', 'a.id',
@@ -39,6 +41,11 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		parent::__construct($config);
 	}
 
+	/**
+	 * populateState
+	 *
+	 * @since Version 1.1.0.0
+	 */
 	protected function populateState($ordering = null, $direction = null, $limitStart = 0)
 	{
 		parent::populateState($ordering, $direction);
@@ -47,6 +54,42 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		$params = $app->getParams();
 		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
 
+	}
+
+	/**
+	 * getSearchFilterInput locations_searchfilter submit
+	 * via self form post data or ajax request $dataAjax
+	 *
+	 * @since Version 1.1.0.0
+	 *
+	 * @return Object with validated filtered filter input data
+	 */
+	protected function getSearchFilterInput()
+	{
+		$filterInput = new StdClass;
+
+		$app = JFactory::getApplication();
+		$input = $app->input;
+
+		$dataAjax   = $input->get("data", '', 'array');
+
+		if ($dataAjax != '')
+		{
+			$input->set('locationLatLng', $dataAjax['locationLatLng']);
+		}
+
+		$filterZip = $input->get('locationLatLng', 0, 'STRING');
+
+		if ($filterZip)
+		{
+			$latLng = explode(",", $filterZip);
+			$filterInput->lat = (float) substr($latLng[0], 0, 10);
+			$filterInput->lng = (float) substr($latLng[1], 0, 10);
+		}
+
+		print_r($filterInput);
+
+		return $filterInput;
 	}
 
 	/**
@@ -60,6 +103,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	{
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
+
+		$filterInput = $this->getSearchFilterInput();
 
 		$select = $db->qn(
 			array(
@@ -101,7 +146,26 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		$query->select($db->qn('c.title', 'category_title'))
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
-		$query->order('a.id DESC');
+		if (isset($filterInput->lat) && isset($filterInput->lng))
+		{
+			/**
+			 *	find nearest latitude longitude
+			 */
+			$query->select('( 6371 * acos( cos( radians( ' . $filterInput->lat .
+				' ) ) * cos( radians( ' . $db->qn('latitude') .
+				' ) ) * cos( radians( ' . $db->qn('longitude') .
+				' ) - radians( ' . $filterInput->lng . ' ) ) + sin(radians( ' . $filterInput->lat .
+				' )) * sin(radians( ' .
+				$db->qn('latitude') .
+				' )) ) )' .
+				$db->qn('distance')
+			)
+			->order('distance ASC');
+		}
+		else
+		{
+			$query->order('a.id DESC');
+		}
 
 		return $query;
 	}
