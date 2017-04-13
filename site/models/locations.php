@@ -158,7 +158,8 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		if (isset($filterInput->fulltext_search))
 		{
-			$query->where($db->qn('a.title') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+			$query->where(
+				$db->qn('a.title') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.company') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.contact_person') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.short_description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
