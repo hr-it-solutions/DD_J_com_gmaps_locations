@@ -31,9 +31,8 @@ endforeach;?>
                 limit = <?php echo (int) $this->params->get('items_more', 4); ?>,
                 geolocate = 'geolocate',
                 locationLatLng = '<?php echo $this->app->input->get('locationLatLng', 0, 'STRING');?>',
-                fullText = '',
-                category = '',
-                excludeItems = '',
+                fulltext_search = '<?php echo $this->app->input->get('fulltext_search', '', 'STRING');?>',
+                category_filter = '<?php echo $this->app->input->get('category_filter', '', 'STRING');?>',
                 activeAlias = '<?php echo $this->active_alias; ?>';
 
             function processAjax(val, attrVal){
@@ -48,7 +47,7 @@ endforeach;?>
                     crossDomain: false,
                     type: "POST",
                     url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
-                    data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fullText:fullText,category:category,excludeItems:excludeItems,activeAlias:activeAlias}},
+                    data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,activeAlias:activeAlias}},
                     dataType: "json",
                     cache: false
                 })
