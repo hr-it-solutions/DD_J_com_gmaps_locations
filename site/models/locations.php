@@ -87,8 +87,6 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$filterInput->lng = (float) substr($latLng[1], 0, 10);
 		}
 
-		print_r($filterInput);
-
 		return $filterInput;
 	}
 
