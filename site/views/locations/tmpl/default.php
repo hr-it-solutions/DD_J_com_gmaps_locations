@@ -30,7 +30,7 @@ endforeach;?>
             var start = <?php echo (int) $this->params->get('items_to_list', 6); ?>,
                 limit = <?php echo (int) $this->params->get('items_more', 4); ?>,
                 geolocate = 'geolocate',
-                locationLatLng = '00',
+                locationLatLng = '<?php echo $this->app->input->get('locationLatLng', 0, 'STRING');?>',
                 fullText = '',
                 category = '',
                 excludeItems = '',
