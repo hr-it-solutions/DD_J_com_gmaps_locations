@@ -64,9 +64,21 @@ else
     <div class="row-col">
         <div class="span6">
             <div class="page-header map_bar">
-                <a href="">
-					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_DISCTANCE'); ?>
-                </a>
+                <?php
+                if (isset($item->distance))
+                {
+	                if ($params->get('unit') == 'kilometers')
+	                {
+		                $item->distance = $item->distance * 1.609;
+		                echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE_KM', round($item->distance, 1));
+
+	                }
+	                else
+                    {
+	                    echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE', round($item->distance, 1));
+                    }
+                }
+                ?>
             </div>
 			<?php echo htmlspecialchars($item->company, ENT_QUOTES, 'UTF-8'); ?><br>
 			<?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
