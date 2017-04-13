@@ -88,7 +88,7 @@ else
     <div class="row-fluid">
         <div class="span12">
             <hr>
-            <a class="btn pull-right btn-primary" href="<?php echo JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
+            <a class="btn pull-right" href="<?php echo JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
 				<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?>
             </a>
             <p>
