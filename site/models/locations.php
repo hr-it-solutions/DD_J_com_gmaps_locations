@@ -75,16 +75,30 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		if ($dataAjax != '')
 		{
-			$input->set('locationLatLng', $dataAjax['locationLatLng']);
+			$input->set('locationLatLng',  $dataAjax['locationLatLng']);
+			$input->set('fulltext_search', $dataAjax['fulltext_search']);
+			$input->set('category_filter', $dataAjax['category_filter']);
 		}
 
-		$filterZip = $input->get('locationLatLng', 0, 'STRING');
+		$locationLatLng = $input->get('locationLatLng', 0, 'STRING');
+		$fulltext_search = $input->get('fulltext_search', '', 'STRING');
+		$category_filter = $input->get('category_filter', 0, 'INT');
 
-		if ($filterZip)
+		if ($locationLatLng)
 		{
-			$latLng = explode(",", $filterZip);
+			$latLng = explode(",", $locationLatLng);
 			$filterInput->lat = (float) substr($latLng[0], 0, 10);
 			$filterInput->lng = (float) substr($latLng[1], 0, 10);
+		}
+
+		if ($fulltext_search != '')
+		{
+			$filterInput->fulltext_search = $fulltext_search;
+		}
+
+		if ($category_filter)
+		{
+			$filterInput->category_filter = (int) $category_filter;
 		}
 
 		return $filterInput;
@@ -116,6 +130,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.company',
 				'a.contact_person',
 				'a.phone',
+				'a.mobile',
 				'a.email',
 				'a.street',
 				'a.location',
@@ -139,6 +154,22 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		// Filter state
 		$query->where('a.state = 1');
+
+
+		if (isset($filterInput->fulltext_search))
+		{
+			$query->where($db->qn('a.title') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+				$db->qn('a.company') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+				$db->qn('a.contact_person') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+				$db->qn('a.short_description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+				$db->qn('a.description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
+				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"');
+		}
+
+		if (isset($filterInput->category_filter))
+		{
+			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
+		}
 
 		// Join over categories
 		$query->select($db->qn('c.title', 'category_title'))
