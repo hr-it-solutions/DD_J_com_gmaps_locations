@@ -16,6 +16,8 @@ Location entries, location profile pages, location search, geolocation distance 
 - Custom CSS, mobile ready and responsive
 - Support all major web browsers
 
+- [GMaps Locations System Plugin](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations)
+
 ### Frontend Features:
 - Location directory with detailed information and profile pages
 - Profile pages linked to the map (markers and info boxes)
