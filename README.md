@@ -55,7 +55,7 @@ Errors and technical modification subject to change.
 - com_gmaps_locations [GMaps Loctaions](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)
 - mod_gmaps_locations_searchfilter [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
 - mod_gmaps_module [GMaps Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_module)
-- plg_system_gmaps_locations_geocode [GMaps Locations GeoCode System Plugin](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations_geocode)
+- plg_system_gmaps_locations_geocode [GMaps Locations GeoCode](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations_geocode)
 
 # System requirements
 Joomla 3.6 +                                                                                <br>
