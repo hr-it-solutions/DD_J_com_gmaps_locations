@@ -13,7 +13,6 @@ Location entries, location profile pages, location search, geolocation distance 
 - Multilingual (actual en-GB and de-DE, more languages can be easily implemented via language files or language overrides)
 - Categories for locations (integrated Joomla Category component)
 - Google Maps v3 integration (API key connection possible) Integrated Google JavaScript API, Geolocation API, Geocoding API and Distance Matrix API
-- Versions History (integrated Joomla Versions History )
 - Custom CSS, mobile ready and responsive
 - Support all major web browsers
 
