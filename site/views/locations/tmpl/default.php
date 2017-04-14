@@ -35,39 +35,6 @@ endforeach;?>
                 category_filter = '<?php echo $this->app->input->get('category_filter', '', 'STRING');?>',
                 activeAlias = '<?php echo $this->active_alias; ?>';
 
-            function processAjax(val, attrVal){
-
-                var loadmorebutton = jQuery('#load-more');
-
-                loadmorebutton.animate({
-                    width: "100%"
-                }, 1500 );
-
-                jQuery.ajax({
-                    crossDomain: false,
-                    type: "POST",
-                    url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
-                    data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,activeAlias:activeAlias}},
-                    dataType: "json",
-                    cache: false
-                })
-
-                .done(function(data, textStatus, jqXHR){
-
-                    start += limit;
-                    jQuery("#InserBefore").before(data.html);
-
-                    init_default_itemsJS();
-
-                    loadmorebutton.stop();
-                    loadmorebutton.css("width", "auto");
-
-                })
-                .fail(function(jqXHR, textStatus, errorThrown){
-                    console.log("Ajax problem: " + textStatus + ". " + errorThrown);
-                });
-            }
-
             jQuery('#load-more').click(function () {
                 processAjax();
             })
