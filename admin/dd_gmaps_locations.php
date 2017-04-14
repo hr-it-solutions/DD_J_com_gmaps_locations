@@ -16,6 +16,9 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_dd_gmaps_locations'))
 
 JLoader::import('helpers.dd_gmaps_locations', JPATH_COMPONENT_ADMINISTRATOR);
 
+JHtml::_('jQuery.Framework');
+JHTML::_('stylesheet', 'com_dd_gmaps_locations/dd_gmaps_locations.admin.min.css', array(), true);
+
 $controller	= JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
