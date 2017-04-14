@@ -16,6 +16,8 @@ defined('_JEXEC') or die;
 class  DD_GMaps_LocationsHelper extends JHelperContent
 {
 
+	public static $extension = 'com_dd_gmaps_locations';
+
 	/**
 	 * Configure the Linkbar.
 	 *
@@ -23,7 +25,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 *
 	 * @return  void
 	 *
-	 * @since   Version 1.1.0.0
+	 * @since    Version 1.1.0.1
 	 */
 	public static function addSubmenu($vName)
 	{
@@ -100,9 +102,11 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
-	 * @param $data
+	 * @param   array  $data
 	 *
-	 * @return string alias
+	 * @return  string  alias
+	 *
+	 * @since   Version 1.1.0.1
 	 */
 	public static function prepareAlias($data)
 	{

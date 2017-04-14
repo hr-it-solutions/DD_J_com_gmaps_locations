@@ -14,14 +14,7 @@ JHtml::_('formbehavior.chosen', '#jform_catid', null, array('disable_search_thre
 JHtml::_('formbehavior.chosen', 'select');
 
 ?>
-<style>
-    .green { color: green }
-    .red { color: red }
-    #jform_short_description {
-        width: 100%;
-        resize: none;
-    }
-</style>
+<div id="dd_gmaps_locations-location" class="row-fluid dd_gmaps_locations">
 <form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>"
       method="post" name="adminForm" id="adminForm" class="form-validate">
     <div class="row-fluid">
@@ -313,3 +306,4 @@ JHtml::_('formbehavior.chosen', 'select');
         </div>
     </div>
 </form>
+</div>

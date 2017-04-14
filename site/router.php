@@ -10,6 +10,17 @@ function DD_GMaps_LocationsBuildRoute(&$query)
 {
 	$segments = array();
 
+	$app = JFactory::getApplication();
+	$input = $app->input;
+
+	$menu = $app->getMenu();
+
+	if (!empty($query['Itemid']))
+	{
+		$menuItem = $menu->getItem($query['Itemid']);
+		$input->set('dd_gmaps_locations_component_alias', $menuItem->alias);
+	}
+
 	if (isset($query['view']))
 	{
 		$segments[] = $query['view'];

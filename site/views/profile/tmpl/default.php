@@ -81,12 +81,13 @@ defined('_JEXEC') or die;
 					     alt="<?php echo htmlspecialchars($this->item->title, ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 			</div>
-			<div class="row-span">
-				<hr>
-				<?php echo $this->item->description; ?>
+            <div class="row-fluid">
+                <div class="span12">
+                    <hr>
+	                <?php echo $this->item->description; ?>
+                </div>
 			</div>
 		</address>
 		<div class="clear"></div>
 	</div>
 </div>
-

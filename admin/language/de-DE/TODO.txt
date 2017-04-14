@@ -1,6 +1,0 @@
-# @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
-# @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
-
-todo-DD-Florian
-# translate all english files to German
-# implement files to xml manifest

@@ -10,11 +10,27 @@ defined('_JEXEC') or die;
 
 class DD_GMaps_LocationsController extends JControllerLegacy{
 
+	/**
+	 * The default view.
+	 *
+	 * @var    string
+	 *
+	 * @since  Version 1.1.0.1
+	 */
 	protected $default_view = 'dashboard';
 
+	/**
+	 * Method to display a view.
+	 *
+	 * @param   boolean  $cachable   If true, the view output will be cached
+	 * @param   array    $urlparams  An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return  ContentController  This object to support chaining.
+	 *
+	 * @since   Version 1.1.0.1
+	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-
 		$view   = $this->input->get('view', 'location');
 		$layout = $this->input->get('layout', 'default');
 		$id     = $this->input->getInt('id');
@@ -29,9 +45,6 @@ class DD_GMaps_LocationsController extends JControllerLegacy{
 			return false;
 		}
 
-		parent::display();
-
-		return $this;
+		return parent::display();
 	}
-
 }

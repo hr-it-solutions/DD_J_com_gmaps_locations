@@ -8,9 +8,8 @@
 
 defined('_JEXEC') or die;
 
-$doc = JFactory::getDocument();
-$doc->addStyleSheetVersion(JUri::base() . 'media/com_dd_gmaps_locations/css/dd_gmaps_locations.css');
-$doc->addScriptVersion(JUri::base() . 'media/com_dd_gmaps_locations/js/dd_gmaps_locations.js');
+JHTML::_('script', 'com_dd_gmaps_locations/dd_gmaps_locations.min.js', true, true);
+JHTML::_('stylesheet', 'com_dd_gmaps_locations/dd_gmaps_locations.min.css', array(), true);
 
 $controller = JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));
