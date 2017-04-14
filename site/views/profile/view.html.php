@@ -31,7 +31,6 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 */
 	function display($tpl = null)
 	{
-
 		$this->input      = JFactory::getApplication()->input;
 		$this->alias      = $this->input->get('alias',      false, 'STRING');
 		$this->profile_id = $this->input->get('profile_id', false, 'STRING');
@@ -48,6 +47,12 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 			JError::raise(404);
 
 			return false;
+		}
+
+		// Set Input ID for 3rd party connection
+		if ($this->profile_id == false)
+		{
+			$this->input->set('profile_id', $this->item->id);
 		}
 
 		if (count($errors = $this->get('Errors')))
