@@ -16,8 +16,6 @@ Location entries, location profile pages, location search, geolocation distance 
 - Custom CSS, mobile ready and responsive
 - Support all major web browsers
 
-- [GMaps Locations System Plugin](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations)
-
 ### Frontend Features:
 - Location directory with detailed information and profile pages
 - Profile pages linked to the map (markers and info boxes)
@@ -52,6 +50,12 @@ Build your community which meets to your needs. The function of the component ca
 Errors and technical modification subject to change.
 
 ---
+### Component package installer compilation
+
+- com_gmaps_locations [GMaps Loctaions](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)
+- mod_gmaps_locations_searchfilter [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
+- mod_gmaps_module [GMaps Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_module)
+- plg_system_gmaps_locations_geocode [GMaps Locations GeoCode System Plugin](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations_geocode)
 
 # System requirements
 Joomla 3.6 +                                                                                <br>
