@@ -45,9 +45,13 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 *
 	 * @since  Version  1.1.0.0
 	 */
-
 	public function display($tpl = null)
 	{
+		if ($this->getLayout() !== 'modal')
+		{
+			DD_GMaps_LocationsHelper::addSubmenu('locations');
+		}
+
 		$this->items        = $this->get('Items');
 		$this->state        = $this->get('State');
 		$this->pagination   = $this->get('Pagination');
@@ -60,8 +64,12 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			return false;
 		}
 
-		$this->addToolbar();
-		$this->addSidebar();
+		// We don't need toolbar in the modal window.
+		if ($this->getLayout() !== 'modal')
+		{
+			$this->addToolbar();
+			$this->sidebar = JHtmlSidebar::render();
+		}
 
 		return parent::display($tpl);
 	}
@@ -83,9 +91,12 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		JToolbarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), '');
 
-		JToolbarHelper::addNew('location.edit');
+		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories('com_dd_gmaps_locations', 'core.create'))) > 0)
+		{
+			JToolbarHelper::addNew('location.add');
+		}
 
-		if ($canDo->get('core.edit'))
+		if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own')))
 		{
 			JToolbarHelper::editList('location.edit');
 		}
@@ -94,41 +105,38 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		{
 			JToolbarHelper::publish('locations.publish', 'JTOOLBAR_PUBLISH', true);
 			JToolbarHelper::unpublish('locations.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-
-			JToolbarHelper::checkin('locations.checkin');
 		}
 
-		$state	= $this->get('State');
-
-		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
+		// Add a batch button
+		if ($user->authorise('core.create', 'com_dd_gmaps_locations')
+			&& $user->authorise('core.edit', 'com_dd_gmaps_locations')
+			&& $user->authorise('core.edit.state', 'com_dd_gmaps_locations'))
 		{
-			JToolbarHelper::deleteList('', 'locations.delete', 'JTOOLBAR_EMPTY_TRASH');
+			$title = JText::_('JTOOLBAR_BATCH');
+
+			// Instantiate a new JLayoutFile instance and render the batch button
+			$layout = new JLayoutFile('joomla.toolbar.batch');
+
+			$dhtml = $layout->render(array('title' => $title));
+			$bar->appendButton('Custom', $dhtml, 'batch');
+		}
+
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
+		{
+			JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'locations.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
 		elseif ($canDo->get('core.edit.state'))
 		{
 			JToolbarHelper::trash('locations.trash');
 		}
 
-		if ($canDo->get('core.admin'))
+		if ($user->authorise('core.admin', 'com_dd_gmaps_locations') || $user->authorise('core.options', 'com_dd_gmaps_locations'))
 		{
 			JToolbarHelper::preferences('com_dd_gmaps_locations');
 		}
 
-		JHtmlSidebar::setAction('index.php?option=com_dd_gmaps_locations&view=locations');
-
-		// Get GridFilter Published Options for sidebar filter and unset "Archived" option
-		$jgridPublishedOptions = JHtml::_('jgrid.publishedOptions');
-		unset($jgridPublishedOptions[2]);
-
-		// Sidebar Filter
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_PUBLISHED'),
-			'filter_language_client',
-			JHtml::_('select.options', $jgridPublishedOptions, 'value', 'text', $this->state->get('filter.state'), true)
-		);
-
+		JToolbarHelper::help('JHELP_CONTENT_ARTICLE_MANAGER');
 	}
-
 	/**
 	 * Add the sidebar
 	 *
@@ -141,7 +149,6 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		DD_GMaps_LocationsHelper::addSubmenu('locations');
 		$this->sidebar = JHtml::_('sidebar.render');
 	}
-
 	/**
 	 * Drop Down Filter
 	 *

@@ -8,46 +8,47 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\Utilities\ArrayHelper;
+
 class DD_GMaps_LocationsControllerLocations extends JControllerAdmin
 {
 
 	/**
-	 * Call Location Model
+	 * Constructor.
 	 *
-	 * @param   string  $name    Name of the model
-	 * @param   string  $prefix  Prefix of the model
-	 * @param   array   $config  Array
+	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
-	 * @return  mixed
+	 * @see     JControllerLegacy
 	 *
-	 * @since Version 1.1.0.0
+	 * @since    Version 1.1.0.1
 	 */
-	public function getModel($name = 'Location', $prefix = 'LocationModel', $config = array('ignore_request' => true))
+	public function __construct($config = array())
 	{
-		$model = parent::getModel($name, $prefix, $config);
-		return $model;
+		parent::__construct($config);
+
+		// Articles default form can come from the articles or featured view.
+		// Adjust the redirect view on the value of 'view' in the request.
+		if ($this->input->get('view') == 'featured')
+		{
+			$this->view_list = 'featured';
+		}
+
+		$this->registerTask('unfeatured', 'featured');
 	}
 
 	/**
-	 * SaveOrderAjax from Sidebar Filter
+	 * Proxy for getModel.
 	 *
-	 * @since Version 1.1.0.0
+	 * @param   string  $name    The model name. Optional.
+	 * @param   string  $prefix  The class prefix. Optional.
+	 * @param   array   $config  The array of possible config values. Optional.
+	 *
+	 * @return  JModelLegacy
+	 *
+	 * @since    Version 1.1.0.1
 	 */
-	public function saveOrderAjax()
+	public function getModel($name = 'Location', $prefix = 'DD_GMaps_LocationsModel', $config = array('ignore_request' => true))
 	{
-		$input = JFactory::getApplication()->input;
-		$pks = (int) $input->post->get('cid', array(), 'array');
-		$order = (int) $input->post->get('order', array(), 'array');
-
-		$model = $this->getModel();
-
-		$return = $model->saveorder($pks, $order);
-
-		if ($return)
-		{
-			echo "1";
-		}
-
-		JFactory::getApplication()->close();
+		return parent::getModel($name, $prefix, $config);
 	}
 }

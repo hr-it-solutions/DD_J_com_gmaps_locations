@@ -15,81 +15,177 @@ defined('_JEXEC') or die;
  */
 class DD_GMaps_LocationsModelLocations extends JModelList
 {
-
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @since    Version 1.1.0.1
+	 *
+	 * @see     JControllerLegacy
+	 */
 	public function __construct($config = array())
 	{
-		if(empty($config['filter_fields']))
+		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
 				'id', 'a.id',
 				'title', 'a.title',
-				'company', 'a.company',
-				'contact_person', 'a.contact_person',
-				'phone', 'a.phone',
-				'email', 'a.email',
-				'street', 'a.street',
-				'location', 'a.location',
-				'zip', 'a.zip',
-				'country', 'a.country',
-				'category_title', 'a.catid',
+				'alias', 'a.alias',
+				'checked_out', 'a.checked_out',
+				'checked_out_time', 'a.checked_out_time',
+				'catid', 'a.catid', 'category_title',
+				'state', 'a.state',
+				'access', 'a.access', 'access_level',
+				'created', 'a.created',
+				'created_by', 'a.created_by',
+				'created_by_alias', 'a.created_by_alias',
+				'ordering', 'a.ordering',
+				'featured', 'a.featured',
+				'language', 'a.language',
+				'hits', 'a.hits',
 				'publish_up', 'a.publish_up',
-			    'publish_down', 'a.publish_down'
+				'publish_down', 'a.publish_down',
+				'published', 'a.published',
+				'author_id',
+				'category_id',
 			);
+
+			if (JLanguageAssociations::isEnabled())
+			{
+				$config['filter_fields'][] = 'association';
+			}
 		}
 
 		parent::__construct($config);
 	}
 
-	protected function populateState($ordering = null, $direction = null)
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 *
+	 * @since    Version 1.1.0.1
+	 */
+	protected function populateState($ordering = 'a.id', $direction = 'desc')
 	{
-		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$app = JFactory::getApplication();
+
+		$forcedLanguage = $app->input->get('forcedLanguage', '', 'cmd');
+
+		// Adjust the context to support modal layouts.
+		if ($layout = $app->input->get('layout'))
+		{
+			$this->context .= '.' . $layout;
+		}
+
+		// Adjust the context to support forced languages.
+		if ($forcedLanguage)
+		{
+			$this->context .= '.' . $forcedLanguage;
+		}
+
+		$search = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
+		$authorId = $app->getUserStateFromRequest($this->context . '.filter.author_id', 'filter_author_id');
+		$this->setState('filter.author_id', $authorId);
 
-		$published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $published);
+		$published = $this->getUserStateFromRequest($this->context . '.filter.published', 'filter_published', '');
+		$this->setState('filter.published', $published);
 
-		parent::populateState('a.title', 'asc');
+		$categoryId = $this->getUserStateFromRequest($this->context . '.filter.category_id', 'filter_category_id');
+		$this->setState('filter.category_id', $categoryId);
+
+		// List state information.
+		parent::populateState($ordering, $direction);
+
+		// Force a language
+		if (!empty($forcedLanguage))
+		{
+			$this->setState('filter.language', $forcedLanguage);
+			$this->setState('filter.forcedLanguage', $forcedLanguage);
+		}
 	}
 
 	/**
-	 * getListQuery
+	 * Method to get a store id based on model configuration state.
 	 *
-	 * @return mixed
+	 * This is necessary because the model is used by the component and
+	 * different modules that might need different sets of data or different
+	 * ordering requirements.
 	 *
-	 * @since Version 1.1.0.0
+	 * @param   string  $id  A prefix for the store id.
+	 *
+	 * @return  string  A store id.
+	 *
+	 * @since    Version 1.1.0.1
+	 */
+	protected function getStoreId($id = '')
+	{
+		// Compile the store id.
+		$id .= ':' . $this->getState('filter.search');
+		$id .= ':' . $this->getState('filter.access');
+		$id .= ':' . $this->getState('filter.published');
+		$id .= ':' . $this->getState('filter.category_id');
+		$id .= ':' . $this->getState('filter.author_id');
+		$id .= ':' . $this->getState('filter.language');
+
+		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Build an SQL query to load the list data.
+	 *
+	 * @return  JDatabaseQuery
+	 *
+	 * @since    Version 1.1.0.1
 	 */
 	protected function getListQuery()
 	{
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
+		// Create a new query object.
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+		$user = JFactory::getUser();
 
-		$select = $db->qn(
-			array(
-				'a.id',
-				'a.title',
-				'a.catid',
-				'a.state',
-				'a.company',
-				'a.contact_person',
-				'a.phone',
-				'a.email',
-				'a.street',
-				'a.location',
-				'a.zip',
-				'a.country',
-				'a.federalstate',
-				'a.latitude',
-				'a.longitude',
-				'a.publish_up',
-				'a.publish_down',
+		$query->select(
+			$this->getState(
+				'list.select',
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid' .
+				', a.created, a.created_by, a.created_by_alias, a.ordering, a.featured' .
+				', a.state, a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip, a.country' .
+				', a.federalstate, a.latitude' .
+				', a.publish_up, a.publish_down'
 			)
 		);
 
-		$query  ->select($select)
-				->from($db->qn('#__dd_gmaps_locations', 'a'));
+		$query->from($db->qn('#__dd_gmaps_locations', 'a'));
 
-		// Filter by state
-		$published = $this->getState('filter.state');
+		// Join over categories
+		$query  ->select($db->qn('c.title', 'category_title'))
+			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
+
+
+		// Filter by access level.
+		if ($access = $this->getState('filter.access'))
+		{
+			$query->where('a.access = ' . (int) $access);
+		}
+
+		// Filter by access level on categories.
+		if (!$user->authorise('core.admin'))
+		{
+			$groups = implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN (' . $groups . ')');
+			$query->where('c.access IN (' . $groups . ')');
+		}
+
+		// Filter by published state
+		$published = $this->getState('filter.published');
 
 		if (is_numeric($published))
 		{
@@ -97,12 +193,33 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		}
 		elseif ($published === '')
 		{
-			$query->where('(a.state IN (0, 1))');
+			$query->where('(a.state = 0 OR a.state = 1)');
 		}
 
-		// Join over categories
-		$query  ->select($db->qn('c.title', 'category_title'))
-				->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
+		// Filter by a single or group of categories.
+		$baselevel = 1;
+		$categoryId = $this->getState('filter.category_id');
+
+		if (is_numeric($categoryId))
+		{
+			$categoryTable = JTable::getInstance('Category', 'JTable');
+			$categoryTable->load($categoryId);
+			$rgt = $categoryTable->rgt;
+			$lft = $categoryTable->lft;
+			$baselevel = (int) $categoryTable->level;
+			$query->where('c.lft >= ' . (int) $lft)
+				->where('c.rgt <= ' . (int) $rgt);
+		}
+		elseif (is_array($categoryId))
+		{
+			$query->where('a.catid IN (' . implode(',', ArrayHelper::toInteger($categoryId)) . ')');
+		}
+
+		// Filter on the level.
+		if ($level = $this->getState('filter.level'))
+		{
+			$query->where('c.level <= ' . ((int) $level + (int) $baselevel - 1));
+		}
 
 		// Filter by search in grid fields
 		$search = $this->getState('filter.search');
@@ -124,12 +241,47 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			}
 		}
 
-		// Ordering
-		$orderCol = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
+		// Add the list ordering clause.
+		$orderCol  = $this->state->get('list.fullordering', 'a.id');
+		$orderDirn = '';
 
-		$query->order($db->escape($orderCol . ' ' . $orderDirn));
+		if (empty($orderCol))
+		{
+			$orderCol  = $this->state->get('list.ordering', 'a.id');
+			$orderDirn = $this->state->get('list.direction', 'DESC');
+		}
+
+		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 
 		return $query;
+	}
+
+	/**
+	 * Method to get a list of articles.
+	 * Overridden to add a check for access levels.
+	 *
+	 * @return  mixed  An array of data items on success, false on failure.
+	 *
+	 * @since    Version 1.1.0.1
+	 */
+	public function getItems()
+	{
+		$items = parent::getItems();
+
+		if (JFactory::getApplication()->isClient('site'))
+		{
+			$groups = JFactory::getUser()->getAuthorisedViewLevels();
+
+			for ($x = 0, $count = count($items); $x < $count; $x++)
+			{
+				// Check the access level. Remove articles the user shouldn't see
+				if (!in_array($items[$x]->access, $groups))
+				{
+					unset($items[$x]);
+				}
+			}
+		}
+
+		return $items;
 	}
 }
