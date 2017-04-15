@@ -232,7 +232,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			}
 			else
 			{
-				$search = $db->Quote('%' . $db->escape($search, true) . '%');
+				$search = $db->q('%' . $db->escape($search, true) . '%', false);
 				$query->where('(a.title LIKE ' . $search . ' OR a.company LIKE ' . $search .
 					' OR a.contact_person LIKE ' . $search . ' OR a.phone LIKE ' . $search .
 					' OR a.street LIKE ' . $search . ' OR a.location LIKE ' . $search .
