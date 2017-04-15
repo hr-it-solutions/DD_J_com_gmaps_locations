@@ -50,8 +50,9 @@ Build your community which meets to your needs. The function of the component ca
 Errors and technical modification subject to change.
 
 ---
-**Note: This is just the component repository (com_gmaps_locations).
-  To get the component package, including required system plugins and required modules, you need the component package installer compilation.**
+**Note: This is just the component repository (com_gmaps_locations).**
+
+**To get the component package, including required system plugins and required modules, you need the component package installer compilation.**
 
 **[Component package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package) installer compilation contains:**
 
