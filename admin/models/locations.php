@@ -232,7 +232,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 			}
 			else
 			{
-				$search = $db->Quote('%' . $db->escape($search, true) . '%');
+				$search = $db->q('%' . $db->escape($search, true) . '%', false);
 				$query->where('(a.title LIKE ' . $search . ' OR a.company LIKE ' . $search .
 					' OR a.contact_person LIKE ' . $search . ' OR a.phone LIKE ' . $search .
 					' OR a.street LIKE ' . $search . ' OR a.location LIKE ' . $search .
@@ -254,34 +254,5 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 
 		return $query;
-	}
-
-	/**
-	 * Method to get a list of articles.
-	 * Overridden to add a check for access levels.
-	 *
-	 * @return  mixed  An array of data items on success, false on failure.
-	 *
-	 * @since    Version 1.1.0.1
-	 */
-	public function getItems()
-	{
-		$items = parent::getItems();
-
-		if (JFactory::getApplication()->isClient('site'))
-		{
-			$groups = JFactory::getUser()->getAuthorisedViewLevels();
-
-			for ($x = 0, $count = count($items); $x < $count; $x++)
-			{
-				// Check the access level. Remove articles the user shouldn't see
-				if (!in_array($items[$x]->access, $groups))
-				{
-					unset($items[$x]);
-				}
-			}
-		}
-
-		return $items;
 	}
 }

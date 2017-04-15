@@ -27,7 +27,9 @@ function processAjax(val, attrVal){
             start += limit;
             jQuery("#InserBefore").before(data.html);
 
-            init_default_itemsJS();
+            if (typeof init_default_itemsJS !== "undefined") {
+                init_default_itemsJS();
+            }
 
             loadmorebutton.stop();
             loadmorebutton.css("width", "auto");
