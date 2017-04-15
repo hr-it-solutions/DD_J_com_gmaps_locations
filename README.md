@@ -52,9 +52,9 @@ Errors and technical modification subject to change.
 ---
 **Note: This is just the component repository (com_gmaps_locations).**
 
-**To get the component package, including required system plugins and required modules, you need the component package installer compilation.**
+**To get the component package, including required system plugins and required modules, you need the component package installer compilation. [https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package)**
 
-**[Component package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package) installer compilation contains:**
+**The [Component package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package) installer compilation contains:**
 
 - com_gmaps_locations [GMaps Loctaions](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)
 - mod_gmaps_locations_searchfilter [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
