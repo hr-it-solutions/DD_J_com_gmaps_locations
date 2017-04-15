@@ -50,7 +50,7 @@ Build your community which meets to your needs. The function of the component ca
 Errors and technical modification subject to change.
 
 ---
-### Component package installer compilation
+### [Component package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_locations_package) installer compilation
 
 - com_gmaps_locations [GMaps Loctaions](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)
 - mod_gmaps_locations_searchfilter [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
