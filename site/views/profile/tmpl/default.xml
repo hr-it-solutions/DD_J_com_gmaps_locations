@@ -5,4 +5,39 @@
             <![CDATA[com_dd_gmaps_locations_profile_view_default_desc]]>
         </message>
     </layout>
+
+    <!-- Add fields to the request variables for the layout. -->
+    <fields name="request">
+        <fieldset name="request"
+                  addfieldpath="/administrator/components/com_dd_gmaps_locations/models/fields">
+
+            <field name="id" type="modal_location"
+                   label="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL"
+                   required="false"
+                   edit="true"
+                   clear="false"
+                   description="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_DESC"
+            />
+        </fieldset>
+    </fields>
+
+    <!-- Add fields to the parameters object for the layout. -->
+    <fields name="params">
+
+        <!-- Select Location options. -->
+        <fieldset name="select_location"
+                  label="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL">
+
+            <field
+                    id="profile_id"
+                    name="profile_id"
+                    label="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_DESC"
+                    default="0"
+                    class="readonly"
+                    size="10"
+                    readonly="true"
+            />
+        </fieldset>
+    </fields>
 </metadata>

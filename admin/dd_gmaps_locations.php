@@ -15,6 +15,12 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_dd_gmaps_locations'))
 
 JLoader::import('helpers.dd_gmaps_locations', JPATH_COMPONENT_ADMINISTRATOR);
 
+// Check if plugin geocode is enabled
+if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
+{
+	JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_WARNING_GEOCODE_PLUGIN_MUST_BE_ENABLED'), 'warning');
+}
+
 JHtml::_('jQuery.Framework');
 
 $doc = JFactory::getDocument();
