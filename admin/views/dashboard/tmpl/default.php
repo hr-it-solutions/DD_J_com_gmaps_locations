@@ -8,7 +8,6 @@
 
 defined('_JEXEC') or die;
 ?>
-
 <div class="row-fluid">
 	<?php if (!empty($this->sidebar)): ?>
 	<div id="j-sidebar-container" class="span2">
@@ -19,7 +18,36 @@ defined('_JEXEC') or die;
 	<div id="j-main-container" class="span12">
 	<?php endif; ?>
 		<div class="row-fluid">
-            
+            <!-- Module Positions -->
+			<?php
+			$modules = JModuleHelper::getModules('dd_gmaps_locations');
+			if (count($modules)):
+
+				$modules = array_chunk($modules, 2);
+
+				foreach ($modules as $modulegroup) :
+
+					echo '<div class="row-fluid">';
+
+					foreach ($modulegroup as $module) :
+						echo '<div class="span12">';
+						echo JModuleHelper::renderModule($module);
+						echo '</div>';
+					endforeach;
+
+					echo '</div>';
+
+				endforeach;
+
+			else :
+
+				echo '<div class="alert alert-info">';
+				echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_POSITION_DESCRIPTION', 'dd_gmaps_locations');
+				echo '</div>';
+
+			endif;
+			?>
+            <hr>
             <!-- Component Description -->
             <div class="text-center">
                 <p><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION'); ?></p>
