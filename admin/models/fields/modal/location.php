@@ -37,8 +37,32 @@ class JFormFieldModal_Location extends JFormField
 		// Script to proxy the select modal function to the modal-fields.js file.
 		if ($allowSelect)
 		{
-			$html = '<input required="required" readonly="readonly" id="jform_type" value="Last ID" size="40" class="input-medium" type="text">';
-			$html .= '<p><b>Note: Select is in this Version currently not possible</b></p>';
+
+			// Get Latest Id todo! #16
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('id')
+				->from($db->qn('#__dd_gmaps_locations'))
+				->where($db->quoteName('state').' = 1')
+				->order('id DESC');
+			$db->setQuery($query);
+			$id = $db->loadResult();
+
+			$html = '<script>
+// Setup Id field jform_params_profile_id
+jQuery(document).ready(function() {
+	jQuery(\'#jform_params_profile_id\').val(' . $id . ');
+	jQuery(\'#jform_last_profile_id\').val(' . $id . ');
+	
+	jQuery("#jform_last_profile_id").on("change paste keyup", function() {
+   		jQuery(\'#jform_params_profile_id\').val(jQuery(this).val()); 
+    });
+});
+
+</script>';
+
+			$html .= '<input required="required" id="jform_last_profile_id" value="Last ID" size="40" class="input-medium" type="text">';
+			$html .= '<p><b>Note: Select is in this Version currently not implemented. (Comming soon!)<br>AutoSetup ID is last published location ID or type manually.</b></p>';
 		}
 
 		return $html;
