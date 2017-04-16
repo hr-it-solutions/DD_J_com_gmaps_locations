@@ -37,7 +37,8 @@ class JFormFieldModal_Location extends JFormField
 		// Script to proxy the select modal function to the modal-fields.js file.
 		if ($allowSelect)
 		{
-
+			$html = '<input required="required" readonly="readonly" id="jform_type" value="Last ID" size="40" class="input-medium" type="text">';
+			$html .= '<p><b>Note: Select is in this Version currently not possible</b></p>';
 		}
 
 		return $html;
