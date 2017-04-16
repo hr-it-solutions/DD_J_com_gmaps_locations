@@ -41,6 +41,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		// Load Profile SetUp from Menu parameters
 		$activeMenuParams   = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id)->getParams();
+
 		if (is_numeric($activeMenuParams->get('profile_id')))
 		{
 			// Set profile ID
