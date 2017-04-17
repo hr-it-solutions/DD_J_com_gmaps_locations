@@ -40,13 +40,18 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		$this->profile_id = $this->input->get('profile_id', false, 'STRING');
 
 		// Load Profile SetUp from Menu parameters
-		$activeMenuParams   = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id)->getParams();
+		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);
 
-		if (is_numeric($activeMenuParams->get('profile_id')))
+		if (method_exists($activeMenu, 'getParams')) // Joomla 3.7.xx
 		{
-			// Set profile ID
+			$activeMenuParams   = $activeMenu->getParams();
 			$this->input->set('profile_id', ($activeMenuParams->get('profile_id')));
 			$this->profile_id = $activeMenuParams->get('profile_id');
+		}
+		else // Joomla 3.5.xx
+		{
+			$this->input->set('profile_id', ($activeMenu->parent_id));
+			$this->profile_id = $activeMenu->parent_id;
 		}
 
 		// Get the component configuration

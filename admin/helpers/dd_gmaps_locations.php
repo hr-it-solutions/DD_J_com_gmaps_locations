@@ -87,7 +87,11 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 
 		if ($output->error_message != "") // If Error on API Connection, display error not
 		{
-			JFactory::getApplication()->enqueueMessage($output->error_message, 'Note');
+			JFactory::getApplication()->enqueueMessage($output->error_message, 'warning');
+		}
+		elseif($output->status == 'ZERO_RESULTS')
+		{
+			JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS'), 'warning');
 		}
 
 		// Build array latitude and longitude
