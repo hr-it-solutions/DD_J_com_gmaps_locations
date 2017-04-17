@@ -23,8 +23,7 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 
 JHtml::_('jQuery.Framework');
 
-$doc = JFactory::getDocument();
-$doc->addStyleSheet(JUri::base() . 'media/com_dd_gmaps_locations/css/dd_gmaps_locations.admin.min.css');
+JHTML::_('stylesheet', 'com_dd_gmaps_locations/dd_gmaps_locations.admin.min.css', array(), true);
 
 $controller	= JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));

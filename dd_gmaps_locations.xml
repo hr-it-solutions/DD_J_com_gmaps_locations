@@ -34,6 +34,7 @@
 
     <files folder="site">
         <filename>controller.php</filename>
+        <filename>router.php</filename>
         <filename>dd_gmaps_locations.php</filename>
         <folder>models</folder>
         <folder>views</folder>
