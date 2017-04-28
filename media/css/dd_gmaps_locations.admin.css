@@ -1,9 +1,10 @@
 /**
- * @version     1-1-0-1 // Y-m-d 2017-04-02
- * @author      HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
- * @copyright   Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only  
-**/
+ * @package    DD_GMaps_Locations
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+ **/
 
 #dd_gmaps_locations-location .green { color: green }
 #dd_gmaps_locations-location .red { color: red }
