@@ -1,7 +1,8 @@
 <?php
 /**
- * @version    1-1-0-1 // Y-m-d 2017-04-02
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Locations
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
@@ -64,14 +65,14 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 		);
 
 		$query->select($select)
-			->from($db->quoteName('#__dd_gmaps_locations', 'a'));
+			->from($db->qn('#__dd_gmaps_locations', 'a'));
 
 		// Filter state
 		$query->where('a.state = 1');
 
 		// Join over categories
-		$query->select($db->quoteName('c.title', 'category_title'))
-			->leftJoin($db->quoteName('#__categories', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid') . ')');
+		$query->select($db->qn('c.title', 'category_title'))
+			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		// Get Profile
 		if ($alias)

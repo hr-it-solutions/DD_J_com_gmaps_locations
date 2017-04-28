@@ -1,11 +1,19 @@
 <?php
 /**
- * @version    1-1-0-1 // Y-m-d 2017-04-02
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Locations
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
+/**
+ * BuildRoute
+ *
+ * @param array $query of URL parameters
+ *
+ * @return array of segments that will form the SEF URL
+ */
 function DD_GMaps_LocationsBuildRoute(&$query)
 {
 	$segments = array();
@@ -36,6 +44,13 @@ function DD_GMaps_LocationsBuildRoute(&$query)
 	return $segments;
 }
 
+/**
+ * ParseRoute
+ *
+ * @param array $segments array of segments
+ *
+ * @return array of URL parameters
+ */
 function DD_GMaps_LocationsParseRoute($segments)
 {
 	$vars = array();

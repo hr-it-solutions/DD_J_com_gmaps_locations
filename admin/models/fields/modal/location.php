@@ -1,7 +1,8 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-04-16
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Locations
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
@@ -43,7 +44,7 @@ class JFormFieldModal_Location extends JFormField
 			$query = $db->getQuery(true);
 			$query->select('id')
 				->from($db->qn('#__dd_gmaps_locations'))
-				->where($db->quoteName('state').' = 1')
+				->where($db->qn('state').' = 1')
 				->order('id DESC');
 			$db->setQuery($query);
 			$id = $db->loadResult();
