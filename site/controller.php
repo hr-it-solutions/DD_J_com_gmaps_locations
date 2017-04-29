@@ -20,9 +20,9 @@ class DD_GMaps_LocationsController extends JControllerLegacy {
 	 */
 	public function getAjax()
 	{
-		$format = strtolower(JRequest::getWord('format', 'raw'));
 		$app    = JFactory::getApplication();
 		$input  = $app->input;
+		$format = $input->get("format", '', 'STRING');
 		$data   = $input->get("data", '', 'array');
 		$callback = $input->get('callback', 'not set');
 
@@ -30,7 +30,7 @@ class DD_GMaps_LocationsController extends JControllerLegacy {
 		{
 			$model = $this->getModel('Locations');
 			$items = $model->getAjaxList($data);
-			$html = $model->bufferAjaxOutputView($items,$data);
+			$html = $model->bufferAjaxOutputView($items, $data);
 
 			$results = array(
 				'success' => true,

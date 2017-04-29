@@ -41,11 +41,10 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = $this->app->getMenu()->getActive()->alias;
 
+		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raise(500, implode("\n", $errors));
-
-			return false;
+			throw new Exception(implode("\n", $errors), 500);
 		}
 
 		return parent::display($tpl);

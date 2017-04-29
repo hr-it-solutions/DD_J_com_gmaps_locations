@@ -64,9 +64,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		}
 		else
 		{
-			JError::raise(404);
-
-			return false;
+			throw new Exception(404, 404);
 		}
 
 		// Set Input ID for 3rd party connection
@@ -75,11 +73,10 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 			$this->input->set('profile_id', $this->item->id);
 		}
 
+		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raise(500, implode("\n", $errors));
-
-			return false;
+			throw new Exception(implode("\n", $errors), 500);
 		}
 
 		return parent::display($tpl);

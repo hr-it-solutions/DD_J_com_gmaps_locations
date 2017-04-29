@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 if (!JFactory::getUser()->authorise('core.manage', 'com_dd_gmaps_locations'))
 {
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	throw new JAccessExceptionNotallowed(JText::_('JERROR_ALERTNOAUTHOR'), 403);
 }
 
 JLoader::import('helpers.dd_gmaps_locations', JPATH_COMPONENT_ADMINISTRATOR);
