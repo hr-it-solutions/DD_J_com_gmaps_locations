@@ -6,7 +6,7 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
-function processAjax(val, attrVal){
+;function processAjax(val, attrVal){
 
     var loadmorebutton = jQuery('#load-more');
 
