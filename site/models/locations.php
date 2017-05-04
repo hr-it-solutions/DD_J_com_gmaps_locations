@@ -14,7 +14,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * DD_GMaps_LocationsModelLocations constructor.
 	 *
-	 * @param array $config
+	 * @param   array  $config  config
 	 *
 	 * @since Version 1.1.0.0
 	 */
@@ -45,16 +45,20 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * populateState
 	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 *
 	 * @since Version 1.1.0.0
 	 */
-	protected function populateState($ordering = null, $direction = null, $limitStart = 0)
+	protected function populateState($ordering = null, $direction = null)
 	{
 		parent::populateState($ordering, $direction);
 
 		$app = JFactory::getApplication();
 		$params = $app->getParams();
 		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
-
 	}
 
 	/**
@@ -223,14 +227,14 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * bufferAjaxOutputView by rendering each data item through default_items template
 	 *
-	 * @param   array  $items items to render
-	 * @param   array  $data  POST params
+	 * @param   array  $items  items to render
+	 * @param   array  $data   POST params
 	 *
 	 * @since Version 1.1.0.0
 	 *
 	 * @return string html output string
 	 */
-	public function bufferAjaxOutputView($items,$data)
+	public function bufferAjaxOutputView($items, $data)
 	{
 		$i = $data['start'];
 
