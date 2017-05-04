@@ -39,4 +39,35 @@
         .fail(function(jqXHR, textStatus, errorThrown){
             console.log("Ajax problem: " + textStatus + ". " + errorThrown);
         });
+
+    checkNextItems();
+
+}
+
+/**
+ * checkNextItems
+ */
+function checkNextItems() {
+    var next_start = start + 1;
+    var next_limit = 1;
+
+    jQuery.ajax({
+        crossDomain: false,
+        type: "POST",
+        url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
+        data:  {data:{start:next_start,limit:next_limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,activeAlias:activeAlias}},
+        dataType: "json",
+        cache: false
+    })
+
+        .done(function(data){
+
+            if(data.html === ''){ // If no data, remove load more button
+                jQuery('#load-more').remove();
+            }
+
+        })
+        .fail(function(jqXHR, textStatus, errorThrown){
+            console.log("Ajax problem: " + textStatus + ". " + errorThrown);
+        });
 }
