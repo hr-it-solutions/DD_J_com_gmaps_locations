@@ -115,12 +115,6 @@ if ($saveOrder)
                     <th width="10%" class="nowrap hidden-phone">
 		                <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_CONTACT_PERSON', 'a.contact_person', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="6%" class="nowrap hidden-phone">
-		                <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_PHONE', 'a.phone', $listDirn, $listOrder); ?>
-                    </th>
-                    <th width="10%" class="nowrap hidden-phone">
-		                <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_EMAIL', 'a.email', $listDirn, $listOrder); ?>
-                    </th>
                     <th width="10%" class="nowrap">
 		                <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_STREET', 'a.street', $listDirn, $listOrder); ?>
                     </th>
@@ -169,12 +163,6 @@ if ($saveOrder)
                             </td>
                             <td class="nowrap hidden-phone">
 				                <?php echo $this->escape($item->contact_person); ?>
-                            </td>
-                            <td class="nowrap hidden-phone">
-				                <?php echo $this->escape($item->phone); ?>
-                            </td>
-                            <td class="nowrap hidden-phone">
-				                <?php echo $this->escape($item->email); ?>
                             </td>
                             <td class="nowrap">
 				                <?php echo $this->escape($item->street); ?>
