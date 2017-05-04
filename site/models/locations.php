@@ -52,13 +52,16 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	 *
 	 * @since Version 1.1.0.0
 	 */
-	protected function populateState($ordering = null, $direction = null)
+	protected function populateState($ordering = null, $direction = null, $listlimit = true)
 	{
 		parent::populateState($ordering, $direction);
 
-		$app = JFactory::getApplication();
-		$params = $app->getParams();
-		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+		if ($listlimit)
+		{
+			$app = JFactory::getApplication();
+			$params = $app->getParams();
+			$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+		}
 	}
 
 	/**
