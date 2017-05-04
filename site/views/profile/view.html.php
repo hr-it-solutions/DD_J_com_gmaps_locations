@@ -31,6 +31,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 * @return boolean | mixed
 	 *
 	 * @since Version 1.1.0.0
+	 * @throws  Exception
 	 */
 	function display($tpl = null)
 	{

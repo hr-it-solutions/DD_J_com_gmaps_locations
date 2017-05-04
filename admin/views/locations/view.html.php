@@ -45,6 +45,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
 	 * @since  Version  1.1.0.0
+	 * @throws  Exception
 	 */
 	public function display($tpl = null)
 	{
