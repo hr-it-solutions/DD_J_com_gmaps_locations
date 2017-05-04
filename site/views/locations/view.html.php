@@ -41,6 +41,33 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = $this->app->getMenu()->getActive()->alias;
 
+		// Active menu
+		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);
+
+		if (method_exists($activeMenu, 'getParams')) // Joomla 3.7.xx
+		{
+			// Active menu params
+			$activeMenuParams   = $activeMenu->getParams();
+
+			// Get meta data from menu
+			$metadesc = $activeMenuParams->get('menu-meta_description');
+			$metakey  = $activeMenuParams->get('menu-meta_keywords');
+			$robots = $activeMenuParams->get('robots');
+		}
+		else // Joomla 3.5.xx
+		{
+			// Get meta data from menu
+			$metadesc = $activeMenu->{'menu-meta_description'};
+			$metakey  = $activeMenu->{'menu-meta_keywords'};
+			$robots = $activeMenu->robots;
+		}
+
+		// Set meta data hedaer from menu : default from item
+		$doc = JFactory::getDocument();
+		$doc->setMetaData('description', $metadesc);
+		$doc->setMetaData('keywords', $metakey);
+		$doc->setMetaData('robots', $robots);
+
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
