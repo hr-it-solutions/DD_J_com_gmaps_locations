@@ -112,8 +112,8 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 *
 	 * @since   Version  1.1.0.1
 	 */
-	protected function setHit($profile_id){
-
+	protected function setHit($profile_id)
+	{
 		$profile_id = (int) $profile_id;
 
 		$db        = JFactory::getDbo();
