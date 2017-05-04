@@ -83,7 +83,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		}
 
 		// Set Input ID for 3rd party connection
-		if ($this->profile_id == false)
+		if ($this->profile_id != null || $this->item->id)
 		{
 			$this->input->set('profile_id', $this->item->id);
 		}
