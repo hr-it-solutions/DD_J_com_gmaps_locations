@@ -119,7 +119,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	 *
 	 * @return JDatabaseQuery
 	 */
-	protected function getListQuery()
+	public function getListQuery()
 	{
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
@@ -181,7 +181,10 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 
 		// Join over categories
-		$query->select($db->qn('c.title', 'category_title'))
+		$query->select(
+			$db->qn('c.title') . 'AS' . $db->qn('category_title') . ',' .
+			$db->qn('c.params') . 'AS' . $db->qn('category_params')
+		)
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		if (isset($filterInput->lat) && isset($filterInput->lng))

@@ -51,6 +51,17 @@
                 <option value="kilometers">COM_DD_GMAPS_LOCATIONS_COMPONENT_UNIT_KM</option>
             </field>
 
+            <field
+                    name="marker_in_entry"
+                    type="list"
+                    label="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARKER_IN_ENTRY_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARKER_IN_ENTRY_DESC"
+                    default="0"
+            >
+                <option value="1">JSHOW</option>
+                <option value="0">JHIDE</option>
+            </field>
+
     </fieldset>
 
     <!-- Google API Settings -->

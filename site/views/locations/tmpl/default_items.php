@@ -81,6 +81,13 @@ else
                 }
                 ?>
             </div>
+            <?php
+            if ($params->get('marker_in_entry') && $item->category_params && json_decode($item->category_params)->image): ?>
+            <img class="category_marker"
+                 src="<?php echo htmlspecialchars(str_replace('\\', '/', json_decode($item->category_params)->image)); ?>"
+                 alt="<?php echo htmlspecialchars(json_decode($item->category_params)->image_alt); ?>">
+            </img>
+	        <?php endif; ?>
 			<?php echo htmlspecialchars($item->company, ENT_QUOTES, 'UTF-8'); ?><br>
 			<?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
 			<?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8'); ?><br>

@@ -71,7 +71,10 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 		$query->where('a.state = 1');
 
 		// Join over categories
-		$query->select($db->qn('c.title', 'category_title'))
+		$query->select(
+			$db->qn('c.title') . 'AS' . $db->qn('category_title') . ',' .
+			$db->qn('c.params') . 'AS' . $db->qn('category_params')
+		)
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		// Get Profile

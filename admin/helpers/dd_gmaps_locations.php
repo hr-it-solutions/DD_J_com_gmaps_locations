@@ -49,6 +49,13 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			JText::_('JCATEGORIES'),
 			'index.php?option=com_categories&extension=com_dd_gmaps_locations'
 		);
+
+		// Markers
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_MARKERS'),
+			'index.php?option=com_dd_gmaps_locations&view=markers',
+			$vName == 'markers'
+		);
 	}
 
 	/**
@@ -107,7 +114,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
-	 * @param   array  $data
+	 * @param   array  $data  data
 	 *
 	 * @return  string  alias
 	 *

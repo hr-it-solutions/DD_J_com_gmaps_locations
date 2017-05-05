@@ -147,6 +147,5 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 		}
 
 		JToolbarHelper::divider();
-		JToolbarHelper::help('JHELP_CONTENT_ARTICLE_MANAGER_EDIT');
 	}
 }

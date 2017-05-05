@@ -22,6 +22,12 @@
     color: #f80;
 }
 
+.dd_gmaps_locations .category_marker {
+    width: 19px;
+    float: right;
+    margin: 4px 4px 0 0;
+}
+
 .dd_gmaps_locations .label {
     border-radius: 3px;
     color: #ffffff;
