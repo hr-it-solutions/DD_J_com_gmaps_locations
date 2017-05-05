@@ -10,7 +10,7 @@
     <license>GNU/GPLv2 only</license>
     <description>COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION</description>
 
-    <!-- Runss on install -->
+    <!-- Runs on install -->
     <scriptfile>script.php</scriptfile>
     <install>
         <sql>
