@@ -14,7 +14,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * DD_GMaps_LocationsModelLocations constructor.
 	 *
-	 * @param array $config
+	 * @param   array  $config  config
 	 *
 	 * @since Version 1.1.0.0
 	 */
@@ -45,16 +45,23 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * populateState
 	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 *
 	 * @since Version 1.1.0.0
 	 */
-	protected function populateState($ordering = null, $direction = null, $limitStart = 0)
+	protected function populateState($ordering = null, $direction = null, $listlimit = true)
 	{
 		parent::populateState($ordering, $direction);
 
-		$app = JFactory::getApplication();
-		$params = $app->getParams();
-		$this->setState('list.limit', (int) $params->get('items_to_list', 6));
-
+		if ($listlimit)
+		{
+			$app = JFactory::getApplication();
+			$params = $app->getParams();
+			$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+		}
 	}
 
 	/**
@@ -112,7 +119,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	 *
 	 * @return JDatabaseQuery
 	 */
-	protected function getListQuery()
+	public function getListQuery()
 	{
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
@@ -174,7 +181,10 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 
 		// Join over categories
-		$query->select($db->qn('c.title', 'category_title'))
+		$query->select(
+			$db->qn('c.title') . 'AS' . $db->qn('category_title') . ',' .
+			$db->qn('c.params') . 'AS' . $db->qn('category_params')
+		)
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		if (isset($filterInput->lat) && isset($filterInput->lng))
@@ -223,14 +233,14 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	/**
 	 * bufferAjaxOutputView by rendering each data item through default_items template
 	 *
-	 * @param   array  $items items to render
-	 * @param   array  $data  POST params
+	 * @param   array  $items  items to render
+	 * @param   array  $data   POST params
 	 *
 	 * @since Version 1.1.0.0
 	 *
 	 * @return string html output string
 	 */
-	public function bufferAjaxOutputView($items,$data)
+	public function bufferAjaxOutputView($items, $data)
 	{
 		$i = $data['start'];
 

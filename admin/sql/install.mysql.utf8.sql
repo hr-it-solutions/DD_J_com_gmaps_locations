@@ -76,3 +76,9 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations_iptables` (
   `visitor_ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Sample data for table `#__categories`
+--
+INSERT INTO `#__categories` (`parent_id`, `path`, `extension`, `title`, `alias`, `published`, `access`, `params`, `metadata`, `language`) VALUES
+(1, 'uncategorised', 'com_dd_gmaps_locations', 'Default', 'uncategorised', 1, 1, '{"category_layout":"","image":"media\\\\com_dd_gmaps_locations\\\\img\\\\marker.png","image_alt":""}', '{"author":"","robots":""}', '*');

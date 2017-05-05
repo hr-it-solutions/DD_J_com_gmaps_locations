@@ -20,15 +20,37 @@ function DD_GMaps_LocationsBuildRoute(&$query)
 {
 	$segments = array();
 
-	$app = JFactory::getApplication();
-	$input = $app->input;
-
-	$menu = $app->getMenu();
-
-	if (!empty($query['Itemid']))
+	if (isset($query['view']) && $query['view'] == 'searchfilter')
 	{
-		$menuItem = $menu->getItem($query['Itemid']);
-		$input->set('dd_gmaps_locations_component_alias', $menuItem->alias);
+		$db = JFactory::getDbo();
+		$db_query = $db->getQuery(true);
+		$db_query->select('alias')
+			->from($db->qn('#__menu'))
+			->where(
+				$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
+				$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
+				$db->qn('published') . '= ' . $db->q('1')
+			);
+		$db->setQuery($db_query);
+		$menuItemAlias = $db->loadResult();
+
+		if (!$menuItemAlias)
+		{
+			$lang = JFactory::getLanguage();
+			$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
+
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
+			);
+		}
+
+		unset($query['Itemid']);
+		$query['option'] = '';
+		unset($query['view']);
+
+		$segments[] = $menuItemAlias;
+
+		return $segments;
 	}
 
 	if (isset($query['view']))
@@ -49,7 +71,7 @@ function DD_GMaps_LocationsBuildRoute(&$query)
 /**
  * ParseRoute
  *
- * @param array $segments array of segments
+ * @param   array  $segments  array of segments
  *
  * @return array of URL parameters
  */

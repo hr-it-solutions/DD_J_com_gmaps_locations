@@ -38,7 +38,9 @@ endforeach;?>
 
             jQuery('#load-more').click(function () {
                 processAjax();
-            })
+            });
+
+            checkNextItems();
         </script>
 
     </div>

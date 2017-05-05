@@ -52,6 +52,13 @@ defined('_JEXEC') or die;
                     <div class="clear"></div><br>
                 <?php endif; ?>
                     <p>
+                    <?php
+                    if ($this->params->get('marker_in_entry') && $this->item->category_params && json_decode($this->item->category_params)->image): ?>
+                        <img class="category_marker"
+                             src="<?php echo htmlspecialchars(str_replace('\\', '/', json_decode($this->item->category_params)->image)); ?>"
+                             alt="<?php echo htmlspecialchars(json_decode($this->item->category_params)->image_alt); ?>">
+                        </img>
+                    <?php endif; ?>
 					<strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_ADDRESS'); ?>:</strong><br>
 					<?php
                     echo htmlspecialchars($this->item->street, ENT_QUOTES, 'UTF-8') . '<br>';

@@ -52,6 +52,7 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
 	 * @since   Version 1.1.0.1
+	 * @throws  Exception
 	 */
 	public function display($tpl = null)
 	{
@@ -146,6 +147,5 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 		}
 
 		JToolbarHelper::divider();
-		JToolbarHelper::help('JHELP_CONTENT_ARTICLE_MANAGER_EDIT');
 	}
 }
