@@ -81,6 +81,7 @@
 
     <media destination="com_dd_gmaps_locations" folder="media">
         <folder>css</folder>
+        <folder>img</folder>
         <folder>js</folder>
     </media>
 
