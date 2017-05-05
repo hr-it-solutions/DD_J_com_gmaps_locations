@@ -22,12 +22,12 @@ defined('_JEXEC') or die;
             <!-- Module Positions -->
 			<?php
 			$modules = JModuleHelper::getModules('dd_gmaps_locations');
-			if (count($modules)):
 
+			if (count($modules))
+			{
 				$modules = array_chunk($modules, 2);
 
 				foreach ($modules as $modulegroup) :
-
 					echo '<div class="row-fluid">';
 
 					foreach ($modulegroup as $module) :
@@ -39,14 +39,13 @@ defined('_JEXEC') or die;
 					echo '</div>';
 
 				endforeach;
-
-			else :
-
+			}
+			else
+			{
 				echo '<div class="alert alert-info">';
 				echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_POSITION_DESCRIPTION', 'dd_gmaps_locations');
 				echo '</div>';
-
-			endif;
+			}
 			?>
             <hr>
             <!-- Component Description -->
