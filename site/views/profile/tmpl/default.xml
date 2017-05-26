@@ -11,22 +11,20 @@
         <fieldset name="request"
                   addfieldpath="/administrator/components/com_dd_gmaps_locations/models/fields">
 
-            <field name="modal_location" type="modal_location"
+            <field name="id" type="modal_location"
                    label="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL"
-                   required="false"
-                   edit="true"
-                   clear="false"
+                   required="true"
                    description="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_DESC"
             />
 
             <!-- Required for modal_location required check -->
-            <field name="modal_location_required" type="text"
+            <!-- <field name="modal_location_required" type="text"
                    label="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL"
                    required="true"
                    edit="true"
                    clear="false"
                    description="COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_DESC"
-            />
+            /> -->
 
         </fieldset>
     </fields>
@@ -38,7 +36,7 @@
         <fieldset name="select_location"
                   label="COM_DD_GMAPS_LOCATIONS_PARAM_LOCATION">
 
-            <field
+            <!--<field
                     id="profile_id"
                     name="profile_id"
                     label="COM_DD_GMAPS_LOCATIONS_SELECTED_LOCATION_ID_LABEL"
@@ -47,7 +45,7 @@
                     class="readonly"
                     size="10"
                     readonly="true"
-            />
+            />-->
         </fieldset>
     </fields>
 </metadata>
