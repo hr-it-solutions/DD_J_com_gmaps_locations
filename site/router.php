@@ -9,77 +9,297 @@
 
 defined('_JEXEC') or die;
 
+JLoader::register('DD_GMaps_LocationsTableLocation', JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/tables/location.php');
+
 /**
- * BuildRoute
+ * Class DD_GMaps_LocationsRouter component routing class
  *
- * @param array $query of URL parameters
- *
- * @return array of segments that will form the SEF URL
+ * @since  Version  1.1.1.2
  */
-function DD_GMaps_LocationsBuildRoute(&$query)
+class DD_GMaps_LocationsRouter extends JComponentRouterBase
 {
-	$segments = array();
+	protected $locationsid = 0;
 
-	if (isset($query['view']) && $query['view'] == 'searchfilter')
+	protected $profileids = array();
+
+	/**
+	 * Class constructor.
+	 *
+	 * @param   JApplicationCms  $app   Application-object that the router should use
+	 * @param   JMenu            $menu  Menu-object that the router should use
+	 */
+	public function __construct($app = null, $menu = null)
 	{
-		$db = JFactory::getDbo();
-		$db_query = $db->getQuery(true);
-		$db_query->select('alias')
-			->from($db->qn('#__menu'))
-			->where(
-				$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
-				$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
-				$db->qn('published') . '= ' . $db->q('1')
-			);
-		$db->setQuery($db_query);
-		$menuItemAlias = $db->loadResult();
+		parent::__construct($app, $menu);
 
-		if (!$menuItemAlias)
+		$component = JComponentHelper::getComponent('com_dd_gmaps_locations');
+
+		$attributes = array('component_id');
+		$values     = array($component->id);
+
+		// Load all menu items of this component
+		$items = $this->menu->getItems($attributes, $values);
+
+		foreach ($items as $item)
 		{
-			$lang = JFactory::getLanguage();
-			$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
+			if ($this->menu->authorise($item->id) && isset($item->query) && isset($item->query['view']))
+			{
+				switch ($item->query['view'])
+				{
+					case 'locations':
+						$this->locationsid = (int) $item->id;
+						break;
 
-			JFactory::getApplication()->enqueueMessage(
-				JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
-			);
+					case 'profile':
+						$this->profileids[$item->query['id']] = (int) $item->id;
+						break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Prepare-method for URLs
+	 * This method is meant to validate and complete the URL parameters.
+	 * For example it can add the Itemid or set a language parameter.
+	 * This method is executed on each URL, regardless of SEF mode switched
+	 * on or not.
+	 *
+	 * @param   array  $query  An associative array of URL arguments
+	 *
+	 * @return  array  The URL arguments to use to assemble the subsequent URL.
+	 */
+	public function preprocess($query)
+	{
+		$query = parent::preprocess($query);
+
+		$active = $this->menu->getActive();
+
+		if (!empty($query['Itemid']))
+		{
+			$active = $this->menu->getItem($query['Itemid']);
+
+			if (empty($query['view']) && !empty($active->query['view']))
+			{
+				$query['view'] = $active->query['view'];
+
+				if ($active->query['view'] == 'profile')
+				{
+					$query['id'] = (int) $active->query['id'];
+				}
+			}
 		}
 
-		unset($query['Itemid']);
-		$query['option'] = '';
-		unset($query['view']);
+		$allowed_views = array(
+			'locations',
+			'profile'
+		);
 
-		$segments[] = $menuItemAlias;
+		if (!isset($query['view']) || !in_array($query['view'], $allowed_views))
+		{
+			$query['view'] = 'locations';
+		}
+
+		if ($query['view'] == 'locations' && !empty($query['id']))
+		{
+			unset($query['id']);
+		}
+		elseif ($query['view'] == 'profile' && empty($query['id']))
+		{
+			$query['view'] = 'locations';
+		}
+
+		if (!empty($query['Itemid']))
+		{
+			if ($query['view'] == 'profile')
+			{
+				if ($active->query['view'] == 'profile')
+				{
+					if ($active->query['id'] != (int) $query['id'])
+					{
+						unset($query['Itemid']);
+					}
+				}
+				elseif ($active->query['view'] != 'locations')
+				{
+					unset($query['Itemid']);
+				}
+			}
+			elseif ($query['view'] == 'locations')
+			{
+				if ($query['view'] != $active->query['view'])
+				{
+					unset($query['Itemid']);
+				}
+			}
+		}
+
+		if (empty($query['Itemid']))
+		{
+			switch ($query['view'])
+			{
+				case 'profile':
+					if (isset($this->profileids[(int) $query['id']]))
+					{
+						$query['Itemid'] = $this->profileids[(int) $query['id']];
+						break;
+					}
+
+				case 'locations':
+					if (!empty($this->locationsid))
+					{
+						$query['Itemid'] = $this->locationsid;
+					}
+					break;
+			}
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Build method for URLs
+	 * This method is meant to transform the query parameters into a more human
+	 * readable form. It is only executed when SEF mode is switched on.
+	 *
+	 * @param   array  &$query  An array of URL arguments
+	 *
+	 * @return  array  The URL arguments to use to assemble the subsequent URL.
+	 */
+	public function build(&$query)
+	{
+		$segments = array();
+
+		$active = $this->menu->getActive();
+
+		if (!empty($query['Itemid']))
+		{
+			$active = $this->menu->getItem($query['Itemid']);
+		}
+
+		switch ($query['view'])
+		{
+			case 'profile':
+				// Link to a profile
+				if (empty($active) || $active->query['view'] == 'profile')
+				{
+					// Link to the correct profile
+					if (!empty($active) && $active->query['id'] == (int) $query['id'])
+					{
+						unset($query['id']);
+					}
+					else
+					{
+						$segments[] = $this->getAlias($query['id']);
+					}
+				}
+				else
+				{
+					$segments[] = $this->getAlias($query['id']);
+				}
+
+				unset($query['id']);
+				break;
+
+			case 'locations':
+				break;
+		}
+
+		unset($query['view']);
 
 		return $segments;
 	}
 
-	if (isset($query['view']))
+	/**
+	 * Parse method for URLs
+	 * This method is meant to transform the human readable URL back into
+	 * query parameters. It is only executed when SEF mode is switched on.
+	 *
+	 * @param   array  &$segments  The segments of the URL to parse.
+	 *
+	 * @return  array  The URL attributes to be used by the application.
+	 */
+	public function parse(&$segments)
 	{
-		$segments[] = $query['view'];
-		unset($query['view']);
+		$active = $this->menu->getActive();
+
+		$query = array();
+
+		if (empty($active) || ($active->component == 'com_dd_gmaps_locations' && $active->query['view'] == 'locations'))
+		{
+			foreach ($segments as $segment)
+			{
+				$id = $this->getId($segment);
+
+				if ((int) $id > 0)
+				{
+					$query['id'] = (int) $id;
+					$query['view'] = 'profile';
+					break;
+				}
+			}
+		}
+
+		return $query;
 	}
 
-	if (isset($query['alias']))
+	/**
+	 * getId
+	 *
+	 * @param   string  $alias  alias
+	 *
+	 * @return int
+	 */
+	protected function getId($alias)
 	{
-		$segments[] = $query['alias'];
-		unset($query['alias']);
+		$table = JTable::getInstance('Location', 'DD_GMaps_LocationsTable');
+
+		if ($table->load(array('alias' => $alias)))
+		{
+			return $table->id;
+		}
+
+		return 0;
 	}
 
-	return $segments;
-}
+	/**
+	 * getAlias
+	 *
+	 * @param   string  $slug  id:alias
+	 *
+	 * @return int|mixed|string
+	 */
+	protected function getAlias($slug)
+	{
+		$parts = explode(':', $slug);
+		$num = count($parts);
 
-/**
- * ParseRoute
- *
- * @param   array  $segments  array of segments
- *
- * @return array of URL parameters
- */
-function DD_GMaps_LocationsParseRoute($segments)
-{
-	$vars = array();
-	$vars['alias']  = array_shift($segments);
-	$vars['view']   = 'profile';
+		$alias = '';
 
-	return $vars;
+		if ($num > 1)
+		{
+			array_shift($parts);
+			$alias = implode('-', $parts);
+		}
+		elseif ($num)
+		{
+			$part = array_shift($parts);
+
+			if (is_numeric($part) && $part == (int) $part)
+			{
+				$table = JTable::getInstance('Location', 'DD_GMaps_LocationsTable');
+
+				if ($table->load((int) $part))
+				{
+					$alias = $table->alias;
+				}
+			}
+			else
+			{
+				$alias = $part;
+			}
+		}
+
+		return $alias;
+	}
 }
