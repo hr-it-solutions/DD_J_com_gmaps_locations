@@ -9,7 +9,21 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_LocationsModelProfile extends JModelLegacy {
+class DD_GMaps_LocationsModelProfile extends JModelItem
+{
+	protected function populateState()
+	{
+		parent::populateState();
+
+		$app = JFactory::getApplication();
+
+		$input = $app->input;
+
+		$this->setState($this->getName() . '.id', $input->getInt('id'));
+
+		$params = $app->getParams();
+		$this->setState('params', $params);
+	}
 
 	/**
 	 * Get Profile Item Details based on sef alias or profile_id
@@ -18,17 +32,10 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 	 *
 	 * @since   Version 1.1.0.1
 	 */
-	public function GetItem()
+	public function getItem($id = null)
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-
-		// Prepare input
-		$input      = JFactory::getApplication()->input;
-		$alias      = $db->escape($input->get('alias', false, 'STRING'));
-		$profile_id = $db->escape($input->get('profile_id', false, 'INT'));
-
-		$alias      = str_replace(":", "-", $alias);
 
 		$select = $db->qn(
 			array(
@@ -78,31 +85,13 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
 
 		// Get Profile
-		if ($alias)
-		{
-			$query->where($db->qn('a.alias') . " = '$alias'");
-		}
-		elseif($profile_id)
-		{
-			$query->where($db->qn('a.id') . " = '$profile_id'");
-		}
+		$query->where($db->qn('a.id') . ' = ' . (int) $this->getState($this->getName() . '.id'));
 
 		$result = $db->setQuery($query)->loadObject();
 
-		if ($result)
-		{
-			// Set Hit
-			$this->setHit($result->id);
+		$this->setHit($result->id);
 
-			return $result;
-
-		}
-		else
-		{
-			JFactory::getApplication()->redirect(JUri::base() . "404");
-
-			return false;
-		}
+		return $result;
 	}
 
 	/**
@@ -122,11 +111,22 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 		$db        = JFactory::getDbo();
 		$VisitorIP = substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15);
 
+		// Delete rows who older than a day!
+		$date = JFactory::getDate();
+		$date->modify('-1 day');
+
+		$query = $db->getQuery(true);
+		$query->delete($db->qn('#__dd_gmaps_locations_iptables'))
+			->where($db->qn('timestamp') . ' < ' . $db->q($date->toSql()));
+
+		$db->setQuery($query)->execute();
+
 		// Select Ip from Table on profile_id
 		$query = $db->getQuery(true);
 		$query->select($db->qn('visitor_ip'))
 			->from($db->qn('#__dd_gmaps_locations_iptables'))
-			->where($db->qn('visitor_ip') . '=' . $db->q($VisitorIP) . " AND " . $db->qn('profile_id') . "= " . $db->q($profile_id));
+			->where($db->qn('visitor_ip') . ' = ' . $db->q($VisitorIP))
+			->where($db->qn('profile_id') . ' = ' . $db->q($profile_id));
 		$db->setQuery($query);
 
 		// Check if IP is not in ip table!
@@ -137,24 +137,14 @@ class DD_GMaps_LocationsModelProfile extends JModelLegacy {
 			$query->insert($db->qn('#__dd_gmaps_locations_iptables'))
 				->columns($db->qn(array('visitor_ip', 'profile_id')))
 				->values(implode(',', array($db->q($VisitorIP), $db->q($profile_id))));
-			$db->setQuery($query);
-			$db->execute();
+			$db->setQuery($query)->execute();
 
 			// Count View +1
 			$query = $db->getQuery(true);
 			$query->update($db->qn('#__dd_gmaps_locations'))
 				->set($db->qn('hits') . '=' . $db->qn('hits') . ' + 1')
 				->where($db->qn('id') . '=' . $db->q($profile_id));
-			$db->setQuery($query);
-			$db->execute();
-
-			// Delete rows who older than a day!
-			$sub_timestamp = date('Y-m-d H:i:s', strtotime("-1 day"));
-			$query = $db->getQuery(true);
-			$query->delete($db->qn('#__dd_gmaps_locations_iptables'))
-				->where($db->qn('timestamp') . " < " . $db->q($sub_timestamp));
-			$db->setQuery($query);
-			$db->execute();
+			$db->setQuery($query)->execute();
 		}
 
 		return true;
