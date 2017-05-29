@@ -9,7 +9,13 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_LocationsController extends JControllerLegacy {
+/**
+ * DD_GMaps_LocationsController
+ *
+ * @since  Version  1.1.0.0
+ */
+class DD_GMaps_LocationsController extends JControllerLegacy
+{
 
 	/**
 	 * getAjax
