@@ -11,27 +11,22 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.helper');
 
-// NORMAL else AJAX request
-if (isset($this->params, $this->sef_rewrite, $this->active_alias))
+if (isset($this->params))
 {
 	$params = $this->params;
-	$sef_rewrite = $this->sef_rewrite;
-	$active_alias = $this->active_alias;
 }
+// AJAX request
 else
 {
 	$app = JFactory::getApplication();
-
 	$params = $app->getParams('com_dd_gmaps_locations');
-	$sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
-	$active_alias = $data['activeAlias'];
 }
 
 ?>
 <address class="span6 location well">
     <div class="page-header">
         <strong>
-            <a href="<?php echo JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
+            <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8')); ?>">
 				<?php echo htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8'); ?>
             </a>
         </strong>
@@ -86,7 +81,6 @@ else
             <img class="category_marker"
                  src="<?php echo htmlspecialchars(str_replace('\\', '/', json_decode($item->category_params)->image)); ?>"
                  alt="<?php echo htmlspecialchars(json_decode($item->category_params)->image_alt); ?>">
-            </img>
 	        <?php endif; ?>
 			<?php echo htmlspecialchars($item->company, ENT_QUOTES, 'UTF-8'); ?><br>
 			<?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
@@ -108,7 +102,7 @@ else
     <div class="row-fluid">
         <div class="span12">
             <hr>
-            <a class="btn pull-right" href="<?php echo JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id); ?>">
+            <a class="btn pull-right" href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8')); ?>">
 				<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_PROFILE_PAGE'); ?>
             </a>
             <p>

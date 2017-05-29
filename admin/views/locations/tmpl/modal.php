@@ -9,7 +9,9 @@
 
 defined('_JEXEC') or die;
 
-if (JFactory::getApplication()->isSite()) {
+$app       = JFactory::getApplication();
+
+if ($app->isSite()) {
 	JSession::checkToken('get') or die(JText::_('JINVALID_TOKEN'));
 }
 
@@ -19,7 +21,10 @@ JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
 JHtml::_('formbehavior.chosen', 'select');
 
-$app       = JFactory::getApplication();
+JHtml::_('behavior.core');
+JHtml::_('behavior.polyfill', array('event'), 'lt IE 9');
+JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', array('version' => 'auto', 'relative' => true));
+
 $user      = JFactory::getUser();
 $userId    = $user->get('id');
 $listOrder = str_replace(' ' . $this->state->get('list.direction'), '', $this->state->get('list.fullordering'));
@@ -46,13 +51,10 @@ if ($saveOrder)
 	JHtml::_('sortablelist.sortable', 'articleList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 
+$function  = $app->input->getCmd('function', 'jSelectArticle');
+$onclick   = $this->escape($function);
+
 ?>
-<script>
-	/* Passing javascript variable from model iframe to parent frame */
-    function onDDGMaps_Locations_Select(id, title) {
-        window.parent.onDDGMapsLocationSelect_Callback(id, title);
-    }
-</script>
 <div id="dd_gmaps_locations-locations" class="row-fluid dd_gmaps_locations">
 	<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&view=locations'); ?>" method="post" name="adminForm" id="adminForm">
 		<?php if (!empty( $this->sidebar)) : ?>
@@ -110,10 +112,7 @@ if ($saveOrder)
                     <th style="min-width: 100px" class="nowrap title">
                         <?php echo JHtml::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
-                    <th style="min-width: 100px" width="12%" class="nowrap">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
-                    </th>
-                    <th width="10%" class="nowrap hidden-phone">
+                    <th width="30%" class="nowrap hidden-phone">
                         <?php echo JHtml::_('searchtools.sort', 'JCATEGORY', 'c.category_title', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
@@ -122,25 +121,23 @@ if ($saveOrder)
                     </thead>
                     <tfoot>
                     <tr>
-                        <td colspan="10">
+                        <td colspan="4">
                             <?php echo $this->pagination->getListFooter(); ?>
                         </td>
                     </tr>
                     </tfoot>
                     <tbody>
-                    <?php foreach ($this->items as $i => $item):
-                        $canCheckin = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
-                        $canChange  = $user->authorise('core.edit.state', 'com_dd_gmaps_locations') && $canCheckin;
-                        ?>
+                    <?php foreach ($this->items as $i => $item): ?>
                         <tr class="row<?php echo $i % 2; ?>">
                             <td class="nowrap">
-                                <a onclick="onDDGMaps_Locations_Select(<?php echo (int) $item->id . ", '" . str_replace("'",'', $this->escape($item->title));?>')"
-                                   href="javascript:void(0)">
-                                    <?php echo $this->escape($item->title);?>
+	                            <?php $attribs = 'data-function="' . $this->escape($onclick) . '"'
+		                            . ' data-id="' . $item->id . '"'
+		                            . ' data-title="' . $this->escape(addslashes($item->title)) . '"'
+		                            . ' data-uri="' . $this->escape('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id) . '"'
+	                            ?>
+                                <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
+		                            <?php echo $this->escape($item->title); ?>
                                 </a>
-                            </td>
-                            <td class="nowrap">
-                                <?php echo $this->escape($item->company); ?>
                             </td>
                             <td class="nowrap hidden-phone">
                                 <?php echo $this->escape($item->category_title); ?>

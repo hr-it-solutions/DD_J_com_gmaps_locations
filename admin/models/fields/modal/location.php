@@ -10,9 +10,9 @@
 defined('_JEXEC') or die();
 
 /**
- * Supports a modal article picker.
+ * Supports a modal location picker.
  *
- * @since  1.6
+ * @since  Version 1.1.0.8
  */
 class JFormFieldModal_Location extends JFormField
 {
@@ -20,7 +20,7 @@ class JFormFieldModal_Location extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  Version 1.1.0.8
 	 */
 	protected $type = 'Modal_Location';
 
@@ -31,6 +31,7 @@ class JFormFieldModal_Location extends JFormField
 	 *
 	 * @return  string  The field input markup.
 	 *
+	 * @throws Exception
 	 * @since   Version 1.1.0.8
 	 */
 	protected function getInput()
@@ -38,70 +39,120 @@ class JFormFieldModal_Location extends JFormField
 		// Load the modal behavior script.
 		JHtml::_('behavior.modal', 'a.modal');
 
-		// Setup variables for display.
-		$html	= array();
+		// @TODO move to setup() method
+		$allowClear  = ((string) $this->element['clear'] != 'false');
+		$allowSelect = ((string) $this->element['select'] != 'false');
 
-		/* Get javascript variable from iframe to this parent frame */
-		$html[] = '<script type=\'text/javascript\'>';
-		$html[] = ' function onDDGMapsLocationSelect_Callback(id,title) {';
-		$html[] = '     jQuery(\'#jform_request_modal_location_required\').val(\'1\');';
-		$html[] = '     jQuery(\'#jform_params_profile_id\').val(id);';
-		$html[] = '     jQuery(\'#jform_request_modal_location\').val(title);';
-		$html[] = '     SqueezeBox.close();';
-		$html[] = ' }';
-		$html[] = '</script>';
+		$value = (int) $this->value > 0 ? (int) $this->value : '';
 
-		$html[] = '<style>#jform_request_modal_location_required-lbl, #jform_request_modal_location_required {display: none;}</style>';
+		// Create the modal id.
+		$modalId = 'Location_' . $this->id;
 
-		$this->id = JFactory::getApplication()->input->get('id', 'INT');
+		// Add the modal field script to the document head.
+		JHtml::_('jquery.framework');
+		JHtml::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
 
-		$link	= 'index.php?option=com_dd_gmaps_locations&amp;view=locations&amp;layout=modal&tmpl=component';
+		// Script to proxy the select modal function to the modal-fields.js file.
+		if ($allowSelect)
+		{
+			static $scriptSelect = null;
+
+			if (is_null($scriptSelect))
+			{
+				$scriptSelect = array();
+			}
+
+			if (!isset($scriptSelect[$this->id]))
+			{
+				JFactory::getDocument()->addScriptDeclaration("
+				function jSelectLocation_" . $this->id . "(id, title, url) {
+					window.processModalSelect('Location', '" . $this->id . "', id, title, null, null, url, null);
+				}
+				");
+
+				$scriptSelect[$this->id] = true;
+			}
+		}
+
+		$link	= 'index.php?option=com_dd_gmaps_locations&view=locations&layout=modal&tmpl=component';
+
+		$modalTitle    = JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION');
+		$urlSelect = JRoute::_($link . '&function=jSelectLocation_' . $this->id);
 
 		// Select menu item params
 		$db = JFactory::getDbo();
 
 		$query = $db->getQuery(true);
 
-		$query->select('params')
-			->from($db->qn('#__menu'))
-			->where($db->qn('id') . '=' . (int) $this->id);
-		$db->setQuery($query);
+		$query->select($query->qn('title'))->from($query->qn('#__dd_gmaps_locations'))->where($query->qn('id') . ' = ' . (int) $this->value);
 
-		$params = $db->loadResult();
-
-		if (is_object(json_decode($params)) && isset(json_decode($params)->profile_id))
+		try
 		{
-			$profile_id = json_decode($params)->profile_id;
-
-			// Select loaction title by profile_id
-			$db = JFactory::getDbo();
-
-			$query = $db->getQuery(true);
-
-			$query->select('title')
-				->from($db->quoteName('#__dd_gmaps_locations'))
-				->where($db->quoteName('id') . '=' . (int) $profile_id);
-			$db->setQuery($query);
-
-			$title = $db->loadResult();
+			$title = $db->setQuery($query)->loadResult();
 		}
-		else
+		catch (RuntimeException $e)
 		{
-			$title = '';
+			throw new Exception($e->getMessage(), 500);
 		}
 
-		// The current selected field.
-		$html[] = '<div class="fltlft">';
-		$html[] = '  <input type="text" name="modal_location" required="required" class="required" id="jform_request_modal_location" value="' . $title . '" disabled="disabled" size="35" placeholder="' . JText::_('COM_DD_GMAPS_LOCATIONS_SELECT_LOCATION_LABEL') . '" />';
-		$html[] = '</div>';
+		$title = empty($title) ? JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
-		// The select button.
-		$html[] = '<div class="button2-left">';
-		$html[] = '  <div class="blank">';
-		$html[] = '	<a class="modal" title="' . JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION') . '"  href="' . $link . '&amp;' . JSession::getFormToken() . '=1" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">' . JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION_BUTTON') . '</a>';
-		$html[] = '  </div>';
-		$html[] = '</div>';
+		// The current location display field.
+		$html  = '<span class="input-append">';
+		$html .= '<input class="input-medium" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
 
-		return implode("\n", $html);
+		// Select location button
+		if ($allowSelect)
+		{
+			$html .= '<a'
+				. ' class="btn hasTooltip' . ($value ? ' hidden' : '') . '"'
+				. ' id="' . $this->id . '_select"'
+				. ' data-toggle="modal"'
+				. ' role="button"'
+				. ' href="#ModalSelect' . $modalId . '"'
+				. ' title="' . JHtml::tooltipText('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION') . '">'
+				. '<span class="icon-file" aria-hidden="true"></span> ' . JText::_('JSELECT')
+				. '</a>';
+		}
+
+		// Clear location button
+		if ($allowClear)
+		{
+			$html .= '<a'
+				. ' class="btn' . ($value ? '' : ' hidden') . '"'
+				. ' id="' . $this->id . '_clear"'
+				. ' href="#"'
+				. ' onclick="window.processModalParent(\'' . $this->id . '\'); return false;">'
+				. '<span class="icon-remove" aria-hidden="true"></span>' . JText::_('JCLEAR')
+				. '</a>';
+		}
+
+		$html .= '</span>';
+
+		// Select article modal
+		if ($allowSelect)
+		{
+			$html .= JHtml::_(
+				'bootstrap.renderModal',
+				'ModalSelect' . $modalId,
+				array(
+					'title'       => $modalTitle,
+					'url'         => $urlSelect,
+					'height'      => '400px',
+					'width'       => '800px',
+					'bodyHeight'  => '70',
+					'modalWidth'  => '80',
+					'footer'      => '<a role="button" class="btn" data-dismiss="modal" aria-hidden="true">' . JText::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</a>',
+				)
+			);
+		}
+
+		// Note: class='required' for client side validation.
+		$class = $this->required ? ' class="required modal-value"' : '';
+
+		$html .= '<input type="hidden" id="' . $this->id . '_id" ' . $class . ' data-required="' . (int) $this->required . '" name="' . $this->name
+			. '" data-text="' . htmlspecialchars(JText::_('COM_CONTENT_SELECT_AN_ARTICLE', true), ENT_COMPAT, 'UTF-8') . '" value="' . $value . '" />';
+
+		return $html;
 	}
 }

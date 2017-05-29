@@ -35,64 +35,28 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 */
 	function display($tpl = null)
 	{
-		$this->app = JFactory::getApplication();
-
-		$this->input      = $this->app->input;
-		$this->alias      = $this->input->get('alias',      false, 'STRING');
-		$this->profile_id = $this->input->get('profile_id', false, 'STRING');
-
 		// Component configuration
 		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
 
-		// Active menu
-		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);
+		$this->item = $this->get('Item');
 
-		if (method_exists($activeMenu, 'getParams')) // Joomla 3.7.xx
+
+		$this->state = $this->get('State');
+
+		if (empty($this->item))
 		{
-			// Active menu params
-			$activeMenuParams   = $activeMenu->getParams();
-
-			// SetUp profile_id from menu parameters
-			$this->input->set('profile_id', ($activeMenuParams->get('profile_id')));
-			$this->profile_id = $activeMenuParams->get('profile_id');
-
-			// Get meta data from menu
-			$metadesc = $activeMenuParams->get('menu-meta_description');
-			$metakey  = $activeMenuParams->get('menu-meta_keywords');
-			$robots = $activeMenuParams->get('robots');
-		}
-		else // Joomla 3.5.xx
-		{
-			// Set profile_id from menu parameters
-			$this->input->set('profile_id', ($activeMenu->parent_id));
-			$this->profile_id = $activeMenu->parent_id;
-
-			// Get meta data from menu
-			$metadesc = $activeMenu->{'menu-meta_description'};
-			$metakey  = $activeMenu->{'menu-meta_keywords'};
-			$robots = $activeMenu->robots;
+			// 404
+			exit;
 		}
 
-		if ($this->alias && $this->alias !== 'profile' OR $this->profile_id)
-		{
-			$this->item = $this->get('Item');
-		}
-		else
-		{
-			throw new Exception(404, 404);
-		}
+		$params = $this->state->get('params');
 
-		// Set Input ID for 3rd party connection
-		if ($this->profile_id != null || $this->item->id)
-		{
-			$this->input->set('profile_id', $this->item->id);
-		}
-
-		// Set meta data hedaer from menu : default from item
+		// Set meta data hedaer from menu : default from item @TODO #29
 		$doc = JFactory::getDocument();
-		$doc->setMetaData('description', $metadesc ? $metadesc : $this->item->metadesc);
-		$doc->setMetaData('keywords', $metakey ? $metakey : $this->item->metakey);
-		$doc->setMetaData('robots', $robots);
+		$doc->setTitle($params->get('page_title') ? $params->get('page_title') : $this->item->title);
+		$doc->setMetaData('description', $params->get('menu-meta_description') ? $params->get('menu-meta_description') : $this->item->metadesc);
+		$doc->setMetaData('keywords', $params->get('menu-meta_keywords') ? $params->get('menu-meta_keywords') : $this->item->metakey);
+		$doc->setMetaData('robots', $params->get('robots'));
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -100,6 +64,13 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 			throw new Exception(implode("\n", $errors), 500);
 		}
 
+		$this->prepareDocument();
+
 		return parent::display($tpl);
+	}
+
+	protected function prepareDocument()
+	{
+		// @ TODO #29 add breadcrumb + meta data here ++ site title
 	}
 }
