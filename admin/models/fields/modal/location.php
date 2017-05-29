@@ -10,9 +10,9 @@
 defined('_JEXEC') or die();
 
 /**
- * Supports a modal article picker.
+ * Supports a modal location picker.
  *
- * @since  1.6
+ * @since  Version 1.1.0.8
  */
 class JFormFieldModal_Location extends JFormField
 {
@@ -20,7 +20,7 @@ class JFormFieldModal_Location extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  Version 1.1.0.8
 	 */
 	protected $type = 'Modal_Location';
 
@@ -31,6 +31,7 @@ class JFormFieldModal_Location extends JFormField
 	 *
 	 * @return  string  The field input markup.
 	 *
+	 * @throws Exception
 	 * @since   Version 1.1.0.8
 	 */
 	protected function getInput()
@@ -75,7 +76,6 @@ class JFormFieldModal_Location extends JFormField
 
 		$link	= 'index.php?option=com_dd_gmaps_locations&view=locations&layout=modal&tmpl=component';
 
-		// @TODO in language file
 		$modalTitle    = JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION');
 		$urlSelect = JRoute::_($link . '&function=jSelectLocation_' . $this->id);
 
@@ -97,11 +97,11 @@ class JFormFieldModal_Location extends JFormField
 
 		$title = empty($title) ? JText::_('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
-		// The current article display field.
+		// The current location display field.
 		$html  = '<span class="input-append">';
 		$html .= '<input class="input-medium" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
 
-		// Select article button
+		// Select location button
 		if ($allowSelect)
 		{
 			$html .= '<a'
@@ -110,12 +110,12 @@ class JFormFieldModal_Location extends JFormField
 				. ' data-toggle="modal"'
 				. ' role="button"'
 				. ' href="#ModalSelect' . $modalId . '"'
-				. ' title="' . JHtml::tooltipText('COM_CONTENT_CHANGE_ARTICLE') . '">'
+				. ' title="' . JHtml::tooltipText('COM_DD_GMAPS_LOCATIONS_CHANGE_LOCATION') . '">'
 				. '<span class="icon-file" aria-hidden="true"></span> ' . JText::_('JSELECT')
 				. '</a>';
 		}
 
-		// Clear article button
+		// Clear location button
 		if ($allowClear)
 		{
 			$html .= '<a'
