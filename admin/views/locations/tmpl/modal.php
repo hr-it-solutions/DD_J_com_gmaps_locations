@@ -9,7 +9,9 @@
 
 defined('_JEXEC') or die;
 
-if (JFactory::getApplication()->isSite()) {
+$app       = JFactory::getApplication();
+
+if ($app->isSite()) {
 	JSession::checkToken('get') or die(JText::_('JINVALID_TOKEN'));
 }
 
@@ -21,9 +23,8 @@ JHtml::_('formbehavior.chosen', 'select');
 
 JHtml::_('behavior.core');
 JHtml::_('behavior.polyfill', array('event'), 'lt IE 9');
-JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.js', array('version' => 'auto', 'relative' => true));
+JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', array('version' => 'auto', 'relative' => true));
 
-$app       = JFactory::getApplication();
 $user      = JFactory::getUser();
 $userId    = $user->get('id');
 $listOrder = str_replace(' ' . $this->state->get('list.direction'), '', $this->state->get('list.fullordering'));
@@ -111,10 +112,7 @@ $onclick   = $this->escape($function);
                     <th style="min-width: 100px" class="nowrap title">
                         <?php echo JHtml::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
-                    <th style="min-width: 100px" width="12%" class="nowrap">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
-                    </th>
-                    <th width="10%" class="nowrap hidden-phone">
+                    <th width="30%" class="nowrap hidden-phone">
                         <?php echo JHtml::_('searchtools.sort', 'JCATEGORY', 'c.category_title', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
@@ -140,9 +138,6 @@ $onclick   = $this->escape($function);
                                 <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
 		                            <?php echo $this->escape($item->title); ?>
                                 </a>
-                            </td>
-                            <td class="nowrap">
-                                <?php echo $this->escape($item->company); ?>
                             </td>
                             <td class="nowrap hidden-phone">
                                 <?php echo $this->escape($item->category_title); ?>

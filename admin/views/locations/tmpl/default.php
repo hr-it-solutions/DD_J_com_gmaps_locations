@@ -120,12 +120,6 @@ if ($saveOrder)
                 <th style="min-width: 100px" class="nowrap title">
                     <?php echo JHtml::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                 </th>
-                <th style="min-width: 100px" width="12%" class="nowrap">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
-                </th>
-                <th width="10%" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_CONTACT_PERSON', 'a.contact_person', $listDirn, $listOrder); ?>
-                </th>
                 <th width="10%" class="nowrap">
                     <?php echo JHtml::_('searchtools.sort', 'COM_DD_GMAPS_LOCATIONS_HEADING_STREET', 'a.street', $listDirn, $listOrder); ?>
                 </th>
@@ -168,12 +162,6 @@ if ($saveOrder)
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">
                                 <?php echo $this->escape($item->title);?>
                             </a>
-                        </td>
-                        <td class="nowrap">
-                            <?php echo $this->escape($item->company); ?>
-                        </td>
-                        <td class="nowrap hidden-phone">
-                            <?php echo $this->escape($item->contact_person); ?>
                         </td>
                         <td class="nowrap">
                             <?php echo $this->escape($item->street); ?>
