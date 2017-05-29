@@ -13,6 +13,4 @@ JFactory::getApplication()->enqueueMessage(
 	JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'notice'
 );
 
-/* ToDo #30 Place instructions and documentation here together with the notice above */
-
-?>
+// ToDo #30 Place instructions and documentation here together with the notice above
