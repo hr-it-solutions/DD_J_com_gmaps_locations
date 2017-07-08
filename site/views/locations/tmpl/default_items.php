@@ -90,9 +90,12 @@ else
         </div>
         <div class="span6">
             <div class="page-header map_bar">
-                <a class="showOnMap" id="showID<?php echo $i; ?>" href="javascript:void()">
+	            <?php // Show on map button
+	            if($params->get('show_on_map')):?>
+                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)">
 					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_SHOW_ON_MAP'); ?>
                 </a>
+	            <?php endif; ?>
             </div>
             <img src="<?php echo JUri::base() . htmlspecialchars($item->image, ENT_QUOTES, 'UTF-8'); ?>"
                  alt="<?php echo htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8'); ?>">
