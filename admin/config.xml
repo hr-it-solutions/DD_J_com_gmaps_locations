@@ -67,10 +67,10 @@
                     type="list"
                     label="COM_DD_GMAPS_LOCATIONS_COMPONENT_SHOW_ON_MAP_LABEL"
                     description="COM_DD_GMAPS_LOCATIONS_COMPONENT_SHOW_ON_MAP_DESC"
-                    default="0"
+                    default="1"
             >
-                <option value="0">JSHOW</option>
-                <option value="1">JHIDE</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
             </field>
 
             <field
