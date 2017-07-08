@@ -217,8 +217,8 @@
                label="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ENABLE_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ENABLE_DESC"
                class="btn-group btn-group-yesno">
-            <option value="0">JYES</option>
-            <option value="1">JNO</option>
+            <option value="0">JENABLED</option>
+            <option value="1">JDISABLED</option>
         </field>
 
         <field name="latitude_c"
