@@ -56,11 +56,28 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 	{
 		parent::populateState($ordering, $direction);
 
+		$app = JFactory::getApplication();
+		$params = $app->getParams();
+
 		if ($listlimit)
 		{
-			$app = JFactory::getApplication();
-			$params = $app->getParams();
 			$this->setState('list.limit', (int) $params->get('items_to_list', 6));
+		}
+
+		// Special Filter
+		if ($params->get('filter_location', false))
+		{
+			$this->setState('dd_filter.location', $params->get('filter_location'));
+		}
+
+		if ($params->get('filter_country', false))
+		{
+			$this->setState('dd_filter.country', $params->get('filter_country'));
+		}
+
+		if ($params->get('filter_federalstate', false))
+		{
+			$this->setState('dd_filter.federalstate', $params->get('filter_federalstate'));
 		}
 	}
 
@@ -178,6 +195,22 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		if (isset($filterInput->category_filter))
 		{
 			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
+		}
+
+		// Special Filter
+		if ($this->getState('dd_filter.location'))
+		{
+			$query->where($db->qn('a.location') . ' = ' . $db->q($this->getState('dd_filter.location')));
+		}
+
+		if ($this->getState('dd_filter.country'))
+		{
+			$query->where($db->qn('a.country') . ' = ' . $db->q($this->getState('dd_filter.country')));
+		}
+
+		if ($this->getState('dd_filter.federalstate'))
+		{
+			$query->where($db->qn('a.federalstate') . ' = ' . $db->q($this->getState('dd_filter.federalstate')));
 		}
 
 		// Join over categories
