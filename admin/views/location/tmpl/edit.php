@@ -14,6 +14,8 @@ JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', '#jform_catid', null, array('disable_search_threshold' => 0));
 JHtml::_('formbehavior.chosen', 'select');
 
+JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', array('version' => 'auto', 'relative' => true));
+
 ?>
 <div id="dd_gmaps_locations-location" class="row-fluid dd_gmaps_locations">
 <form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&layout=edit&id=' . (int) $this->item->id); ?>"
@@ -150,6 +152,35 @@ JHtml::_('formbehavior.chosen', 'select');
                         </div>
                         <div class="controls">
 							<?php echo $this->form->getInput('longitude'); ?>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('ll_c'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('ll_c'); ?>
+                        </div>
+                    </div>
+                    <div id="ll_custom_enable">
+                        <p><small><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ENABLE_DESC')?></small></p>
+                        <div class="control-group">
+                            <div class="control-label">
+			                    <?php echo $this->form->getLabel('latitude_c'); ?>
+                            </div>
+                            <div class="controls">
+			                    <?php echo $this->form->getInput('latitude_c'); ?>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="control-label">
+			                    <?php echo $this->form->getLabel('longitude_c'); ?>
+                            </div>
+                            <div class="controls">
+			                    <?php echo $this->form->getInput('longitude_c'); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
