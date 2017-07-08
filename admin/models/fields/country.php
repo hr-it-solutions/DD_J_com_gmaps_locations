@@ -19,6 +19,8 @@ class JFormFieldCountry extends JFormFieldList {
 
 	protected $countries_json = '/models/countries/countries.json';
 
+	protected $component_name = 'com_dd_gmaps_locations';
+
 	/**
 	 * Get Options
 	 *
@@ -31,11 +33,22 @@ class JFormFieldCountry extends JFormFieldList {
 		$countries = array();
 		$options = array();
 
-		$reduced_selection = JComponentHelper::getParams('com_dd_gmaps_locations')->get('countries_reduced_selection', 0);
+		$reduced_selection = JComponentHelper::getParams($this->component_name)->get('countries_reduced_selection', 0);
 
-		if (JFile::exists(JPATH_COMPONENT . $this->countries_json))
+		if (JFile::exists(JPATH_COMPONENT . $this->countries_json)
+			|| JFile::exists(JPATH_ADMINISTRATOR . '/components/' . $this->component_name . $this->countries_json))
 		{
-			$json = file_get_contents(JPATH_COMPONENT . $this->countries_json);
+			if (JFile::exists(JPATH_COMPONENT . $this->countries_json))
+			{
+				// From this component
+				$json = file_get_contents(JPATH_COMPONENT . $this->countries_json);
+			}
+			else
+			{
+				// From outside component (like com_menu etc..)
+				$json = file_get_contents(JPATH_ADMINISTRATOR . '/components/' . $this->component_name . $this->countries_json);
+			}
+
 			$obj = json_decode($json);
 			$countries = $obj->extension->countries->country;
 		}
