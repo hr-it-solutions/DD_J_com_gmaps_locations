@@ -210,6 +210,31 @@
                description="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_DESC"
         />
 
+        <!-- GeoCoding Hard Coding - Latitude longitude custom (ll_c) -->
+        <field name="ll_c"
+               type="radio"
+               default="1"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ENABLE_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ENABLE_DESC"
+               class="btn-group btn-group-yesno">
+            <option value="0">JYES</option>
+            <option value="1">JNO</option>
+        </field>
+
+        <field name="latitude_c"
+               type="text"
+               default="000.000000"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_CUSTOM_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_CUSTOM_DESC"
+        />
+
+        <field name="longitude_c"
+               type="text"
+               default="000.000000"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_CUSTOM_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_LONGITUDE_CUSTOM_DESC"
+        />
+
     </fieldset>
 
     <fieldset>

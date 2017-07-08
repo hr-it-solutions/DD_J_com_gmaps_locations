@@ -31,6 +31,8 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
   `latitude` float(10,6) NOT NULL DEFAULT '255.000000',
   `longitude` float(10,6) NOT NULL DEFAULT '255.000000',
 
+  `ll_c` TINYINT(1) unsigned NOT NULL DEFAULT '1'
+
   `description` text COLLATE utf8mb4_unicode_ci,
   `short_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
 

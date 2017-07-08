@@ -22,4 +22,21 @@
             })
         }
     });
+
 })();
+
+jQuery(function () {
+
+    // Switch latitude longitiode custom fields
+    if(jQuery('#jform_ll_c0').is(':checked')){
+        jQuery('#ll_custom_enable').show();
+    }
+
+    jQuery("label[for='jform_ll_c0']").on('click', function () {
+        jQuery('#ll_custom_enable').show();
+    });
+    jQuery("label[for='jform_ll_c1']").on('click', function () {
+        jQuery('#ll_custom_enable').hide();
+    });
+
+});

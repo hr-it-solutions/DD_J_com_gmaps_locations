@@ -259,6 +259,13 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data->params = $data->params->toArray();
 		}
 
+		// Fill ll cutsom if ll_c is active
+		if ($data->ll_c == 0)
+		{
+			$data->set('latitude_c', $data->latitude);
+			$data->set('longitude_c', $data->longitude);
+		}
+
 		$this->preprocessData('com_dd_gmaps_locations.location', $data);
 
 		return $data;
@@ -329,11 +336,36 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		// Check and prepare Alias for saving
 		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
 
-		// Generate latitude and longitude
-		$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
 
-		$data['latitude']   = $latlng['latitude'];
-		$data['longitude'] = $latlng['longitude'];
+		if ($data['ll_c'] == 0)
+		{
+			if (preg_match("/^(\-?\d+(\.\d+)?).\s*(\-?\d+(\.\d+)?)$/", trim($data['latitude_c']))
+				&& preg_match("/^(\-?\d+(\.\d+)?).\s*(\-?\d+(\.\d+)?)$/", trim($data['longitude_c'])))
+			{
+				// Custom latitude and longitude
+				$data['latitude']  = $data['latitude_c'];
+				$data['longitude'] = $data['longitude_c'];
+			}
+			else
+			{
+				JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ERROR'), 'warning');
+				JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ERROR_SUCCESS'), 'success');
+
+				// Generate latitude and longitude
+				$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
+
+				$data['latitude']   = $latlng['latitude'];
+				$data['longitude'] = $latlng['longitude'];
+			}
+		}
+		else
+		{
+			// Generate latitude and longitude
+			$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
+
+			$data['latitude']   = $latlng['latitude'];
+			$data['longitude'] = $latlng['longitude'];
+		}
 
 		if (parent::save($data))
 		{

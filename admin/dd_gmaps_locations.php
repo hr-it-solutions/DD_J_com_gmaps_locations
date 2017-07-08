@@ -24,7 +24,7 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 
 JHtml::_('jQuery.Framework');
 
-JHTML::_('stylesheet', 'com_dd_gmaps_locations/dd_gmaps_locations.admin.min.css', array(), true);
+JHTML::_('stylesheet', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.css', array(), true);
 
 $controller	= JControllerLegacy::getInstance('DD_GMaps_Locations');
 $controller->execute(JFactory::getApplication()->input->get('task'));
