@@ -30,10 +30,11 @@ endforeach;?>
 
             var start = <?php echo (int) $this->params->get('items_to_list', 6); ?>,
                 limit = <?php echo (int) $this->params->get('items_more', 4); ?>,
-                geolocate = '<?php echo $this->app->input->get('geolocate', '', 'STRING');?>',
-                locationLatLng = '<?php echo $this->app->input->get('locationLatLng', 0, 'STRING');?>',
-                fulltext_search = '<?php echo $this->app->input->get('fulltext_search', '', 'STRING');?>',
-                category_filter = '<?php echo $this->app->input->get('category_filter', '', 'STRING');?>',
+                geolocate = '<?php echo $this->app->input->get('geolocate', '', 'STRING'); ?>',
+                locationLatLng = '<?php echo $this->app->input->get('locationLatLng', 0, 'STRING'); ?>',
+                fulltext_search = '<?php echo $this->app->input->get('fulltext_search', '', 'STRING'); ?>',
+                category_filter = '<?php echo $this->app->input->get('category_filter', '', 'STRING'); ?>',
+                federalstate_filter = '<?php echo $this->app->input->get('federalstate_filter', '', 'STRING'); ?>',
                 activeAlias = '<?php echo $this->active_alias; ?>';
 
             jQuery('#load-more').click(function () {
