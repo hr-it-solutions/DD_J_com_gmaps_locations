@@ -147,6 +147,19 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
+
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed  Object on success, false on failure.
+	 */
+	public function getItem($pk = null)
+	{
+		return parent::getItem($pk);
+	}
+
 	/**
 	 * Method to get the record form.
 	 *
@@ -236,7 +249,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data = $this->getItem();
 
 			// Pre-select some filters (Status, Category, Language, Access) in edit form if those have been selected in Article Manager: Articles
-			if ($this->getState('article.id') == 0)
+			if ($this->getState('location.id') == 0)
 			{
 				$filters = (array) $app->getUserState('com_dd_gmaps_locations.locations.filter');
 				$data->set(
@@ -336,13 +349,11 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		// Check and prepare Alias for saving
 		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
 
-
 		if ($data['ll_c'] == 0)
 		{
-			if (preg_match("/^(\-?\d+(\.\d+)?).\s*(\-?\d+(\.\d+)?)$/", trim($data['latitude_c']))
-				&& preg_match("/^(\-?\d+(\.\d+)?).\s*(\-?\d+(\.\d+)?)$/", trim($data['longitude_c'])))
+			if (DD_GMaps_LocationsHelper::validateLatLong($data['latitude_c'], $data['longitude_c']))
 			{
-				// Custom latitude and longitude
+				// GeoCoding hard coding _c (custom)
 				$data['latitude']  = $data['latitude_c'];
 				$data['longitude'] = $data['longitude_c'];
 			}
@@ -351,19 +362,17 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 				JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ERROR'), 'warning');
 				JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_LATITUDE_LONGITUDE_CUSTOM_ERROR_SUCCESS'), 'success');
 
-				// Generate latitude and longitude
-				$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
-
-				$data['latitude']   = $latlng['latitude'];
-				$data['longitude'] = $latlng['longitude'];
+				goto generateLatLng;
 			}
 		}
 		else
 		{
+			generateLatLng:
+
 			// Generate latitude and longitude
 			$latlng = DD_GMaps_LocationsHelper::Geocode_Location_To_LatLng($data);
 
-			$data['latitude']   = $latlng['latitude'];
+			$data['latitude']  = $latlng['latitude'];
 			$data['longitude'] = $latlng['longitude'];
 		}
 
@@ -373,6 +382,20 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		}
 
 		return false;
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param   object  $table  A record object.
+	 *
+	 * @return  array  An array of conditions to add to add to ordering queries.
+	 *
+	 * @since   1.6
+	 */
+	protected function getReorderConditions($table)
+	{
+		return array('catid = ' . (int) $table->catid);
 	}
 
 	/**

@@ -18,7 +18,7 @@
         crossDomain: false,
         type: "POST",
         url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
-        data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,activeAlias:activeAlias}},
+        data:  {data:{start:start,limit:limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,federalstate_filter:federalstate_filter,activeAlias:activeAlias}},
         dataType: "json",
         cache: false
     })
@@ -55,7 +55,7 @@ function checkNextItems() {
         crossDomain: false,
         type: "POST",
         url: 'index.php?option=com_dd_gmaps_locations&task=getAjax&format=json',
-        data:  {data:{start:next_start,limit:next_limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,activeAlias:activeAlias}},
+        data:  {data:{start:next_start,limit:next_limit,geolocate:geolocate,locationLatLng:locationLatLng,fulltext_search:fulltext_search,category_filter:category_filter,federalstate_filter:federalstate_filter,activeAlias:activeAlias}},
         dataType: "json",
         cache: false
     })
