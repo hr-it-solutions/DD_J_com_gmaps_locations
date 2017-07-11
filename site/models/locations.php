@@ -103,11 +103,14 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$input->set('locationLatLng',  $dataAjax['locationLatLng']);
 			$input->set('fulltext_search', $dataAjax['fulltext_search']);
 			$input->set('category_filter', $dataAjax['category_filter']);
+			$input->set('federalstate_filter', $dataAjax['federalstate_filter']);
 		}
 
 		$locationLatLng = $input->get('locationLatLng', 0, 'STRING');
 		$fulltext_search = $input->get('fulltext_search', '', 'STRING');
 		$category_filter = $input->get('category_filter', 0, 'INT');
+		$federalstate_filter = $input->get('federalstate_filter', '', 'STRING');
+
 
 		if ($locationLatLng)
 		{
@@ -124,6 +127,11 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		if ($category_filter)
 		{
 			$filterInput->category_filter = (int) $category_filter;
+		}
+
+		if ($federalstate_filter)
+		{
+			$filterInput->federalstate_filter = $federalstate_filter;
 		}
 
 		return $filterInput;
@@ -180,7 +188,6 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		// Filter state
 		$query->where('a.state = 1');
 
-
 		if (isset($filterInput->fulltext_search))
 		{
 			$query->where(
@@ -197,7 +204,13 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
 		}
 
-		// Special Filter
+
+		if (isset($filterInput->federalstate_filter))
+		{
+			$query->where($db->qn('a.federalstate') . ' = ' . $db->q($filterInput->federalstate_filter));
+		}
+
+		// Special Menu Filter
 		if ($this->getState('dd_filter.location'))
 		{
 			$query->where($db->qn('a.location') . ' = ' . $db->q($this->getState('dd_filter.location')));
@@ -208,7 +221,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$query->where($db->qn('a.country') . ' = ' . $db->q($this->getState('dd_filter.country')));
 		}
 
-		if ($this->getState('dd_filter.federalstate'))
+		if ($this->getState('dd_filter.federalstate') && !isset($filterInput->federalstate_filter))
 		{
 			$query->where($db->qn('a.federalstate') . ' = ' . $db->q($this->getState('dd_filter.federalstate')));
 		}
