@@ -111,6 +111,20 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	}
 
 	/**
+	 * Validates coordinate
+	 * Adapted from https://gist.github.com/arubacao/b5683b1dab4e4a47ee18fd55d9efbdd1
+	 *
+	 * @param   float  $lat   Latitude
+	 * @param   float  $long  Longitude
+	 *
+	 * @return  bool `true` if the coordinate is valid, `false` if not
+	 */
+	public static function validateLatLong($lat, $long)
+	{
+		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $lat . ',' . $long);
+	}
+
+	/**
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
