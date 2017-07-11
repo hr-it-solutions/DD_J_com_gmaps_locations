@@ -236,7 +236,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data = $this->getItem();
 
 			// Pre-select some filters (Status, Category, Language, Access) in edit form if those have been selected in Article Manager: Articles
-			if ($this->getState('article.id') == 0)
+			if ($this->getState('location.id') == 0)
 			{
 				$filters = (array) $app->getUserState('com_dd_gmaps_locations.locations.filter');
 				$data->set(
@@ -369,6 +369,20 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		}
 
 		return false;
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param   object  $table  A record object.
+	 *
+	 * @return  array  An array of conditions to add to add to ordering queries.
+	 *
+	 * @since   1.6
+	 */
+	protected function getReorderConditions($table)
+	{
+		return array('catid = ' . (int) $table->catid);
 	}
 
 	/**
