@@ -147,6 +147,19 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
+
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed  Object on success, false on failure.
+	 */
+	public function getItem($pk = null)
+	{
+		return parent::getItem($pk);
+	}
+
 	/**
 	 * Method to get the record form.
 	 *
