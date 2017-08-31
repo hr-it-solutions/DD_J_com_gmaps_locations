@@ -20,6 +20,40 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	public static $extension = 'com_dd_gmaps_locations';
 
 	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param   string   $component  The component name.
+	 * @param   string   $section    The access section name.
+	 * @param   integer  $id         The item ID.
+	 *
+	 * @return  JObject
+	 */
+	public static function getActions($component = '', $section = '', $id = 0)
+	{
+		if (!$section || $id)
+		{
+			return parent::getActions($component, $section, $id);
+		}
+
+		$assetName = $component . '.' . $section;
+
+		$path = JPATH_ADMINISTRATOR . '/components/' . $component . '/access.xml';
+
+		$actions = JAccess::getActionsFromFile($path, "/access/section[@name='component']/");
+
+		$user	= JFactory::getUser();
+		$result	= new JObject;
+
+		foreach ($actions as $action)
+		{
+			$result->set($action->name, $user->authorise($action->name, $assetName));
+		}
+
+		return $result;
+	}
+
+
+	/**
 	 * Configure the Linkbar.
 	 *
 	 * @param   string  $vName  The name of the active view.
@@ -125,6 +159,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	}
 
 	/**
+	 * todo: replace with valid alias check in tables/location.php
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
