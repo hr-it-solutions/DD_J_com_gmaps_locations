@@ -93,6 +93,56 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	}
 
 	/**
+	 * Adds Count Items for Category Manager.
+	 *
+	 * @param   stdClass[]  &$items  The banner category objects
+	 *
+	 * @return  stdClass[]
+	 *
+	 * @since   3.5
+	 */
+	public static function countItems(&$items)
+	{
+		$db = JFactory::getDbo();
+
+		foreach ($items as $item)
+		{
+			$item->count_trashed = 0;
+			$item->count_unpublished = 0;
+			$item->count_published = 0;
+			$query = $db->getQuery(true);
+			$select = array($db->qn('state'));
+			$select[] = 'COUNT(*) AS ' . $db->qn('count');
+			$query->select($select)
+				->from($db->qn('#__dd_gmaps_locations'))
+				->where('catid = ' . (int) $item->id)
+				->group('state');
+
+			$locations = $db->setQuery($query)->loadObjectList();
+
+			foreach ($locations as $location)
+			{
+				if ($location->state == 1)
+				{
+					$item->count_published = $location->count;
+				}
+
+				if ($location->state == 0)
+				{
+					$item->count_unpublished = $location->count;
+				}
+
+				if ($location->state == -2)
+				{
+					$item->count_trashed = $location->count;
+				}
+			}
+		}
+
+		return $items;
+	}
+
+	/**
 	 * Get latitude and longitude by address from Google GeoCode API
 	 *
 	 * @param   array  $data  The form data which must include 'street' 'zip' 'location' 'federalstate' and 'country'
