@@ -79,8 +79,12 @@ defined('_JEXEC') or die;
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
                     <p>
-                    <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_WEBADDRESS'); ?>:</strong>
-                    <?php echo $this->item->url ? htmlspecialchars($this->item->url, ENT_QUOTES, 'UTF-8') :''; ?></p>
+                        <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_WEBADDRESS'); ?>:</strong>
+                        <a href="<?php echo htmlspecialchars($this->item->url, ENT_QUOTES, 'UTF-8'); ?>"
+                           title="<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_WEBADDRESS') . ' ' . htmlspecialchars($this->item->title, ENT_QUOTES, 'UTF-8'); ?>">
+                            <?php echo htmlspecialchars($this->item->url, ENT_QUOTES, 'UTF-8'); ?>
+                        </a>
+                    </p>
                 <?php endif; ?>
                 </div>
 				<div class="span6">
