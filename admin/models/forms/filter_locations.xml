@@ -28,7 +28,7 @@
 			type="category"
 			label="JOPTION_FILTER_CATEGORY"
 			description="JOPTION_FILTER_CATEGORY_DESC"
-			extension="com_dd_gmaps_locations.location"
+			extension="com_dd_gmaps_locations"
 			onchange="this.form.submit();"
 			published="0,1,2"
 			>
