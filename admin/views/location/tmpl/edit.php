@@ -275,6 +275,29 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
             </div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 
+	        <?php if($this->params->get('ext_c_connect')): ?>
+                <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-thirparyconnect', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_THIRDPARTYCONNECT')); ?>
+                <div class="row-fluid form-horizontal-desktop">
+                    <div class="span6">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <?php echo $this->form->getLabel('ext_c_id'); ?>
+                            </div>
+                            <div class="controls">
+                                <?php echo $this->form->getInput('ext_c_id'); ?>
+                            </div>
+                        </div>
+
+                        <div class="tab-description alert alert-info">
+                            <span class="icon-info" aria-hidden="true"></span>
+                            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_NOTE'); ?>
+                        </div>
+
+                    </div>
+                </div>
+                <?php echo JHtml::_('bootstrap.endTab');?>
+	        <?php endif;?>
+
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_PUBLISHING')); ?>
             <div class="row-fluid form-horizontal-desktop">
                 <div class="span3">
