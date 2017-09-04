@@ -174,6 +174,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.longitude',
 				'a.short_description',
 				'a.description',
+				'a.ext_c_id',
 				'a.created',
 				'a.publish_up',
 				'a.publish_down',

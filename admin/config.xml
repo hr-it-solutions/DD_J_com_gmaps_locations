@@ -123,4 +123,24 @@
         />
 
     </fieldset>
+
+    <!-- 3rd Party Connect -->
+    <fieldset name="thirdparty_settings"
+              label="COM_DD_GMAPS_LOCATIONS_THIRDPARTY_SETTINGS_LABEL"
+              description="COM_DD_GMAPS_LOCATIONS_THIRDPARTY_SETTINGS_DESC"
+    >
+
+        <field
+                name="ext_c_connect"
+                type="radio"
+                label="COM_DD_GMAPS_LOCATIONS_EXT_C_CONNECT_LABEL"
+                description="COM_DD_GMAPS_LOCATIONS_EXT_C_CONNECT_DESC"
+                default="0"
+                class="btn-group btn-group-yesno"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
 </config>

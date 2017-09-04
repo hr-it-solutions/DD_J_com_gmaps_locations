@@ -21,8 +21,6 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 	protected $alias;
 
-	protected $profile_id;
-
 	/**
 	 * Execute and display a template script.
 	 *
@@ -39,7 +37,6 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		$this->item = $this->get('Item');
-
 
 		$this->state = $this->get('State');
 
@@ -65,6 +62,9 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		}
 
 		$this->prepareDocument();
+
+		// Input Set Profile ID for GMapsLocations launchInfoWindow
+		JFactory::getApplication()->input->set('profile_id', $this->item->id);
 
 		return parent::display($tpl);
 	}

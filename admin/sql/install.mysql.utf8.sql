@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `#__dd_gmaps_locations` (
 
   `ll_c` tinyint(1) unsigned NOT NULL DEFAULT '1',
 
+  `ext_c_id` int(11) unsigned NOT NULL,
+
   `description` text COLLATE utf8mb4_unicode_ci,
   `short_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
 

@@ -20,6 +20,40 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	public static $extension = 'com_dd_gmaps_locations';
 
 	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param   string   $component  The component name.
+	 * @param   string   $section    The access section name.
+	 * @param   integer  $id         The item ID.
+	 *
+	 * @return  JObject
+	 */
+	public static function getActions($component = '', $section = '', $id = 0)
+	{
+		if (!$section || $id)
+		{
+			return parent::getActions($component, $section, $id);
+		}
+
+		$assetName = $component . '.' . $section;
+
+		$path = JPATH_ADMINISTRATOR . '/components/' . $component . '/access.xml';
+
+		$actions = JAccess::getActionsFromFile($path, "/access/section[@name='component']/");
+
+		$user	= JFactory::getUser();
+		$result	= new JObject;
+
+		foreach ($actions as $action)
+		{
+			$result->set($action->name, $user->authorise($action->name, $assetName));
+		}
+
+		return $result;
+	}
+
+
+	/**
 	 * Configure the Linkbar.
 	 *
 	 * @param   string  $vName  The name of the active view.
@@ -56,6 +90,56 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			'index.php?option=com_dd_gmaps_locations&view=markers',
 			$vName == 'markers'
 		);
+	}
+
+	/**
+	 * Adds Count Items for Category Manager.
+	 *
+	 * @param   stdClass[]  &$items  The banner category objects
+	 *
+	 * @return  stdClass[]
+	 *
+	 * @since   3.5
+	 */
+	public static function countItems(&$items)
+	{
+		$db = JFactory::getDbo();
+
+		foreach ($items as $item)
+		{
+			$item->count_trashed = 0;
+			$item->count_unpublished = 0;
+			$item->count_published = 0;
+			$query = $db->getQuery(true);
+			$select = array($db->qn('state'));
+			$select[] = 'COUNT(*) AS ' . $db->qn('count');
+			$query->select($select)
+				->from($db->qn('#__dd_gmaps_locations'))
+				->where('catid = ' . (int) $item->id)
+				->group('state');
+
+			$locations = $db->setQuery($query)->loadObjectList();
+
+			foreach ($locations as $location)
+			{
+				if ($location->state == 1)
+				{
+					$item->count_published = $location->count;
+				}
+
+				if ($location->state == 0)
+				{
+					$item->count_unpublished = $location->count;
+				}
+
+				if ($location->state == -2)
+				{
+					$item->count_trashed = $location->count;
+				}
+			}
+		}
+
+		return $items;
 	}
 
 	/**
@@ -125,6 +209,7 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	}
 
 	/**
+	 * todo: replace with valid alias check in tables/location.php
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
