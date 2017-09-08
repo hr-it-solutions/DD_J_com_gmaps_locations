@@ -16,7 +16,6 @@ defined('_JEXEC') or die;
  */
 class DD_GMaps_LocationsViewLocations extends JViewLegacy
 {
-
 	/**
 	 * An array of items
 	 *
@@ -37,6 +36,14 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	protected $pagination;
 
+	public $filterForm;
+
+	public $activeFilters;
+
+	protected $canDo;
+
+	protected $sidebar;
+
 	/**
 	 * Display the view
 	 *
@@ -49,14 +56,19 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
+		$this->canDo = DD_GMaps_LocationsHelper::getActions('com_dd_gmaps_locations', 'location');
+
 		if ($this->getLayout() !== 'modal')
 		{
 			DD_GMaps_LocationsHelper::addSubmenu('locations');
 		}
 
-		$this->items        = $this->get('Items');
-		$this->state        = $this->get('State');
-		$this->pagination   = $this->get('Pagination');
+		// Load the datas from the model
+		$this->items			= $this->get('Items');
+		$this->state			= $this->get('State');
+		$this->pagination		= $this->get('Pagination');
+		$this->filterForm		= $this->get('FilterForm');
+		$this->activeFilters	= $this->get('ActiveFilters');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -83,54 +95,38 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$canDo = JHelperContent::getActions('com_dd_gmaps_locations', 'category', $this->state->get('filter.category_id'));
-		$user  = JFactory::getUser();
+		JToolBarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), 'dd_gmaps_locations');
 
-		// Get the toolbar object instance
-		$bar = JToolbar::getInstance('toolbar');
-
-		JToolbarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), '');
-
-		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories('com_dd_gmaps_locations', 'core.create'))) > 0)
+		if ($this->canDo->get('core.create'))
 		{
-			JToolbarHelper::addNew('location.add');
+			JToolBarHelper::addNew('location.add');
 		}
 
-		if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own')))
+		if (!empty($this->items))
 		{
-			JToolbarHelper::editList('location.edit');
+			if ($this->canDo->get('core.edit'))
+			{
+				JToolBarHelper::editList('location.edit');
+			}
+
+			if ($this->canDo->get('core.edit.state'))
+			{
+				JToolbarHelper::publish('locations.publish', 'JTOOLBAR_PUBLISH', true);
+				JToolbarHelper::unpublish('locations.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+				JToolbarHelper::checkin('locations.checkin');
+			}
+
+			if ($this->state->get('filter.published') == -2 && $this->canDo->get('core.delete'))
+			{
+				JToolbarHelper::deleteList('', 'locations.delete', 'JTOOLBAR_EMPTY_TRASH');
+			}
+			elseif ($this->canDo->get('core.edit.state'))
+			{
+				JToolbarHelper::trash('locations.trash');
+			}
 		}
 
-		if ($canDo->get('core.edit.state'))
-		{
-			JToolbarHelper::publish('locations.publish', 'JTOOLBAR_PUBLISH', true);
-			JToolbarHelper::unpublish('locations.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-		}
-
-		// Add a batch button
-		if ($user->authorise('core.create', 'com_dd_gmaps_locations')
-			&& $user->authorise('core.edit', 'com_dd_gmaps_locations')
-			&& $user->authorise('core.edit.state', 'com_dd_gmaps_locations'))
-		{
-			$title = JText::_('JTOOLBAR_BATCH');
-
-			// Instantiate a new JLayoutFile instance and render the batch button
-			$layout = new JLayoutFile('joomla.toolbar.batch');
-
-			$dhtml = $layout->render(array('title' => $title));
-			$bar->appendButton('Custom', $dhtml, 'batch');
-		}
-
-		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
-		{
-			JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'locations.delete', 'JTOOLBAR_EMPTY_TRASH');
-		}
-		elseif ($canDo->get('core.edit.state'))
-		{
-			JToolbarHelper::trash('locations.trash');
-		}
-
-		if ($user->authorise('core.admin', 'com_dd_gmaps_locations') || $user->authorise('core.options', 'com_dd_gmaps_locations'))
+		if ($this->canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_dd_gmaps_locations');
 		}

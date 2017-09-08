@@ -44,6 +44,8 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 	 */
 	protected $canDo;
 
+	protected $params;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -71,6 +73,8 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 		$this->item  = $this->get('Item');
 		$this->state = $this->get('State');
 		$this->canDo = JHelperContent::getActions('com_dd_gmaps_locations', 'location', $this->item->id);
+
+		$this->params = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
