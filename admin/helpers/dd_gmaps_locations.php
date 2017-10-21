@@ -205,7 +205,9 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 */
 	public static function validateLatLong($lat, $long)
 	{
-		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $lat . ',' . $long);
+		$latlong = preg_replace("/[^0-9,.]/", "", $lat . ',' . $long);
+
+		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $latlong);
 	}
 
 	/**
