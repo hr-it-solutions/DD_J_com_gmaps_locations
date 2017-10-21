@@ -62,7 +62,7 @@ Errors and technical modification subject to change.
 
 > It has been developed with :green_heart: for Joomla Extension-/ Templatedevelopers. So it is just based on the nativ Joomla MVC Pattern.
 > And it comes just with a minimal bootstrap design (but not required) to make it easy to extend, customizeable and itegrateable for your projects.
-> The Software is licensenced under the GPLv2 only Permissions, so feel free for Commercial Use, Modification, Distribution as well as Private Use
+> The Software is licensenced under the GPLv2 only Permissions, so feel free for Commercial Use, Modification, Distribution as well as Private Use.
 
 ---
 **Note: This is just the component repository (com_gmaps_locations).**
