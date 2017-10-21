@@ -298,6 +298,7 @@
         <field name="ext_c_id"
                type="number"
                default="0"
+               min="0"
                label="COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_DESC"
         />

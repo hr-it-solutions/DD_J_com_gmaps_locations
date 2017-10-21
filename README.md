@@ -1,6 +1,6 @@
 # DD_J_com_gmaps_locations
 An extendable Joomla! component for integrating Google Maps Locations.
-Location entries, location profile pages, location search, geolocation distance search, Google Maps module, customization options, etc… More than just maps: A reliable extension for building your own community based on Google Maps.
+Location entries, location profile pages, location search, geolocation distance search, Google Maps module, customization options, etc… More than just maps: A reliable extension for building your own plattform or community based on Google Maps.
 
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=102)](https://opensource.org/licenses/GPL-2.0/)  
 
@@ -32,8 +32,8 @@ Location entries, location profile pages, location search, geolocation distance 
 
 **and much more...**
 
-### Addon Module:
-Build your community which meets to your needs. The function of the component can be extended by various modules. (e.g. place locations on a map separate from the location register or place a search field on your website that is directly linked to the component.
+### Addon Modules:
+Build your plattform which meets to your needs. The component can be extended by various modules. (e.g. place locations on a map separate from the location register or place a search field on your website that is directly linked to the component.)
 
 ##### [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
 - Geolocalisation function
@@ -47,7 +47,22 @@ Build your community which meets to your needs. The function of the component ca
 
 *Further modules on request!*
 
+### Addon Plugins:
+The function of the component can be also extended by various plugins, which can provide huge functions. (e.g. connect Joomla user profiles to the map or place a activity stream at that pages to build your own maps community.)
+
+##### Features for 3rd Party extensions - Ect C Connector
+- Connect any extension like (com_content, com_k2, com_seblod etc..) or any custom extensin which follows the Joomla routing system.
+**Note:** This requires the DD GMaps Locations Component and a DD_GMaps_Locations_ext_c System Plugin for the extension to connect.
+Ext C Plugins can be available at our github account for some 3rd party extensions we have already connected or if not available, a plugin for your extension can be mostly provided on paid request.
+**Note:** 3rd Party connect is BETA and experimental, we can just provide the plugins (Suggested for developers), support on paid request via https://www.hr-it-solutions.com/en/contact
+
+*Further plugins on request!*
+
 Errors and technical modification subject to change.
+
+> It has been developed with :green_heart: for Joomla Extension-/ Templatedevelopers. So it is just based on the nativ Joomla MVC Pattern.
+> And it comes just with a minimal bootstrap design (but not required) to make it easy to extend, customizeable and itegrateable for your projects.
+> The Software is licensenced under the GPLv2 only Permissions, so feel free for Commercial Use, Modification, Distribution as well as Private Use.
 
 ---
 **Note: This is just the component repository (com_gmaps_locations).**
