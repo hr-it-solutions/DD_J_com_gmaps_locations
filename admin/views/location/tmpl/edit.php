@@ -182,6 +182,11 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 			                    <?php echo $this->form->getInput('longitude_c'); ?>
                             </div>
                         </div>
+                        <p><a href="javascript:void(0)"
+                              class="btn btn-danger"
+                              id="geoaddressclear">⚑ <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_UNSET')?>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
