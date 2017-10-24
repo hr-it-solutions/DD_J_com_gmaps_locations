@@ -5,6 +5,7 @@
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
+
 ;(function() {
     "use strict";
 
@@ -18,25 +19,52 @@
                 event.preventDefault();
                 var functionName = event.target.getAttribute('data-function');
 
-                window.parent[functionName](event.target.getAttribute('data-id'), event.target.getAttribute('data-title'), event.target.getAttribute('data-uri'));
+                window.parent[functionName](event.target.getAttribute('data-id'),
+                    event.target.getAttribute('data-title'), event.target.getAttribute('data-uri'));
             })
         }
     });
 
 })();
 
-jQuery(function () {
+var DD_GMaps_Locations = (function($, document, undefined) {
 
-    // Switch latitude longitiode custom fields
-    if(jQuery('#jform_ll_c0').is(':checked')){
-        jQuery('#ll_custom_enable').show();
-    }
+    var init = function() {
 
-    jQuery("label[for='jform_ll_c0']").on('click', function () {
-        jQuery('#ll_custom_enable').show();
+        // Switch latitude longitiode custom fields
+        if($('#jform_ll_c0').is(':checked')){
+            $('#ll_custom_enable').show();
+        }
+
+        $("label[for='jform_ll_c0']").on('click', function () {
+            $('#ll_custom_enable').show();
+        });
+        $("label[for='jform_ll_c1']").on('click', function () {
+            $('#ll_custom_enable').hide();
+        });
+
+
+        // GeoHard code address unset / flag
+        var falg = '⚑';
+
+        $('#geoaddressclear').on('click', function(){
+            $('#jform_street').val(falg);
+            $('#jform_location').val(falg);
+            $('#jform_zip').val(falg);
+        });
+
+    };
+
+    // init public method
+    return {
+        init:init
+    };
+
+}(jQuery, document, undefined));
+
+(function($) {
+    $(function()
+    {
+        DD_GMaps_Locations.init();
     });
-    jQuery("label[for='jform_ll_c1']").on('click', function () {
-        jQuery('#ll_custom_enable').hide();
-    });
-
-});
+})(jQuery);
