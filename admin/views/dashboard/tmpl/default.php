@@ -19,6 +19,27 @@ defined('_JEXEC') or die;
 	<div id="j-main-container" class="span12">
 	<?php endif; ?>
 		<div class="row-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="well well-small"><h2 class="module-title nav-header"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_STATS'); ?></h2>
+                        <div class="row-striped">
+                            <?php
+                            foreach ($this->items[0] as $key => $item): ?>
+                            <div class="row-fluid">
+                                <div class="span8">
+                                    <strong class="row-title">
+                                       <?php echo JText::_($key); ?>
+                                    </strong>
+                                </div>
+                                <div class="span4">
+                                    <?php echo $item; ?>
+                                </div>
+                            </div>
+                           <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Module Positions -->
 			<?php
 			$modules = JModuleHelper::getModules('dd_gmaps_locations');
