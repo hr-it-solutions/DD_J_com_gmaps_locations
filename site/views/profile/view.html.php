@@ -21,6 +21,8 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 	protected $alias;
 
+	protected $emtpyFlag;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -40,6 +42,8 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		$this->state = $this->get('State');
 
+		$this->emtpyFlag = array('','⚑');
+
 		if (empty($this->item))
 		{
 			// 404
@@ -48,7 +52,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		$params = $this->state->get('params');
 
-		// Set meta data hedaer from menu : default from item @TODO #29
+		// Set meta data header from menu : default from item @TODO #29
 		$doc = JFactory::getDocument();
 		$doc->setTitle($params->get('page_title') ? $params->get('page_title') : $this->item->title);
 		$doc->setMetaData('description', $params->get('menu-meta_description') ? $params->get('menu-meta_description') : $this->item->metadesc);
