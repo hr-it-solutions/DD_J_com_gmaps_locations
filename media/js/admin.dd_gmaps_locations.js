@@ -53,6 +53,11 @@ var DD_GMaps_Locations = (function($, document, undefined) {
             $('#jform_zip').val(falg);
         });
 
+        // Unset Ext-C ID
+        $('#extcclear').on('click', function(){
+            $('#jform_ext_c_id').val('0');
+        });
+
     };
 
     // init public method
