@@ -123,16 +123,36 @@ if ($saveOrder)
                         <td class="nowrap">
                             <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations&task=location.edit&id=' . (int) $item->id);?> ">
                                 <?php echo $this->escape($item->title);?>
+	                            <?php if($item->ext_c_id != '0'):  ?>
+                                <span class="badge badge-success"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_THIRDPARTY'); ?></span>
+	                            <?php endif;  ?>
+
+	                            <?php if($item->ll_c != '1'):  ?>
+                                <span class="badge badge-warning"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_BADGE'); ?></span>
+	                            <?php endif;  ?>
+
                             </a>
                         </td>
                         <td class="nowrap">
-                            <?php echo $this->escape($item->street); ?>
+                            <?php if($item->street != '⚑'):  ?>
+	                            <?php echo $this->escape($item->street); ?>
+	                        <?php else: ?>
+	                            <span class="badge"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_FLAG'); ?></span>
+                            <?php endif;  ?>
                         </td>
                         <td class="nowrap">
-                            <?php echo $this->escape($item->location); ?>
+	                        <?php if($item->location != '⚑'):  ?>
+		                        <?php echo $this->escape($item->location); ?>
+	                        <?php else: ?>
+                                <span class="badge"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_FLAG'); ?></span>
+	                        <?php endif;  ?>
                         </td>
                         <td class="nowrap">
-                            <?php echo $this->escape($item->zip); ?>
+	                        <?php if($item->zip != '⚑'):  ?>
+		                        <?php echo $this->escape($item->zip); ?>
+	                        <?php else: ?>
+                                <span class="badge"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_FLAG'); ?></span>
+	                        <?php endif;  ?>
                         </td>
                         <td class="nowrap">
                             <?php echo JText::_($this->escape($item->country)); ?>

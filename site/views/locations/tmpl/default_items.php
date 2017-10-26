@@ -22,6 +22,8 @@ else
 	$params = $app->getParams('com_dd_gmaps_locations');
 }
 
+$emtpyFlag = array('','⚑')
+
 ?>
 <address class="span6 location well">
     <div class="page-header">
@@ -83,8 +85,19 @@ else
                  alt="<?php echo htmlspecialchars(json_decode($item->category_params)->image_alt); ?>">
 	        <?php endif; ?>
 			<?php echo htmlspecialchars($item->company, ENT_QUOTES, 'UTF-8'); ?><br>
-			<?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
-			<?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php if(!in_array($item->street, $emtpyFlag)):?>
+			    <?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php endif; ?>
+
+	        <?php if(!in_array($item->zip, $emtpyFlag) && !in_array($item->location, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8') . ' '; ?><br>
+	        <?php elseif(!in_array($item->zip, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php elseif(!in_array($item->location, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php endif; ?>
+
+
 			<?php echo $item->federalstate ? htmlspecialchars($item->federalstate, ENT_QUOTES, 'UTF-8') . ', ' : ' '; ?>
 			<?php echo JText::_($item->country); ?>
         </div>
