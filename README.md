@@ -7,6 +7,7 @@ Location entries, location profile pages, location search, geolocation distance 
 ### Main Features / Backend Features:
 - Simple location management by filterable backend tables
 - Different field types for various locations
+- Custom fields support
 - Integration of the Joomla Media Manager, linking locations with images
 - Validate addresses via the backend (geocoding of the address)
 - Address validation for more than 250 countries
@@ -52,9 +53,8 @@ The function of the component can be also extended by various plugins, which can
 
 ##### [Features for 3rd Party extensions - Ect C Connector](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations#addon-plugins)
 - Connect any extension like (com_content, com_k2, com_seblod etc..) or any custom extensin which follows the Joomla routing system.
-
-**Note:** This requires the DD GMaps Locations Component and a DD_GMaps_Locations_ext_c System Plugin for the extension to connect. Ext C Plugins can be available at our github account for some 3rd party extensions we have already connected or if not available, a plugin for your extension can be mostly provided on paid request. <br>
-**Note:** 3rd Party connect is BETA and experimental, we can just provide the plugins (Suggested for developers), support on paid request via https://www.hr-it-solutions.com/en/contact
+- **Note:** This requires the DD GMaps Locations Component and a DD_GMaps_Locations_ext_c System Plugin for the extension to   connect. Ext C Plugins can be available at our github account for some 3rd party extensions we have already connected or if not  available, a plugin for your extension can be mostly provided on paid request. <br>
+- **Note:** 3rd Party connect is BETA and experimental, we can just provide the plugins (Suggested for developers), support on paid request via https://www.hr-it-solutions.com/en/contact
 
 *Further plugins on request!*
 

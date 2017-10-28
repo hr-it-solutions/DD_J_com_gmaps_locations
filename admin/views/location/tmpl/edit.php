@@ -280,6 +280,10 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
             </div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 
+            <?php // Other fields support, like custom fields (excluded from load 'general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing') ?>
+	        <?php $this->ignore_fieldsets = array('general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing'); ?>
+	        <?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+
 	        <?php if($this->params->get('ext_c_connect')): ?>
                 <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-thirparyconnect', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_THIRDPARTYCONNECT')); ?>
                 <div class="row-fluid form-horizontal-desktop">
