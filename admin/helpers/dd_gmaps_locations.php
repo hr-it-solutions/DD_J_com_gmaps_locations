@@ -106,6 +106,20 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			'index.php?option=com_dd_gmaps_locations&view=markers',
 			$vName == 'markers'
 		);
+
+		// Extensions / Updates
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_EXTENSIONS'),
+			'index.php?option=com_dd_gmaps_locations&view=extensions',
+			$vName == 'extensions'
+		);
+
+		// Help / Documentation
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_HELP'),
+			'index.php?option=com_dd_gmaps_locations&view=help',
+			$vName == 'help'
+		);
 	}
 
 	/**
@@ -255,9 +269,9 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		// Plausibility check unique alias
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('alias')
-			->from($db->quoteName('#__dd_gmaps_locations'))
-			->where($db->quoteName('alias') . " ='$alias' AND " . $db->quoteName('id') . " <> " . $data['id']);
+		$query->select($db->qn('alias'))
+			->from($db->qn('#__dd_gmaps_locations'))
+			->where($db->qn('alias') . " ='$alias' AND " . $db->qn('id') . " <> " . $data['id']);
 		$db->setQuery($query);
 
 		if ($db->loadResult())
