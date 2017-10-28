@@ -34,7 +34,7 @@ Location entries, location profile pages, location search, geolocation distance 
 **and much more...**
 
 ### Addon Modules:
-Build your plattform which meets to your needs. The component can be extended by various modules. (e.g. place locations on a map separate from the location register or place a search field on your website that is directly linked to the component.)
+Build your platform which meets to your needs. The component can be extended by various modules. (e.g. place locations on a map separate from the location register or place a search field on your website that is directly linked to the component.)
 
 ##### [GMaps Loctaions Search Filter](https://github.com/hr-it-solutions/DD_J_mod_gmaps_locations_searchfilter)
 - Geolocalisation function
