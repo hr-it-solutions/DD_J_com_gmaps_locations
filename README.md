@@ -7,6 +7,7 @@ Location entries, location profile pages, location search, geolocation distance 
 ### Main Features / Backend Features:
 - Simple location management by filterable backend tables
 - Different field types for various locations
+- Custom fields support
 - Integration of the Joomla Media Manager, linking locations with images
 - Validate addresses via the backend (geocoding of the address)
 - Address validation for more than 250 countries

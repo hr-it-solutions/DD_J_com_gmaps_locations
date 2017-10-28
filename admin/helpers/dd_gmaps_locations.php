@@ -89,13 +89,13 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		{
 			JHtmlSidebar::addEntry(
 				JText::_('JGLOBAL_FIELDS'),
-				'index.php?option=com_fields&context=com_dd_gmaps_locations.item',
+				'index.php?option=com_fields&context=com_dd_gmaps_locations.location',
 				$vName == 'fields.fields'
 			);
 
 			JHtmlSidebar::addEntry(
 				JText::_('JGLOBAL_FIELD_GROUPS'),
-				'index.php?option=com_fields&view=groups&context=com_dd_gmaps_locations.item',
+				'index.php?option=com_fields&view=groups&context=com_dd_gmaps_locations.location',
 				$vName == 'fields.groups'
 			);
 		}
