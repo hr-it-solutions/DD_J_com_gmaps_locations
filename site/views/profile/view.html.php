@@ -44,6 +44,16 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		$this->emtpyFlag = array('','⚑');
 
+		// Get custom fields
+		JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+		$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $this->item, true);
+
+		// Assigne custom fields to $this->item->jcfields
+		foreach ($fields as $key => $field)
+		{
+			$this->item->jcfields[$field->id] = $field;
+		}
+
 		if (empty($this->item))
 		{
 			// 404

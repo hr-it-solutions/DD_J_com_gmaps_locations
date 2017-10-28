@@ -97,18 +97,43 @@ defined('_JEXEC') or die;
                     </p>
                 <?php endif; ?>
                 </div>
+				<?php // Image ?>
 				<div class="span6">
 					<img src="<?php echo JUri::base() . $this->escape($this->item->image); ?>"
 					     alt="<?php echo $this->escape($this->item->title); ?>">
 				</div>
 			</div>
+        </address>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 well">
+			<?php // Custom fields ?>
+            <?php if(count($this->item->jcfields)): ?>
+            <div class="row-fluid">
+                <hr>
+                <h2><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h2>
+                <hr>
+            </div>
+            <?php endif; ?>
+			<?php foreach ($this->item->jcfields as $jcfield): ?>
+                <div class="row-fluid">
+                    <div class="span6">
+						<b><?php echo $jcfield->name; ?>:</b>
+                    </div>
+                    <div class="span6">
+						<?php echo $jcfield->value; ?>
+                    </div>
+                </div>
+			<?php endforeach; ?>
+
+			<?php // Description ?>
             <div class="row-fluid">
                 <div class="span12">
                     <hr>
 	                <?php echo $this->item->description; ?>
                 </div>
 			</div>
-		</address>
+		</div>
 		<div class="clear"></div>
 	</div>
 </div>
