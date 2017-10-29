@@ -68,10 +68,10 @@
                   alt="DD_GMaps_Locations/Markers">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_MARKERS</menu>
             <!-- Extensions -->
             <menu link="option=com_dd_gmaps_locations&amp;view=extensions" view="markers" img="class:generic"
-                  alt="DD_GMaps_Locations/Markers">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_MARKERS</menu>
+                  alt="DD_GMaps_Locations/Extensions">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_EXTENSIONS</menu>
             <!-- Help -->
             <menu link="option=com_dd_gmaps_locations&amp;view=help" view="markers" img="class:generic"
-                  alt="DD_GMaps_Locations/Markers">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_MARKERS</menu>
+                  alt="DD_GMaps_Locations/Help">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_HELP</menu>
         </submenu>
 
         <files folder="admin">
