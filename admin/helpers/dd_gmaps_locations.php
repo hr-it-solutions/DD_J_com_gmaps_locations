@@ -276,7 +276,9 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 
 		if ($db->loadResult())
 		{
-			JFactory::getApplication()->enqueueMessage('COM_DD_GMAPS_LOCATIONS_CHECKALIAS_ALIAS_UNIQUE', 'notice');
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_CHECKALIAS_ALIAS_UNIQUE'), 'notice'
+			);
 			$alias = $data['id'] . '-' . $alias;
 		}
 
