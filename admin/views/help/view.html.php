@@ -55,7 +55,7 @@ class DD_GMaps_LocationsViewHelp extends JViewLegacy
 	{
 		$canDo = JHelperContent::getActions('com_dd_gmaps_locations');
 
-		JToolBarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_HELP'), 'grid');
+		JToolBarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_HELP'), 'support');
 
 		if ($canDo->get('core.admin'))
 		{
