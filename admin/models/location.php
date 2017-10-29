@@ -263,6 +263,10 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 				$data->set('access',
 					$app->input->getInt('access', (!empty($filters['access']) ? $filters['access'] : JFactory::getConfig()->get('access')))
 				);
+
+				// Set default catid for new entries (to catid where access)
+				$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
+				$data->set('catid', $categories[0]);
 			}
 		}
 
