@@ -27,14 +27,14 @@ class DD_GMaps_LocationsModelExtensions extends JModelList
 	private function getDD_Extensions()
 	{
 		return array(
-		'com_dd_gmaps_locations'                => ['pkg' => 'base', 'label' => 'DD GMaps Locations'],
-		'plg_system_dd_gmaps_locations_geocode' => ['pkg' => 'base', 'label' => 'DD GMaps Locations GeoCode', 'required' => '1'],
-		'mod_dd_gmaps_module'                   => ['pkg' => 'base', 'label' => 'DD GMaps Module'],
-		'mod_dd_gmaps_locations_searchfilter'   => ['label' => 'DD GMaps Locations Searchfilter'],
-		'plg_dd_gmaps_locations_ext_c_k2'       => ['label' => 'DD GMaps Locations Ext C K2'],
-		'plg_dd_gmaps_locations_ext_c_content'  => ['label' => 'DD GMaps Locations Ext C Content'],
-		'plg_dd_gmaps_locations_ext_c_seblod'   => ['label' => 'DD GMaps Locations Ext C Seblod'],
-		'plg_editors-xtd_gmaps_locations'       => ['label' => 'DD GMaps Locations Editor Button'],
+		'com_dd_gmaps_locations'                    => ['pkg' => 'base', 'label' => 'DD GMaps Locations'],
+		'plg_system_dd_gmaps_locations_geocode'     => ['pkg' => 'base', 'label' => 'DD GMaps Locations GeoCode', 'required' => '1'],
+		'mod_dd_gmaps_module'                       => ['pkg' => 'base', 'label' => 'DD GMaps Module'],
+		'mod_dd_gmaps_locations_searchfilter'       => ['label' => 'DD GMaps Locations Searchfilter'],
+		'plg_dd_gmaps_locations_dd_ext_c_k2'        => ['label' => 'DD GMaps Locations Ext C K2'],
+		'plg_dd_gmaps_locations_dd_ext_c_content'   => ['label' => 'DD GMaps Locations Ext C Content'],
+		'plg_dd_gmaps_locations_dd_ext_c_seblod'    => ['label' => 'DD GMaps Locations Ext C Seblod'],
+		'plg_editors-xtd_dd_gmaps_locations'        => ['label' => 'DD GMaps Locations Editor Button'],
 		);
 	}
 
@@ -70,7 +70,7 @@ class DD_GMaps_LocationsModelExtensions extends JModelList
 		$query = $db->getQuery(true);
 
 		// Load extensions
-		$query->select($db->qn(array('enabled', 'name', 'type')))
+		$query->select($db->qn(array('extension_id', 'enabled', 'name', 'type')))
 			->from($db->quoteName('#__extensions'))
 			->where($db->quoteName('name') . ' IN (\'' . implode('\', \'', array_keys($this->getDD_Extensions())) . '\')');
 
@@ -97,11 +97,16 @@ class DD_GMaps_LocationsModelExtensions extends JModelList
 		{
 			$defaults = $this->getDD_Extensions_Defaults();
 			$defaults['name']  = $key;
+			$defaults['label'] = $extension['label'];
+
+			if(isset($extension['pkg']))
+			{
+				$defaults['pkg'] = $extension['pkg'];
+			}
 			if(isset($extension['required']))
 			{
 				$defaults['required'] = $extension['required'];
 			}
-			$defaults['label'] = $extension['label'];
 
 			$extensions[$key] = (object) $defaults;
 
@@ -123,8 +128,15 @@ class DD_GMaps_LocationsModelExtensions extends JModelList
 		foreach ($items as $item)
 		{
 			$itemsValues = (object) array_merge($this->getDD_Extensions_Defaults(), (array) $item);
+
 			$extensions[$item->name]->enabled   = $itemsValues->enabled;
 			$extensions[$item->name]->type      = $itemsValues->type;
+
+			if (isset($itemsValues->extension_id))
+			{
+				$extensions[$item->name]->extension_id = $itemsValues->extension_id;
+			}
+
 			$extensions[$item->name]->installed = 1;
 		}
 
