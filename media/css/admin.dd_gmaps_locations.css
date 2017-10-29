@@ -16,3 +16,14 @@
 #dd_gmaps_locations-location #ll_custom_enable {
     display: none;
 }
+
+#dd_gmaps_locations-location .extensions-info h2 {
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+}
+#dd_gmaps_locations-location .extensions-info .alert-info {
+    padding: 10px;
+}
+#dd_gmaps_locations-location .badge-pkg {
+    float: right;
+}
