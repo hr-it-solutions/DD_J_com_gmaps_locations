@@ -264,9 +264,12 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 					$app->input->getInt('access', (!empty($filters['access']) ? $filters['access'] : JFactory::getConfig()->get('access')))
 				);
 
-				// Set default catid for new entries (to catid where access)
-				$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
-				$data->set('catid', $categories[0]);
+				// Set default catid for none admins and for new entries (to catid where access to write)
+				if (!JFactory::getUser()->authorise('core.admin'))
+				{
+					$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
+					$data->set('catid', $categories[0]);
+				}
 			}
 		}
 
@@ -321,6 +324,17 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		if ($catid > 0)
 		{
 			$catid = CategoriesHelper::validateCategoryId($data['catid'], 'com_dd_gmaps_locations');
+		}
+
+		// Check Category access level for save if not core.admin
+		if (!JFactory::getUser()->authorise('core.admin')
+			&& !in_array($catid, JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit')))
+		{
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_WARNING_CATEGORY_ACCESSLEVEL'), 'warning'
+			);
+
+			return false;
 		}
 
 		// Alter the title for save as copy
