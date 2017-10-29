@@ -95,7 +95,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), 'dd_gmaps_locations');
+		JToolBarHelper::title(JText::_('COM_DD_GMAPS_LOCATIONS_TOOLBARTITLE_LOCATIONS'), 'location');
 
 		if ($this->canDo->get('core.create'))
 		{

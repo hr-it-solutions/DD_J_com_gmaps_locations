@@ -273,7 +273,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		}
 
 		// Fill ll cutsom if ll_c is active
-		if ($data->ll_c == 0)
+		if ($data->ll_c === 0)
 		{
 			$data->set('latitude_c', $data->latitude);
 			$data->set('longitude_c', $data->longitude);
@@ -349,7 +349,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		// Check and prepare Alias for saving
 		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
 
-		if ($data['ll_c'] == 0)
+		if ($data['ll_c'] === 0)
 		{
 			if (DD_GMaps_LocationsHelper::validateLatLong($data['latitude_c'], $data['longitude_c']))
 			{
