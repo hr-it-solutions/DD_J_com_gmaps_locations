@@ -9,8 +9,9 @@
 
 defined('_JEXEC') or die;
 
+JHTML::_('behavior.tooltip');
 ?>
-<div class="row-fluid">
+<div class="row-fluid" id="dd_gmaps_locations-location">
 	<?php if (!empty($this->sidebar)): ?>
 	<div id="j-sidebar-container" class="span2">
 	<?php echo $this->sidebar; ?>
@@ -22,21 +23,11 @@ defined('_JEXEC') or die;
 		<div class="row-fluid">
             <div class="row-fluid">
                 <div class="span12">
-                    <div  class="well">
-                        <h2 class="module-title nav-header" style="border-bottom: 1px solid white;margin-bottom: 10px;">
-                            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_TITLE')?>
-                        </h2>
-                        <p>
-                            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION'); ?>
-                        </p>
-                        <p class="alert-info" style="padding: 10px">
-                            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_NOTE'); ?>
-                        </p>
-                        <p>
-                            <small>
-                                <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_DISCLAIMER'); ?>
-                            </small>
-                        </p>
+                    <div class="well extensions-info">
+                        <h2 class="module-title nav-header"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_TITLE')?></h2>
+                        <p><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION'); ?></p>
+                        <p class="alert-info"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_NOTE'); ?>                        </p>
+                        <p><small><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DESCRIPTION_DISCLAIMER'); ?></small></p>
                     </div>
                 </div>
             </div>
@@ -51,28 +42,8 @@ defined('_JEXEC') or die;
 			                <?php foreach ($this->items as $item): ?>
 				                <?php if ($item->type === 'component'): ?>
                                     <div class="row-fluid">
-                                        <div class="span8">
-                                            <strong class="row-title">
-								                <?php echo $item->label; ?>
-                                            </strong>
-                                            <br>
-							                <?php if ($item->installed == '1'): ?>
-                                                <span class="badge badge-success"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_INSTALLED')?></span>
-							                <?php endif; ?>
-							                <?php if ($item->enabled == '1'): ?>
-                                                <span class="badge badge-info"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_AKTIVE')?></span>
-							                <?php endif; ?>
-	                                        <?php if ($item->required == '1' && $item->installed != '1' && $item->enabled != '1'): ?>
-                                                <span class="badge badge-important"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_REQUIRED')?></span>
-	                                        <?php endif; ?>
-                                        </div>
-                                        <div class="span4">
-							                <?php if($item->pkg == 'base'):?>
-                                                <span class="badge badge-warning" style="float: right"><?php echo $item->pkg; ?></span>
-							                <?php else: ?>
-                                                <span class="badge" style="float: right"><?php echo $item->pkg; ?></span>
-							                <?php endif; ?>
-                                        </div>
+	                                    <?php $this->item = $item; ?>
+	                                    <?php echo $this->loadTemplate('extlist'); ?>
                                     </div>
 				                <?php endif; ?>
 			                <?php endforeach; ?>
@@ -87,34 +58,15 @@ defined('_JEXEC') or die;
 	                        <?php foreach ($this->items as $item): ?>
 		                        <?php if ($item->type === 'module'): ?>
                                     <div class="row-fluid">
-                                        <div class="span8">
-                                            <strong class="row-title">
-						                        <?php echo $item->label; ?>
-                                            </strong>
-                                            <br>
-					                        <?php if ($item->installed == '1'): ?>
-                                                <span class="badge badge-success"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_INSTALLED')?></span>
-					                        <?php endif; ?>
-					                        <?php if ($item->enabled == '1'): ?>
-                                                <span class="badge badge-info"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_AKTIVE')?></span>
-					                        <?php endif; ?>
-	                                        <?php if ($item->required == '1' && $item->installed != '1' && $item->enabled != '1'): ?>
-                                                <span class="badge badge-important"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_REQUIRED')?></span>
-	                                        <?php endif; ?>
-                                        </div>
-                                        <div class="span4">
-	                                        <?php if($item->pkg == 'base'):?>
-                                                <span class="badge badge-warning" style="float: right"><?php echo $item->pkg; ?></span>
-	                                        <?php else: ?>
-                                                <span class="badge" style="float: right"><?php echo $item->pkg; ?></span>
-	                                        <?php endif; ?>
-                                        </div>
+	                                    <?php $this->item = $item; ?>
+	                                    <?php echo $this->loadTemplate('extlist'); ?>
                                     </div>
 		                        <?php endif; ?>
 	                        <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
+
                 <div class="span6">
                     <div class="well well-small">
                         <h2 class="module-title nav-header">
@@ -124,28 +76,8 @@ defined('_JEXEC') or die;
 	                        <?php foreach ($this->items as $item): ?>
 		                        <?php if ($item->type === 'plugin'): ?>
                                     <div class="row-fluid">
-                                        <div class="span8">
-                                            <strong class="row-title">
-						                        <?php echo $item->label; ?>
-                                            </strong>
-                                            <br>
-					                        <?php if ($item->installed == '1'): ?>
-                                                <span class="badge badge-success"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_INSTALLED')?></span>
-					                        <?php endif; ?>
-					                        <?php if ($item->enabled == '1'): ?>
-                                                <span class="badge badge-info"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_AKTIVE')?></span>
-					                        <?php endif; ?>
-	                                        <?php if ($item->required == '1' && $item->installed != '1' && $item->enabled != '1'): ?>
-                                                <span class="badge badge-important"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_BADGE_REQUIRED')?></span>
-	                                        <?php endif; ?>
-                                        </div>
-                                        <div class="span4">
-	                                        <?php if($item->pkg == 'base'):?>
-                                                <span class="badge badge-warning" style="float: right"><?php echo $item->pkg; ?></span>
-	                                        <?php else: ?>
-                                                <span class="badge" style="float: right"><?php echo $item->pkg; ?></span>
-	                                        <?php endif; ?>
-                                        </div>
+				                        <?php $this->item = $item; ?>
+				                        <?php echo $this->loadTemplate('extlist'); ?>
                                     </div>
 		                        <?php endif; ?>
 	                        <?php endforeach; ?>
@@ -161,8 +93,12 @@ defined('_JEXEC') or die;
                 <p>
 	                <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_UPDATESERVER_NOTE'); ?>
                 </p>
-            </div>
 
+                <button onclick="location.href='index.php?option=com_installer&amp;view=update';" class="btn btn-small">
+                    <span class="icon-new-tab-2" aria-hidden="true"></span>
+		            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_UPDATE_PAGE'); ?>
+                </button>
+            </div>
 
             <!-- Component Version Info -->
             <div class="alert alert-success text-center">
