@@ -176,6 +176,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.description',
 				'a.ext_c_id',
 				'a.created',
+				'a.created_by',
 				'a.publish_up',
 				'a.publish_down',
 				'a.hits',
@@ -198,6 +199,15 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				$db->qn('a.short_description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"');
+		}
+
+		// Filter by author
+		$authorId = $this->getState('filter.author_id');
+
+		if (is_numeric($authorId))
+		{
+			$type = $this->getState('filter.author_id.include', true) ? '= ' : '<>';
+			$query->where('a.created_by ' . $type . (int) $authorId);
 		}
 
 		if (isset($filterInput->category_filter))
