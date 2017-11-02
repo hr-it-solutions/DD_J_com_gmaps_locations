@@ -394,6 +394,8 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data['longitude'] = $latlng['longitude'];
 		}
 
+		$data['created_by'] = JFactory::getUser()->id;
+
 		if (parent::save($data))
 		{
 			return true;
