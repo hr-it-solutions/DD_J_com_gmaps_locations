@@ -49,9 +49,15 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $this->item, true);
 
 		// Assigne custom fields to $this->item->jcfields
-		foreach ($fields as $key => $field)
+		if($fields)
 		{
-			$this->item->jcfields[$field->id] = $field;
+			foreach ($fields as $key => $field)
+			{
+				if($field->value != '')
+				{
+					$this->item->jcfields[$field->id] = $field;
+				}
+			}
 		}
 
 		if (empty($this->item))
