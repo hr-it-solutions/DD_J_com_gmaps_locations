@@ -32,6 +32,18 @@ class DD_GMaps_LocationsTableLocation extends JTable
 	 */
 	public function check()
 	{
+		if (trim($this->alias) == '')
+		{
+			$this->alias = $this->title;
+		}
+
+		$this->alias = JApplicationHelper::stringURLSafe($this->alias);
+
+		if (trim(str_replace('-', '', $this->alias)) == '')
+		{
+			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+		}
+
 		// If there is an ordering column and this is a new row then get the next ordering value
 		if (property_exists($this, 'ordering') && $this->id == 0)
 		{
