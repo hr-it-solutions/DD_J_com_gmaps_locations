@@ -28,13 +28,14 @@ class DD_GMaps_LocationsModelExtensions extends JModelList
 	{
 		return array(
 		'com_dd_gmaps_locations'                    => ['pkg' => 'base', 'label' => 'DD GMaps Locations'],
+		'com_dd_gmaps_locations_cmty_edit'          => ['label' => 'DD GMaps Locations CMTY Edit'],
 		'plg_system_dd_gmaps_locations_geocode'     => ['pkg' => 'base', 'label' => 'DD GMaps Locations GeoCode', 'required' => '1'],
 		'mod_dd_gmaps_module'                       => ['pkg' => 'base', 'label' => 'DD GMaps Module'],
 		'mod_dd_gmaps_locations_searchfilter'       => ['label' => 'DD GMaps Locations Searchfilter'],
 		'plg_dd_gmaps_locations_dd_ext_c_k2'        => ['label' => 'DD GMaps Locations Ext C K2'],
 		'plg_dd_gmaps_locations_dd_ext_c_content'   => ['label' => 'DD GMaps Locations Ext C Content'],
 		'plg_dd_gmaps_locations_dd_ext_c_seblod'    => ['label' => 'DD GMaps Locations Ext C Seblod'],
-		'plg_editors-xtd_dd_gmaps_locations'        => ['label' => 'DD GMaps Locations Editor Button'],
+		'plg_editors-xtd_dd_gmaps_locations'        => ['label' => 'DD GMaps Locations Editor Button']
 		);
 	}
 
