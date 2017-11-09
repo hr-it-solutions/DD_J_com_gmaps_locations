@@ -255,8 +255,8 @@
                size="22"
                format="%Y-%m-%d %H:%M:%S"
                filter="user_utc"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_UP_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_UPD_DESC"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_UP_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_UPD_DESC"
         />
 
         <field name="publish_down"
@@ -265,8 +265,8 @@
                size="22"
                format="%Y-%m-%d %H:%M:%S"
                filter="user_utc"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_DOWN_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_DOWN_DESC"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_DOWN_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_DOWN_DESC"
         />
 
         <field name="hits"
