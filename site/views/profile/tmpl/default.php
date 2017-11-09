@@ -81,10 +81,10 @@ defined('_JEXEC') or die;
                     <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_DETAILS'); ?>:</strong><br>
 	                <?php
                     echo $this->item->contact_person ? $this->escape($this->item->contact_person) . '<br>':'';
-                    echo $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '';
-                    echo $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '';
-	                echo $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->item->fax    . '<br>' : '';
-	                echo $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
+                    echo $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->escape($this->item->phone)  . '<br>' : '';
+                    echo $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->escape($this->item->mobile) . '<br>' : '';
+	                echo $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->escape($this->item->fax)    . '<br>' : '';
+	                echo $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->escape($this->item->email) ). '<br>' : '';
                     ?></p>
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
@@ -97,18 +97,43 @@ defined('_JEXEC') or die;
                     </p>
                 <?php endif; ?>
                 </div>
+				<?php // Image ?>
 				<div class="span6">
 					<img src="<?php echo JUri::base() . $this->escape($this->item->image); ?>"
 					     alt="<?php echo $this->escape($this->item->title); ?>">
 				</div>
 			</div>
+        </address>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 well">
+			<?php // Custom fields ?>
+            <?php if(isset($this->item->jcfields) && count($this->item->jcfields)): ?>
+            <div class="row-fluid">
+                <hr>
+                <h2><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h2>
+                <hr>
+            </div>
+			<?php foreach ($this->item->jcfields as $jcfield): ?>
+                <div class="row-fluid">
+                    <div class="span6">
+						<b><?php echo $jcfield->name; ?>:</b>
+                    </div>
+                    <div class="span6">
+						<?php echo $jcfield->value; ?>
+                    </div>
+                </div>
+			<?php endforeach; ?>
+            <?php endif; ?>
+
+			<?php // Description ?>
             <div class="row-fluid">
                 <div class="span12">
                     <hr>
 	                <?php echo $this->item->description; ?>
                 </div>
 			</div>
-		</address>
+		</div>
 		<div class="clear"></div>
 	</div>
 </div>
