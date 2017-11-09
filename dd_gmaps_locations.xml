@@ -49,14 +49,29 @@
     <administration>
         <menu view="default">COM_DD_GMAPS_LOCATIONS</menu>
         <submenu>
+            <!-- Dashboard -->
             <menu link="option=com_dd_gmaps_locations" img="class:generic"
                   alt="DD_GMaps_Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_DASHBOARD</menu>
+            <!-- Locations -->
             <menu link="option=com_dd_gmaps_locations&amp;view=locations" view="locations" img="class:generic"
                   alt="DD_GMaps_Locations/Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_LOCATIONS</menu>
+            <!-- Categories -->
             <menu link="option=com_categories&amp;extension=com_dd_gmaps_locations" view="categories" img="class:categories"
                   alt="DD_GMaps_Locations/Categories">JCATEGORIES</menu>
+            <!-- Fields -->
+            <menu link="option=com_fields&amp;context=com_dd_gmaps_locations.location" img="class:generic"
+                  alt="DD_GMaps_Locations/Fields">JGLOBAL_FIELDS</menu>
+            <menu link="option=com_fields&amp;view=groups&amp;context=com_dd_gmaps_locations.location" view="groups" img="class:generic"
+                  alt="DD_GMaps_Locations/Field_Groups">JGLOBAL_FIELD_GROUPS</menu>
+            <!-- Markers -->
             <menu link="option=com_dd_gmaps_locations&amp;view=markers" view="markers" img="class:generic"
                   alt="DD_GMaps_Locations/Markers">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_MARKERS</menu>
+            <!-- Extensions -->
+            <menu link="option=com_dd_gmaps_locations&amp;view=extensions" view="markers" img="class:generic"
+                  alt="DD_GMaps_Locations/Extensions">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_EXTENSIONS</menu>
+            <!-- Help -->
+            <menu link="option=com_dd_gmaps_locations&amp;view=help" view="markers" img="class:generic"
+                  alt="DD_GMaps_Locations/Help">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_HELP</menu>
         </submenu>
 
         <files folder="admin">

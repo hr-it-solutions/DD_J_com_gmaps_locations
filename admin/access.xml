@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <access component="com_dd_gmaps_locations">
 	<section name="component">
-		<action name="core.admin" 		title="JACTION_ADMIN" 		description="JACTION_ADMIN_COMPONENT_DESC" />
-		<action name="core.manage" 		title="JACTION_MANAGE" 		description="JACTION_MANAGE_COMPONENT_DESC" />
-		<action name="core.create" 		title="JACTION_CREATE" 		description="JACTION_CREATE_COMPONENT_DESC" />
-		<action name="core.delete" 		title="JACTION_DELETE" 		description="JACTION_DELETE_COMPONENT_DESC" />
-		<action name="core.edit" 		title="JACTION_EDIT" 		description="JACTION_EDIT_COMPONENT_DESC" />
-		<action name="core.edit.state" 	title="JACTION_EDITSTATE"   description="JACTION_EDITSTATE_COMPONENT_DESC" />
-		<action name="core.edit.own" 	title="JACTION_EDITOWN" 	description="JACTION_EDITOWN_COMPONENT_DESC" />
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC"/>
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC"/>
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC"/>
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC"/>
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC"/>
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC"/>
+		<action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC"/>
+		<action name="core.edit.value" title="JACTION_EDITVALUE" description="JACTION_EDITVALUE_COMPONENT_DESC"/>
 	</section>
 
 	<!-- Category Component ACL -->
@@ -35,5 +36,33 @@
 		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
 		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
 		<action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
+	</section>
+
+	<!-- Fields -->
+	<section name="fieldgroup">
+		<action name="core.create" title="JACTION_CREATE" description="COM_FIELDS_GROUP_PERMISSION_CREATE_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="COM_FIELDS_GROUP_PERMISSION_DELETE_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="COM_FIELDS_GROUP_PERMISSION_EDIT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_FIELDS_GROUP_PERMISSION_EDITSTATE_DESC" />
+		<action name="core.edit.own" title="JACTION_EDITOWN" description="COM_FIELDS_GROUP_PERMISSION_EDITOWN_DESC" />
+		<action name="core.edit.value" title="JACTION_EDITVALUE" description="COM_FIELDS_GROUP_PERMISSION_EDITVALUE_DESC" />
+	</section>
+	<section name="field">
+		<action name="core.delete" title="JACTION_DELETE" description="COM_FIELDS_FIELD_PERMISSION_DELETE_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="COM_FIELDS_FIELD_PERMISSION_EDIT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_FIELDS_FIELD_PERMISSION_EDITSTATE_DESC" />
+		<action name="core.edit.value" title="JACTION_EDITVALUE" description="COM_FIELDS_FIELD_PERMISSION_EDITVALUE_DESC" />
+	</section>
+
+	<!-- Extensions ACL -->
+	<section name="extensions">
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+	</section>
+
+	<!-- Help ACL -->
+	<section name="help">
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
 	</section>
 </access>
