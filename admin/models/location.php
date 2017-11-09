@@ -272,8 +272,8 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data->params = $data->params->toArray();
 		}
 
-		// Fill ll cutsom if ll_c is active
-		if ($data->ll_c == 0)
+		// Fill ll custom if ll_c is active
+		if (!empty($data->ll_c) && $data->ll_c === '0')
 		{
 			$data->set('latitude_c', $data->latitude);
 			$data->set('longitude_c', $data->longitude);
