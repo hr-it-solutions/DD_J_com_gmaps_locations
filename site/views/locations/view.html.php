@@ -63,7 +63,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			$robots = $activeMenu->robots;
 		}
 
-		// Set meta data hedaer from menu : default from item
+		// Set meta data haeder from menu : default from item
 		$doc = JFactory::getDocument();
 		$doc->setMetaData('description', $metadesc);
 		$doc->setMetaData('keywords', $metakey);

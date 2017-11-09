@@ -326,18 +326,18 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_up'); ?>
+			                <?php echo $this->form->getLabel('publish_up'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_up'); ?>
+			                <?php echo $this->form->getInput('publish_up'); ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_down'); ?>
+			                <?php echo $this->form->getLabel('publish_down'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_down'); ?>
+			                <?php echo $this->form->getInput('publish_down'); ?>
                         </div>
                     </div>
                     <div class="control-group">

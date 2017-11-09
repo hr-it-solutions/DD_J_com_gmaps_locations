@@ -249,7 +249,7 @@
                description="JGLOBAL_FIELD_CREATED_DESC"
         />
 
-        <field name="published_up"
+        <field name="publish_up"
                type="calendar"
                class="inputbox"
                size="22"
@@ -259,7 +259,7 @@
                description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_UPD_DESC"
         />
 
-        <field name="published_down"
+        <field name="publish_down"
                type="calendar"
                class="inputbox"
                size="22"
