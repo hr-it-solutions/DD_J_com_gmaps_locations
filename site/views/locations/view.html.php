@@ -31,7 +31,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 * @since Version 1.1.0.0
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$this->app = JFactory::getApplication();
 

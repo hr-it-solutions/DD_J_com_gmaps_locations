@@ -33,7 +33,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 * @since Version 1.1.0.0
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Component configuration
 		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
