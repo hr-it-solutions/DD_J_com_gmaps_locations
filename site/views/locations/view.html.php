@@ -21,6 +21,8 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 	protected $active_alias;
 
+	protected $overridePath;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -41,6 +43,8 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = $this->app->getMenu()->getActive()->alias;
+
+		$this->overridePath = JPATH_ROOT . '/templates/' . JFactory::getApplication()->getTemplate() . '/html/com_dd_gmaps_locations/locations/default_items.php';
 
 		foreach ($this->items as $key => $item){
 		// Get custom fields
