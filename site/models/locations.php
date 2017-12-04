@@ -64,6 +64,14 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$this->setState('list.limit', (int) $params->get('items_to_list', 6));
 		}
 
+		$orderby_sec = $params->get('orderby_sec', 'default');
+
+		if ($orderby_sec != 'default')
+		{
+			$this->setState('list.orderby_sec',  $orderby_sec);
+		}
+
+
 		// Special Filter
 		if ($params->get('filter_location', false))
 		{
@@ -262,7 +270,18 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 		else
 		{
-			$query->order('a.id DESC');
+			if ($this->getState('list.orderby_sec') == 'alpha')
+			{
+				$query->order('a.title ASC');
+			}
+			elseif ($this->getState('list.orderby_sec') == 'ralpha')
+			{
+				$query->order('a.title DESC');
+			}
+			else
+			{
+				$query->order('a.id DESC');
+			}
 		}
 
 		return $query;
@@ -306,12 +325,42 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		foreach ($items as $item)
 		{
+
+			// Get custom fields
+			JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+			$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $item, true);
+
+			// Assigne custom fields to $item->jcfields
+			if($fields)
+			{
+				foreach ($fields as $key => $field)
+				{
+					if($field->value != '')
+					{
+						$item->jcfields[$field->id] = $field;
+					}
+				}
+			}
+
 			if ($i % 2 == 0)
 			{
 				echo '</div><div class="row-fluid">';
 			}
 
-			include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+			$override = JPATH_ROOT . '/templates/' .
+				JFactory::getApplication()->getTemplate() .
+				'/html/com_dd_gmaps_locations/locations/default_items.php';
+
+			if (JFile::exists($override))
+			{
+				include $override;
+			}
+			else
+			{
+				include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+
+			}
+
 			++$i;
 		}
 
