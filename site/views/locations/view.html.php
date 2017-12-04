@@ -42,6 +42,24 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = $this->app->getMenu()->getActive()->alias;
 
+		foreach ($this->items as $key => $item){
+		// Get custom fields
+			JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+			$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $item, true);
+
+			// Assigne custom fields to $item->jcfields
+			if($fields)
+			{
+				foreach ($fields as $field)
+				{
+					if($field->value != '')
+					{
+						$this->items[$key]->jcfields[$field->id] = $field;
+					}
+				}
+			}
+		}
+
 		// Active menu
 		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);
 
