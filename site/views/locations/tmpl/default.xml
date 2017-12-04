@@ -34,6 +34,17 @@
                     label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_MORE_LABEL"
                     description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_MORE_DESC"
             />
+
+            <field name="orderby_sec" type="list"
+                   description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_DESC"
+                   label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_LABEL"
+                   useglobal="true"
+                   default="default"
+            >
+                <option value="default">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER</option>
+                <option value="alpha">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_TITLE_ALPHABETICAL</option>
+                <option value="ralpha">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_TITLE_REVERSE_ALPHABETICAL</option>
+            </field>
         </fieldset>
 
         <!-- Spezial Filter options. -->
