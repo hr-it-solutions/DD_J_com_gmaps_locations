@@ -249,6 +249,13 @@
                description="JGLOBAL_FIELD_CREATED_DESC"
         />
 
+        <field
+                name="created_by"
+                type="user"
+                label="JGLOBAL_FIELD_Created_by_Label"
+                description="JGLOBAL_FIELD_CREATED_BY_DESC"
+        />
+
         <field name="publish_up"
                type="calendar"
                class="inputbox"

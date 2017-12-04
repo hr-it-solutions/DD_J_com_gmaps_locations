@@ -326,6 +326,14 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                     </div>
                     <div class="control-group">
                         <div class="control-label">
+			                <?php echo $this->form->getLabel('created_by'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('created_by'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
 			                <?php echo $this->form->getLabel('publish_up'); ?>
                         </div>
                         <div class="controls">
