@@ -62,6 +62,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 				'a.description',
 				'a.short_description',
 				'a.created',
+				'a.created_by',
 				'a.publish_up',
 				'a.publish_down',
 				'a.hits',
