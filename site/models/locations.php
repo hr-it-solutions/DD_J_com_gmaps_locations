@@ -195,8 +195,11 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		$query->select($select)
 			->from($db->qn('#__dd_gmaps_locations', 'a'));
 
-		// Filter state
-		$query->where('a.state = 1');
+		// Filter state for cmty_edit load model
+		if ($this->getState('filter.state') !== 'all')
+		{
+			$query->where('a.state = 1');
+		}
 
 		if (isset($filterInput->fulltext_search))
 		{
