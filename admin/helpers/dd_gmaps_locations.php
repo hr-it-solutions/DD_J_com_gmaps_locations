@@ -183,6 +183,8 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 */
 	public static function Geocode_Location_To_LatLng($data)
 	{
+		$latlng = array("latitude" => 0, "longitude" => 0);
+
 		// Get Location Data
 		$address = array(
 			'street'        => $data['street'],
@@ -207,18 +209,20 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		$geoCode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($prepAddr) . '&sensor=false' . $google_api_URL_pram);
 		$output  = json_decode($geoCode);
 
-		if ($output->error_message != "") // If Error on API Connection, display error not
-		{
-			JFactory::getApplication()->enqueueMessage($output->error_message, 'warning');
-		}
-		elseif($output->status == 'ZERO_RESULTS')
+		if($output->status == 'ZERO_RESULTS')
 		{
 			JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS'), 'warning');
 		}
-
-		// Build array latitude and longitude
-		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
-						"longitude" => $output->results[0]->geometry->location->lng);
+		elseif ($output->error_message != "") // If Error on API Connection, display error not
+		{
+			JFactory::getApplication()->enqueueMessage($output->error_message, 'warning');
+		}
+		else
+		{
+			// Build array latitude and longitude
+			$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
+			                "longitude" => $output->results[0]->geometry->location->lng);
+		};
 
 		// Return Array
 		return $latlng;
