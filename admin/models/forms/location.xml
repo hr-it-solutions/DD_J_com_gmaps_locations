@@ -43,8 +43,9 @@
            default=""
            label="COM_DD_GMAPS_LOCATIONS_FIELD_CATID_LABEL"
            description="COM_DD_GMAPS_LOCATIONS_CATID_DESC"
+           required="true"
     >
-        <option value="0">JOPTION_SELECT_CATEGORY</option>
+        <option value="">JOPTION_SELECT_CATEGORY</option>
     </field>
 
     <field name="featured" type="list" label="COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_LABEL"
