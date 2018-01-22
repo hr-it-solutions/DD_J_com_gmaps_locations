@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -33,7 +33,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 * @since Version 1.1.0.0
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Component configuration
 		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');

@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -326,18 +326,26 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_up'); ?>
+			                <?php echo $this->form->getLabel('created_by'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_up'); ?>
+			                <?php echo $this->form->getInput('created_by'); ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_down'); ?>
+			                <?php echo $this->form->getLabel('publish_up'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_down'); ?>
+			                <?php echo $this->form->getInput('publish_up'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('publish_down'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('publish_down'); ?>
                         </div>
                     </div>
                     <div class="control-group">

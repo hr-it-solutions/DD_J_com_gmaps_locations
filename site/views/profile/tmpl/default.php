@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -81,10 +81,10 @@ defined('_JEXEC') or die;
                     <strong><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_DETAILS'); ?>:</strong><br>
 	                <?php
                     echo $this->item->contact_person ? $this->escape($this->item->contact_person) . '<br>':'';
-                    echo $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->item->phone  . '<br>' : '';
-                    echo $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->item->mobile . '<br>' : '';
-	                echo $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->item->fax    . '<br>' : '';
-	                echo $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->item->email) . '<br>' : '';
+                    echo $this->item->phone   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_PHONE')  . ' ' . $this->escape($this->item->phone)  . '<br>' : '';
+                    echo $this->item->mobile  ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_MOBILE') . ' ' . $this->escape($this->item->mobile) . '<br>' : '';
+	                echo $this->item->fax     ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_FAX')  . ' ' . $this->escape($this->item->fax)    . '<br>' : '';
+	                echo $this->item->email   ? JText::_('COM_DD_GMAPS_LOCATIONS_CONTACT_EMAIL')    . ' ' . JHtml::_('email.cloak', $this->escape($this->item->email) ). '<br>' : '';
                     ?></p>
                 <?php endif; ?>
                 <?php if( $this->item->url): ?>
