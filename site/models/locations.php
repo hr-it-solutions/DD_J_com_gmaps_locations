@@ -239,7 +239,24 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 		elseif ($this->getState('dd_filter.catid'))
 		{
-			$query->where($db->qn('a.catid') . ' = ' . $db->q($this->getState('dd_filter.catid')));
+			$catid = (int) $this->getState('dd_filter.catid');
+			$subquery = $db->getQuery(true);
+
+			// Load all its subcategories
+			$subquery->select($db->qn('c.id'))
+				->from($db->qn('#__categories', 'c'))
+				->join('INNER', $db->qn('#__categories','cc') . ' ON ' . $db->qn('c.parent_id') . ' = ' . $db->qn('cc.id'))
+				->where($db->qn('c.parent_id') . ' != 1')
+				->where($db->qn('cc.id') . ' = ' . $db->q($catid))
+			    ->where($db->qn('c.published') . '= 1');
+
+				$db->setQuery($subquery);
+				$result = $db->loadAssocList('id','id');
+
+			// Assigne parentId itself
+			array_push($result, $catid);
+
+			$query->where($db->qn('a.catid') . ' IN (' . implode(',',$result) . ')');
 		}
 
 		if ($this->getState('dd_filter.location'))
