@@ -18,6 +18,12 @@ defined('_JEXEC') or die;
     </div>
 <?php endif; ?>
 
+    <?php if($this->params->get('show_cat_desc')): ?>
+    <div class="well">
+        <?php echo $this->items[0]->category_description; ?>
+    </div>
+	<?php endif; ?>
+
 <?php
 foreach ($this->items as $i => $item):
     ?>

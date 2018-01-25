@@ -73,6 +73,11 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 
 		// Special Filter
+		if ($params->get('filter_catid', false))
+		{
+			$this->setState('dd_filter.catid', $params->get('filter_catid'));
+		}
+
 		if ($params->get('filter_location', false))
 		{
 			$this->setState('dd_filter.location', $params->get('filter_location'));
@@ -221,18 +226,22 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$query->where('a.created_by ' . $type . (int) $authorId);
 		}
 
-		if (isset($filterInput->category_filter))
-		{
-			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
-		}
-
-
 		if (isset($filterInput->federalstate_filter))
 		{
 			$query->where($db->qn('a.federalstate') . ' = ' . $db->q($filterInput->federalstate_filter));
 		}
 
 		// Special Menu Filter
+
+		if (isset($filterInput->category_filter))
+		{
+			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
+		}
+		elseif ($this->getState('dd_filter.catid'))
+		{
+			$query->where($db->qn('a.catid') . ' = ' . $db->q($this->getState('dd_filter.catid')));
+		}
+
 		if ($this->getState('dd_filter.location'))
 		{
 			$query->where($db->qn('a.location') . ' = ' . $db->q($this->getState('dd_filter.location')));
@@ -251,6 +260,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		// Join over categories
 		$query->select(
 			$db->qn('c.title') . 'AS' . $db->qn('category_title') . ',' .
+			$db->qn('c.description') . 'AS' . $db->qn('category_description') . ',' .
 			$db->qn('c.params') . 'AS' . $db->qn('category_params')
 		)
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');

@@ -22,7 +22,7 @@ else
 	$params = $app->getParams('com_dd_gmaps_locations');
 }
 
-$emtpyFlag = array('','⚑')
+$emtpyFlag = array('','⚑');
 
 ?>
 <address class="span6 location well">
