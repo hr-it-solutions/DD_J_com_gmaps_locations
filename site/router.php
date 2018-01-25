@@ -92,7 +92,8 @@ class DD_GMaps_LocationsRouter extends JComponentRouterBase
 
 		$allowed_views = array(
 			'locations',
-			'profile'
+			'profile',
+			'categories'
 		);
 
 		if (!isset($query['view']) || !in_array($query['view'], $allowed_views))
