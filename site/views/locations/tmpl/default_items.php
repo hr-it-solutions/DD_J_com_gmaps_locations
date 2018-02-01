@@ -105,7 +105,7 @@ $emtpyFlag = array('','⚑');
             <div class="page-header map_bar">
 	            <?php // Show on map button
 	            if($params->get('show_on_map')):?>
-                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)">
+                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)" rel="nofollow" >
 					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_SHOW_ON_MAP'); ?>
                 </a>
 	            <?php endif; ?>
