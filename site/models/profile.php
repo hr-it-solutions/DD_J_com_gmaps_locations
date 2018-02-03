@@ -41,6 +41,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 			array(
 				'a.id',
 				'a.title',
+				'a.alias',
 				'a.catid',
 				'a.state',
 				'a.profileimage',
