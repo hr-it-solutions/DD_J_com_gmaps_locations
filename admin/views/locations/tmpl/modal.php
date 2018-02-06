@@ -109,7 +109,7 @@ $onclick   = $this->escape($function);
 		                            . ' data-title="' . $this->escape(addslashes($item->title)) . '"'
 		                            . ' data-uri="' . $this->escape('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id) . '"'
 	                            ?>
-                                <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
+                                <a class="select-link" href="javascript:void(0)" rel="nofollow" <?php echo $attribs; ?>>
 		                            <?php echo $this->escape($item->title); ?>
                                 </a>
                             </td>

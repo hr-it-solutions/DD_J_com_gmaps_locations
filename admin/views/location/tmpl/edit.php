@@ -302,7 +302,7 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                             <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_NOTE'); ?>
                         </div>
 
-                        <p><a href="javascript:void(0)"
+                        <p><a href="javascript:void(0)" rel="nofollow"
                               class="btn btn-small btn-danger"
                               id="extcclear"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_UNSET')?>
                             </a>

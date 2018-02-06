@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 				<?php endif; ?>
                 <?php // Mark as new
                 $mark_as_new = (int) $this->params->get('mark_as_new', 0);
-                if( strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
+                if($mark_as_new AND strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
 				<span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
                 <?php endif; ?>
                 <?php // Featured
