@@ -20,4 +20,25 @@
 
         </fieldset>
     </fields>
+
+    <!-- Add fields to the parameters object for the layout. -->
+    <fields name="params">
+
+        <!-- Basic options. -->
+        <fieldset name="basic"
+                  label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_LABEL">
+
+            <field
+                    name="count_items"
+                    type="radio"
+                    class="btn-group btn-group-yesno"
+                    default="0"
+                    label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_COUNT_ITEMS_LABEL"
+                    description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_COUNT_ITEMS_DESC"
+            >
+                <option value="1">JSHOW</option>
+                <option value="0">JHIDE</option>
+            </field>
+        </fieldset>
+    </fields>
 </metadata>

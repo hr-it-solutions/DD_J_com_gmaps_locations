@@ -14,7 +14,11 @@ defined('_JEXEC') or die;
 	<?php foreach ($this->items as $i => $item): ?>
 	<?php if ($i % 3 == 0){ echo '</div><div class="row-fluid">'; } ?>
     <div class="span4 category well">
-        <h5><?php echo $this->escape($item->title); ?></h5>
+        <h5 class="pull-left"><?php echo $this->escape($item->title); ?></h5>
+	    <?php if($this->params->get('count_items')):?>
+        <span class="badge pull-right"><?php echo $item->count; ?></span>
+        <hr class="clear">
+        <?php endif; ?>
         <img src="<?php echo json_decode($item->params)->image; ?>" alt="<?php echo json_decode($item->params)->image_alt; ?>">
         <hr>
         <div class="category-desc">

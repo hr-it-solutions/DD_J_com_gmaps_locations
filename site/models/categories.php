@@ -26,12 +26,21 @@ class DD_GMaps_LocationsModelCategories extends JModelList
 	{
 		parent::populateState($ordering, $direction);
 
+		$app = JFactory::getApplication();
+		$params = $app->getParams();
+
 		$catid = (int) JFactory::getApplication()->input->get('catid');
 
 		// Category
 		if ($catid)
 		{
 			$this->setState('dd_filter.catid', $catid);
+		}
+
+		// Count locations
+		if ($params->get('count_items', false))
+		{
+			$this->setState('dd_filter.count_items', $params->get('count_items'));
 		}
 	}
 
@@ -58,6 +67,15 @@ class DD_GMaps_LocationsModelCategories extends JModelList
 			->where($db->qn('c.parent_id') . ' != 1')
 			->where($db->qn('cc.id') . ' = ' . $db->q($catid))
 			->where($db->qn('c.published') . '= 1 OR' . ($db->qn('c.id') . ' = ' . $db->q($catid)));
+
+		// Count items
+		if ($this->getState('dd_filter.count_items'))
+		{
+			$query->select('COUNT(*) AS ' . $db->qn('count'))
+				->join('LEFT', $db->qn('#__dd_gmaps_locations', 'a') . ' ON ' . $db->qn('a.catid') . ' = ' . $db->qn('c.id'))
+				->where($db->qn('a.state') . '= 1')
+				->group($db->qn('c.id'));
+		}
 
 		$db->setQuery($query);
 
