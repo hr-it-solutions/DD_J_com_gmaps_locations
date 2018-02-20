@@ -111,7 +111,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 		$profile_id = (int) $profile_id;
 
 		$db        = JFactory::getDbo();
-		$VisitorIP = substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15);
+		$VisitorIP = md5(substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15));
 
 		// Delete rows who older than a day!
 		$date = JFactory::getDate();
