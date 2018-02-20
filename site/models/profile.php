@@ -123,7 +123,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 
 		$db->setQuery($query)->execute();
 
-		// Select Ip from Table on profile_id
+		// Select IP from Table on profile_id
 		$query = $db->getQuery(true);
 		$query->select($db->qn('visitor_ip'))
 			->from($db->qn('#__dd_gmaps_locations_iptables'))
@@ -134,7 +134,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 		// Check if IP is not in ip table!
 		if (!$db->loadResult())
 		{
-			// Inset Ip to ip table
+			// Insert IP to ip table
 			$query = $db->getQuery(true);
 			$query->insert($db->qn('#__dd_gmaps_locations_iptables'))
 				->columns($db->qn(array('visitor_ip', 'profile_id')))
