@@ -2,7 +2,7 @@
     "extension": {
         "name": "country-package",
         "author": "HR IT-Solutions Florian Häusler",
-        "copyright": "Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions",
+        "copyright": "Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions",
         "license": "GNU/GPLv2 only",
         "description": "Countries Package contains an extended and a reduced selection for smaller German Websites",
         "countries": {

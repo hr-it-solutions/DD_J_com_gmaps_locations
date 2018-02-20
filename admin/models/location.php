@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -394,7 +394,10 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data['longitude'] = $latlng['longitude'];
 		}
 
-		$data['created_by'] = JFactory::getUser()->id;
+		if (JFactory::getApplication()->isClient('site') && $data['id'] == '0')
+		{
+			$data['created_by'] = JFactory::getUser()->id;
+		}
 
 		if (parent::save($data))
 		{

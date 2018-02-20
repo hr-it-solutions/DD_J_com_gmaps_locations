@@ -37,6 +37,7 @@
                     label="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_SELECTION_LABEL"
                     description="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_SELECTION_DESC"
             >
+                <option value="0">JNO</option>
                 <option value="30">COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_DEFAULT_THIRTYDAYS</option>
             </field>
 

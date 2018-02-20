@@ -9,19 +9,13 @@
 
 defined('_JEXEC') or die;
 
-class DD_GMaps_LocationsViewLocations extends JViewLegacy
+class DD_GMaps_LocationsViewCategories extends JViewLegacy
 {
 	protected $app;
 
 	protected $items;
 
 	protected $params;
-
-	protected $sef_rewrite;
-
-	protected $active_alias;
-
-	protected $overridePath;
 
 	/**
 	 * Execute and display a template script.
@@ -40,29 +34,6 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 		$this->items = $this->get('Items');
 
 		$this->params = $this->app->getParams();
-
-		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
-		$this->active_alias = $this->app->getMenu()->getActive()->alias;
-
-		$this->overridePath = JPATH_ROOT . '/templates/' . JFactory::getApplication()->getTemplate() . '/html/com_dd_gmaps_locations/locations/default_items.php';
-
-		foreach ($this->items as $key => $item){
-		// Get custom fields
-			JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
-			$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $item, true);
-
-			// Assigne custom fields to $item->jcfields
-			if($fields)
-			{
-				foreach ($fields as $field)
-				{
-					if($field->value != '')
-					{
-						$this->items[$key]->jcfields[$field->id] = $field;
-					}
-				}
-			}
-		}
 
 		// Active menu
 		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);

@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -302,7 +302,7 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                             <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_NOTE'); ?>
                         </div>
 
-                        <p><a href="javascript:void(0)"
+                        <p><a href="javascript:void(0)" rel="nofollow"
                               class="btn btn-small btn-danger"
                               id="extcclear"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_UNSET')?>
                             </a>
@@ -322,6 +322,14 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                         </div>
                         <div class="controls">
 			                <?php echo $this->form->getInput('created'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('created_by'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('created_by'); ?>
                         </div>
                     </div>
                     <div class="control-group">

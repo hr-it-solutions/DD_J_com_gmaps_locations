@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -22,7 +22,7 @@ else
 	$params = $app->getParams('com_dd_gmaps_locations');
 }
 
-$emtpyFlag = array('','⚑')
+$emtpyFlag = array('','⚑');
 
 ?>
 <address class="span6 location well">
@@ -45,7 +45,7 @@ $emtpyFlag = array('','⚑')
 		<?php endif; ?>
 		<?php // Mark as new
 		$mark_as_new = (int) $params->get('mark_as_new', 0);
-		if( strtotime("-$mark_as_new days") < strtotime($item->created)):?>
+		if($mark_as_new AND strtotime("-$mark_as_new days") < strtotime($item->created)):?>
             <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
 		<?php endif; ?>
 		<?php // Featured
@@ -105,7 +105,7 @@ $emtpyFlag = array('','⚑')
             <div class="page-header map_bar">
 	            <?php // Show on map button
 	            if($params->get('show_on_map')):?>
-                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)">
+                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)" rel="nofollow" >
 					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_SHOW_ON_MAP'); ?>
                 </a>
 	            <?php endif; ?>

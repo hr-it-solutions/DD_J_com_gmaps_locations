@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -41,6 +41,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 			array(
 				'a.id',
 				'a.title',
+				'a.alias',
 				'a.catid',
 				'a.state',
 				'a.profileimage',
@@ -62,6 +63,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 				'a.description',
 				'a.short_description',
 				'a.created',
+				'a.created_by',
 				'a.publish_up',
 				'a.publish_down',
 				'a.hits',

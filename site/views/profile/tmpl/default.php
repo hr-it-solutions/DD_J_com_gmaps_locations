@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 				<?php endif; ?>
                 <?php // Mark as new
                 $mark_as_new = (int) $this->params->get('mark_as_new', 0);
-                if( strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
+                if($mark_as_new AND strtotime("-$mark_as_new days") < strtotime($this->item->created)):?>
 				<span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
                 <?php endif; ?>
                 <?php // Featured
@@ -111,7 +111,7 @@ defined('_JEXEC') or die;
             <?php if(isset($this->item->jcfields) && count($this->item->jcfields)): ?>
             <div class="row-fluid">
                 <hr>
-                <h2><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h2>
+                <h3><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h3>
                 <hr>
             </div>
 			<?php foreach ($this->item->jcfields as $jcfield): ?>

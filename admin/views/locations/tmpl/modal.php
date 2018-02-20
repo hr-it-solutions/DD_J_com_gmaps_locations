@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2016 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2016 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -109,7 +109,7 @@ $onclick   = $this->escape($function);
 		                            . ' data-title="' . $this->escape(addslashes($item->title)) . '"'
 		                            . ' data-uri="' . $this->escape('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id) . '"'
 	                            ?>
-                                <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
+                                <a class="select-link" href="javascript:void(0)" rel="nofollow" <?php echo $attribs; ?>>
 		                            <?php echo $this->escape($item->title); ?>
                                 </a>
                             </td>

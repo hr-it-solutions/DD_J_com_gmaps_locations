@@ -34,6 +34,47 @@
                     label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_MORE_LABEL"
                     description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ITEMS_MORE_DESC"
             />
+
+            <field name="orderby_sec" type="list"
+                   description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_DESC"
+                   label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_LABEL"
+                   useglobal="true"
+                   default="default"
+            >
+                <option value="default">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER</option>
+                <option value="alpha">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_TITLE_ALPHABETICAL</option>
+                <option value="ralpha">COM_DD_GMAPS_LOCATIONS_LOCATIONS_ORDER_TITLE_REVERSE_ALPHABETICAL</option>
+            </field>
+        </fieldset>
+
+        <!-- Spezial Filter options. -->
+        <fieldset name="category_view"
+                  label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_FILTER_CATEGORYLIST_LABEL">
+
+            <field type="spacer" name="showonly_filter" label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_FILTER_SHOWONLY" />
+
+            <field name="filter_catid" type="category"
+                   description="JGLOBAL_FIELD_CATEGORIES_CHOOSE_CATEGORY_DESC"
+                   extension="com_dd_gmaps_locations"
+                   label="JGLOBAL_FIELD_CATEGORIES_CHOOSE_CATEGORY_LABEL"
+            >
+                <option value="">JOPTION_SELECT_CATEGORY</option>
+            </field>
+
+            <field type="spacer" name="showonly_filter_note" label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_FILTER_SHOWONLY_NOTE" />
+
+            <field name="show_cat_desc"
+                   type="list"
+                   class="btn-group btn-group-yesno"
+                   label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_FILTER_SHOW_CATID_DESC_LABEL"
+                   description="COM_DD_GMAPS_LOCATIONS_LOCATIONS_FILTER_SHOW_CATID_DESC_DESC"
+                   useglobal="true"
+                   default="0"
+            >
+                <option value="1">JSHOW</option>
+                <option value="0">JHIDE</option>
+            </field>
+
         </fieldset>
 
         <!-- Spezial Filter options. -->
@@ -63,6 +104,7 @@
             />
 
             <field type="spacer" name="showonly_filter_note" label="COM_DD_GMAPS_LOCATIONS_LOCATIONS_SETTINGS_FILTER_SHOWONLY_NOTE" />
+
         </fieldset>
     </fields>
 </metadata>
