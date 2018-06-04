@@ -33,7 +33,7 @@ class DD_GMaps_LocationsModelDashboard extends JModelList
 		$query->select('COUNT(*) AS \'COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATIONS\', 
 						SUM(hits) AS \'COM_DD_GMAPS_LOCATIONS_FIELD_HITS\'')
 			->from($db->quoteName('#__dd_gmaps_locations'))
-			->where($db->quoteName('state') . ' = 1');
+			->where($db->quoteName('state') . ' != -1');
 		$db->setQuery($query);
 
 		return $query;
