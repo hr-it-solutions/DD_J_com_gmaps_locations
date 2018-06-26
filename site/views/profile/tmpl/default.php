@@ -111,7 +111,7 @@ defined('_JEXEC') or die;
             <?php if(isset($this->item->jcfields) && count($this->item->jcfields)): ?>
             <div class="row-fluid">
                 <hr>
-                <h2><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h2>
+                <h3><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h3>
                 <hr>
             </div>
 			<?php foreach ($this->item->jcfields as $jcfield): ?>
