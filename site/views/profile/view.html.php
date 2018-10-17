@@ -70,7 +70,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		// Set meta data header from menu : default from item @TODO #29
 		$doc = JFactory::getDocument();
-		$doc->setTitle($params->get('page_title') ? $params->get('page_title') : $this->item->title);
+		$doc->setTitle($this->item->title);
 		$doc->setMetaData('description', $params->get('menu-meta_description') ? $params->get('menu-meta_description') : $this->item->metadesc);
 		$doc->setMetaData('keywords', $params->get('menu-meta_keywords') ? $params->get('menu-meta_keywords') : $this->item->metakey);
 		$doc->setMetaData('robots', $params->get('robots'));
