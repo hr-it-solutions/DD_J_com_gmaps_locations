@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -204,17 +204,29 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		if ($this->getState('filter.state') !== 'all')
 		{
 			$query->where('a.state = 1');
+
+			$query->where('('.
+				$db->qn('a.publish_up') . ' = ' . $db->q('0000-00-00 00:00:00') .
+				' OR ' .
+				$db->qn('a.publish_up') . '<= ' . $db->q(JFactory::getDate()->format('Y-m-d H:i:s'))
+				. ')');
+
+			$query->where('('.
+				$db->qn('a.publish_down') . ' = ' . $db->q('0000-00-00 00:00:00') .
+				' OR ' .
+				$db->qn('a.publish_down') . '>= ' . $db->q(JFactory::getDate()->format('Y-m-d H:i:s'))
+				. ')');
 		}
 
 		if (isset($filterInput->fulltext_search))
 		{
-			$query->where(
+			$query->where('(' .
 				$db->qn('a.title') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.company') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.contact_person') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.short_description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
-				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"');
+				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"' . ')');
 		}
 
 		// Filter by author

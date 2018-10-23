@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -33,7 +33,7 @@ class DD_GMaps_LocationsModelDashboard extends JModelList
 		$query->select('COUNT(*) AS \'COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_LOCATIONS\', 
 						SUM(hits) AS \'COM_DD_GMAPS_LOCATIONS_FIELD_HITS\'')
 			->from($db->quoteName('#__dd_gmaps_locations'))
-			->where($db->quoteName('state') . ' = 1');
+			->where($db->quoteName('state') . ' != -1');
 		$db->setQuery($query);
 
 		return $query;

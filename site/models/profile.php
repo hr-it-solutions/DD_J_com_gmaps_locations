@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -111,7 +111,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 		$profile_id = (int) $profile_id;
 
 		$db        = JFactory::getDbo();
-		$VisitorIP = substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15);
+		$VisitorIP = md5(substr(JFactory::getApplication()->input->server->get('REMOTE_ADDR', ''), 0, 15));
 
 		// Delete rows who older than a day!
 		$date = JFactory::getDate();
@@ -123,7 +123,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 
 		$db->setQuery($query)->execute();
 
-		// Select Ip from Table on profile_id
+		// Select IP from Table on profile_id
 		$query = $db->getQuery(true);
 		$query->select($db->qn('visitor_ip'))
 			->from($db->qn('#__dd_gmaps_locations_iptables'))
@@ -134,7 +134,7 @@ class DD_GMaps_LocationsModelProfile extends JModelItem
 		// Check if IP is not in ip table!
 		if (!$db->loadResult())
 		{
-			// Inset Ip to ip table
+			// Insert IP to ip table
 			$query = $db->getQuery(true);
 			$query->insert($db->qn('#__dd_gmaps_locations_iptables'))
 				->columns($db->qn(array('visitor_ip', 'profile_id')))
