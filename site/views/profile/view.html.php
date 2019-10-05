@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -71,8 +71,8 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		// Set meta data header from menu : default from item @TODO #29
 		$doc = JFactory::getDocument();
 		$doc->setTitle($this->item->title);
-		$doc->setMetaData($this->item->metadesc);
-		$doc->setMetaData($this->item->metakey);
+		$doc->setMetaData('description', $this->item->metadesc);
+		$doc->setMetaData('keywords', $this->item->metakey);
 		$doc->setMetaData('robots', $params->get('robots'));
 
 		// Check for errors.

@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -83,22 +83,6 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			JText::_('JCATEGORIES'),
 			'index.php?option=com_categories&extension=com_dd_gmaps_locations'
 		);
-
-		// Fields
-		if (JComponentHelper::isEnabled('com_fields'))
-		{
-			JHtmlSidebar::addEntry(
-				JText::_('JGLOBAL_FIELDS'),
-				'index.php?option=com_fields&context=com_dd_gmaps_locations.location',
-				$vName == 'fields.fields'
-			);
-
-			JHtmlSidebar::addEntry(
-				JText::_('JGLOBAL_FIELD_GROUPS'),
-				'index.php?option=com_fields&view=groups&context=com_dd_gmaps_locations.location',
-				$vName == 'fields.groups'
-			);
-		}
 
 		// Markers
 		JHtmlSidebar::addEntry(

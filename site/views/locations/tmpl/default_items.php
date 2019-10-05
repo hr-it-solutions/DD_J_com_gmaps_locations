@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -62,21 +62,6 @@ $emtpyFlag = array('','⚑');
     <div class="row-col">
         <div class="span6">
             <div class="page-header map_bar">
-                <?php
-                if (isset($item->distance))
-                {
-	                if ($params->get('unit') == 'kilometers')
-	                {
-		                $item->distance = $item->distance * 1.609;
-		                echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE_KM', round($item->distance, 1));
-
-	                }
-	                else
-                    {
-	                    echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE', round($item->distance, 1));
-                    }
-                }
-                ?>
             </div>
             <?php
             if ($params->get('marker_in_entry') && $item->category_params && json_decode($item->category_params)->image): ?>

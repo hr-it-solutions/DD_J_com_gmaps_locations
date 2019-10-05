@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2016 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2016 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
