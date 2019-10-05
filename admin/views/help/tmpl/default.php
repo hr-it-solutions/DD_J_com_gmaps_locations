@@ -56,7 +56,7 @@ JHTML::_('behavior.tooltip');
 	                        <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DOCUMENTATION'); ?>
                         </h2>
                         <a class="btn btn-wide btn-success"
-                           href="http://demo.hr-it-solutions.com/documentation-gmaps-locations"
+                           href="https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations"
                            target="_blank"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_DOCUMENTATION_PAGE'); ?></a>
                     </div>
                 </div>
