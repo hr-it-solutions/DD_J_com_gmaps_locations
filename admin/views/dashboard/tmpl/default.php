@@ -44,7 +44,7 @@ defined('_JEXEC') or die;
 			<?php
 			$modules = JModuleHelper::getModules('dd_gmaps_locations');
 
-			if (count($modules))
+			if ($modules && count($modules))
 			{
 				$modules = array_chunk($modules, 2);
 

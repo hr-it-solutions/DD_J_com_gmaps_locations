@@ -32,12 +32,6 @@ class DD_GMaps_LocationsViewHelp extends JViewLegacy
 	{
 		$this->items = $this->get('items');
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			throw new Exception(implode("\n", $errors), 500);
-		}
-
 		$this->addToolbar();
 		$this->addSidebar();
 

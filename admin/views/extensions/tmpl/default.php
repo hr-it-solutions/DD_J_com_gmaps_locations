@@ -86,7 +86,7 @@ JHTML::_('behavior.tooltip');
                 </div>
             </div>
 
-            <div class="well alert alert-warning">
+            <div class="well alert alert-warning" style="display: none">
                 <h2 class="module-title nav-header" style="color: #830">
 		            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_EXTENSIONS_UPDATESERVER_TITLE')?>
                 </h2>
