@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -18,6 +18,40 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 {
 
 	public static $extension = 'com_dd_gmaps_locations';
+
+	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param   string   $component  The component name.
+	 * @param   string   $section    The access section name.
+	 * @param   integer  $id         The item ID.
+	 *
+	 * @return  JObject
+	 */
+	public static function getActions($component = '', $section = '', $id = 0)
+	{
+		if (!$section || $id)
+		{
+			return parent::getActions($component, $section, $id);
+		}
+
+		$assetName = $component . '.' . $section;
+
+		$path = JPATH_ADMINISTRATOR . '/components/' . $component . '/access.xml';
+
+		$actions = JAccess::getActionsFromFile($path, "/access/section[@name='component']/");
+
+		$user	= JFactory::getUser();
+		$result	= new JObject;
+
+		foreach ($actions as $action)
+		{
+			$result->set($action->name, $user->authorise($action->name, $assetName));
+		}
+
+		return $result;
+	}
+
 
 	/**
 	 * Configure the Linkbar.
@@ -56,6 +90,70 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			'index.php?option=com_dd_gmaps_locations&view=markers',
 			$vName == 'markers'
 		);
+
+		// Extensions / Updates
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_EXTENSIONS'),
+			'index.php?option=com_dd_gmaps_locations&view=extensions',
+			$vName == 'extensions'
+		);
+
+		// Help / Documentation
+		JHtmlSidebar::addEntry(
+			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_HELP'),
+			'index.php?option=com_dd_gmaps_locations&view=help',
+			$vName == 'help'
+		);
+	}
+
+	/**
+	 * Adds Count Items for Category Manager.
+	 *
+	 * @param   stdClass[]  &$items  The banner category objects
+	 *
+	 * @return  stdClass[]
+	 *
+	 * @since   3.5
+	 */
+	public static function countItems(&$items)
+	{
+		$db = JFactory::getDbo();
+
+		foreach ($items as $item)
+		{
+			$item->count_trashed = 0;
+			$item->count_unpublished = 0;
+			$item->count_published = 0;
+			$query = $db->getQuery(true);
+			$select = array($db->qn('state'));
+			$select[] = 'COUNT(*) AS ' . $db->qn('count');
+			$query->select($select)
+				->from($db->qn('#__dd_gmaps_locations'))
+				->where('catid = ' . (int) $item->id)
+				->group('state');
+
+			$locations = $db->setQuery($query)->loadObjectList();
+
+			foreach ($locations as $location)
+			{
+				if ($location->state == 1)
+				{
+					$item->count_published = $location->count;
+				}
+
+				if ($location->state == 0)
+				{
+					$item->count_unpublished = $location->count;
+				}
+
+				if ($location->state == -2)
+				{
+					$item->count_trashed = $location->count;
+				}
+			}
+		}
+
+		return $items;
 	}
 
 	/**
@@ -69,6 +167,8 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 */
 	public static function Geocode_Location_To_LatLng($data)
 	{
+		$latlng = array("latitude" => 0, "longitude" => 0);
+
 		// Get Location Data
 		$address = array(
 			'street'        => $data['street'],
@@ -93,18 +193,20 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		$geoCode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($prepAddr) . '&sensor=false' . $google_api_URL_pram);
 		$output  = json_decode($geoCode);
 
-		if ($output->error_message != "") // If Error on API Connection, display error not
-		{
-			JFactory::getApplication()->enqueueMessage($output->error_message, 'warning');
-		}
-		elseif($output->status == 'ZERO_RESULTS')
+		if($output->status == 'ZERO_RESULTS')
 		{
 			JFactory::getApplication()->enqueueMessage(JText::_('COM_DD_GMAPS_LOCATIONS_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS'), 'warning');
 		}
-
-		// Build array latitude and longitude
-		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
-						"longitude" => $output->results[0]->geometry->location->lng);
+		elseif ($output->error_message != "") // If Error on API Connection, display error not
+		{
+			JFactory::getApplication()->enqueueMessage($output->error_message, 'warning');
+		}
+		else
+		{
+			// Build array latitude and longitude
+			$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
+			                "longitude" => $output->results[0]->geometry->location->lng);
+		};
 
 		// Return Array
 		return $latlng;
@@ -121,10 +223,13 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 	 */
 	public static function validateLatLong($lat, $long)
 	{
-		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $lat . ',' . $long);
+		$latlong = preg_replace("/[^0-9,.]/", "", $lat . ',' . $long);
+
+		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $latlong);
 	}
 
 	/**
+	 * todo: replace with valid alias check in tables/location.php
 	 * Checks plausibility of alias and prepare for URLSafe
 	 * If alias ist not unique, a unique ID was prefixed (loaction ID)
 	 *
@@ -152,14 +257,16 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 		// Plausibility check unique alias
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('alias')
-			->from($db->quoteName('#__dd_gmaps_locations'))
-			->where($db->quoteName('alias') . " ='$alias' AND " . $db->quoteName('id') . " <> " . $data['id']);
+		$query->select($db->qn('alias'))
+			->from($db->qn('#__dd_gmaps_locations'))
+			->where($db->qn('alias') . " ='$alias' AND " . $db->qn('id') . " <> " . $data['id']);
 		$db->setQuery($query);
 
 		if ($db->loadResult())
 		{
-			JFactory::getApplication()->enqueueMessage('COM_DD_GMAPS_LOCATIONS_CHECKALIAS_ALIAS_UNIQUE', 'notice');
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_CHECKALIAS_ALIAS_UNIQUE'), 'notice'
+			);
 			$alias = $data['id'] . '-' . $alias;
 		}
 

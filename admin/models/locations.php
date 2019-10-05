@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -159,7 +159,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid' .
 				', a.created, a.created_by, a.created_by_alias, a.ordering, a.featured' .
 				', a.state, a.company, a.contact_person, a.phone, a.email, a.street, a.location, a.zip, a.country' .
-				', a.federalstate, a.latitude' .
+				', a.federalstate, a.ll_c, a.ext_c_id' .
 				', a.publish_up, a.publish_down'
 			)
 		);

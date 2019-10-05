@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -64,7 +64,20 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 			$this->setState('list.limit', (int) $params->get('items_to_list', 6));
 		}
 
+		$orderby_sec = $params->get('orderby_sec', 'default');
+
+		if ($orderby_sec != 'default')
+		{
+			$this->setState('list.orderby_sec',  $orderby_sec);
+		}
+
+
 		// Special Filter
+		if ($params->get('filter_catid', false))
+		{
+			$this->setState('dd_filter.catid', $params->get('filter_catid'));
+		}
+
 		if ($params->get('filter_location', false))
 		{
 			$this->setState('dd_filter.location', $params->get('filter_location'));
@@ -174,7 +187,9 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 				'a.longitude',
 				'a.short_description',
 				'a.description',
+				'a.ext_c_id',
 				'a.created',
+				'a.created_by',
 				'a.publish_up',
 				'a.publish_down',
 				'a.hits',
@@ -185,25 +200,43 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		$query->select($select)
 			->from($db->qn('#__dd_gmaps_locations', 'a'));
 
-		// Filter state
-		$query->where('a.state = 1');
+		// Filter state for cmty_edit load model
+		if ($this->getState('filter.state') !== 'all')
+		{
+			$query->where('a.state = 1');
+
+			$query->where('('.
+				$db->qn('a.publish_up') . ' = ' . $db->q('0000-00-00 00:00:00') .
+				' OR ' .
+				$db->qn('a.publish_up') . '<= ' . $db->q(JFactory::getDate()->format('Y-m-d H:i:s'))
+				. ')');
+
+			$query->where('('.
+				$db->qn('a.publish_down') . ' = ' . $db->q('0000-00-00 00:00:00') .
+				' OR ' .
+				$db->qn('a.publish_down') . '>= ' . $db->q(JFactory::getDate()->format('Y-m-d H:i:s'))
+				. ')');
+		}
 
 		if (isset($filterInput->fulltext_search))
 		{
-			$query->where(
+			$query->where('(' .
 				$db->qn('a.title') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.company') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.contact_person') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.short_description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
 				$db->qn('a.description') . ' LIKE "%' . $filterInput->fulltext_search . '%" OR ' .
-				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"');
+				$db->qn('c.title') . ' LIKE "%' . $filterInput->fulltext_search . '%"' . ')');
 		}
 
-		if (isset($filterInput->category_filter))
+		// Filter by author
+		$authorId = $this->getState('filter.author_id');
+
+		if (is_numeric($authorId))
 		{
-			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
+			$type = $this->getState('filter.author_id.include', true) ? '= ' : '<>';
+			$query->where('a.created_by ' . $type . (int) $authorId);
 		}
-
 
 		if (isset($filterInput->federalstate_filter))
 		{
@@ -211,6 +244,33 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 
 		// Special Menu Filter
+
+		if (isset($filterInput->category_filter))
+		{
+			$query->where($db->qn('a.catid') . ' = ' . $filterInput->category_filter);
+		}
+		elseif ($this->getState('dd_filter.catid'))
+		{
+			$catid = (int) $this->getState('dd_filter.catid');
+			$subquery = $db->getQuery(true);
+
+			// Load all its subcategories
+			$subquery->select($db->qn('c.id'))
+				->from($db->qn('#__categories', 'c'))
+				->join('INNER', $db->qn('#__categories','cc') . ' ON ' . $db->qn('c.parent_id') . ' = ' . $db->qn('cc.id'))
+				->where($db->qn('c.parent_id') . ' != 1')
+				->where($db->qn('cc.id') . ' = ' . $db->q($catid))
+			    ->where($db->qn('c.published') . '= 1');
+
+				$db->setQuery($subquery);
+				$result = $db->loadAssocList('id','id');
+
+			// Assigne parentId itself
+			array_push($result, $catid);
+
+			$query->where($db->qn('a.catid') . ' IN (' . implode(',',$result) . ')');
+		}
+
 		if ($this->getState('dd_filter.location'))
 		{
 			$query->where($db->qn('a.location') . ' = ' . $db->q($this->getState('dd_filter.location')));
@@ -229,6 +289,7 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		// Join over categories
 		$query->select(
 			$db->qn('c.title') . 'AS' . $db->qn('category_title') . ',' .
+			$db->qn('c.description') . 'AS' . $db->qn('category_description') . ',' .
 			$db->qn('c.params') . 'AS' . $db->qn('category_params')
 		)
 			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
@@ -251,7 +312,18 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 		}
 		else
 		{
-			$query->order('a.id DESC');
+			if ($this->getState('list.orderby_sec') == 'alpha')
+			{
+				$query->order('a.title ASC');
+			}
+			elseif ($this->getState('list.orderby_sec') == 'ralpha')
+			{
+				$query->order('a.title DESC');
+			}
+			else
+			{
+				$query->order('a.id DESC');
+			}
 		}
 
 		return $query;
@@ -295,12 +367,42 @@ class DD_GMaps_LocationsModelLocations extends JModelList {
 
 		foreach ($items as $item)
 		{
+
+			// Get custom fields
+			JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+			$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $item, true);
+
+			// Assigne custom fields to $item->jcfields
+			if($fields)
+			{
+				foreach ($fields as $key => $field)
+				{
+					if($field->value != '')
+					{
+						$item->jcfields[$field->id] = $field;
+					}
+				}
+			}
+
 			if ($i % 2 == 0)
 			{
 				echo '</div><div class="row-fluid">';
 			}
 
-			include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+			$override = JPATH_ROOT . '/templates/' .
+				JFactory::getApplication()->getTemplate() .
+				'/html/com_dd_gmaps_locations/locations/default_items.php';
+
+			if (JFile::exists($override))
+			{
+				include $override;
+			}
+			else
+			{
+				include JPATH_COMPONENT . '/views/locations/tmpl/default_items.php';
+
+			}
+
 			++$i;
 		}
 

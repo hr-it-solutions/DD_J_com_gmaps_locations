@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -44,6 +44,8 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 	 */
 	protected $canDo;
 
+	protected $params;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -71,6 +73,8 @@ class DD_GMaps_LocationsViewLocation extends JViewLegacy
 		$this->item  = $this->get('Item');
 		$this->state = $this->get('State');
 		$this->canDo = JHelperContent::getActions('com_dd_gmaps_locations', 'location', $this->item->id);
+
+		$this->params = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

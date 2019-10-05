@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <extension type="component" version="3.5.0" method="upgrade">
     <name>com_dd_gmaps_locations</name>
-    <version>1.1.1.3</version>
+    <version>1.1.2.0</version>
     <creationDate>25.02.2017</creationDate>
-    <author>HR IT-Solutions Florian Häusler</author>
+    <author>HR-IT-Solutions Florian Häusler</author>
     <authorEmail>info@hr-it-solutions.com</authorEmail>
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
-    <copyright>Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
+    <copyright>Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH</copyright>
     <license>GNU/GPLv2 only</license>
     <description>COM_DD_GMAPS_LOCATIONS_XML_DESCRIPTION</description>
 
@@ -36,6 +36,7 @@
         <filename>controller.php</filename>
         <filename>router.php</filename>
         <filename>dd_gmaps_locations.php</filename>
+        <folder>helpers</folder>
         <folder>language</folder>
         <folder>models</folder>
         <folder>views</folder>
@@ -48,14 +49,24 @@
     <administration>
         <menu view="default">COM_DD_GMAPS_LOCATIONS</menu>
         <submenu>
+            <!-- Dashboard -->
             <menu link="option=com_dd_gmaps_locations" img="class:generic"
                   alt="DD_GMaps_Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_DASHBOARD</menu>
+            <!-- Locations -->
             <menu link="option=com_dd_gmaps_locations&amp;view=locations" view="locations" img="class:generic"
                   alt="DD_GMaps_Locations/Locations">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_LOCATIONS</menu>
+            <!-- Categories -->
             <menu link="option=com_categories&amp;extension=com_dd_gmaps_locations" view="categories" img="class:categories"
                   alt="DD_GMaps_Locations/Categories">JCATEGORIES</menu>
+            <!-- Markers -->
             <menu link="option=com_dd_gmaps_locations&amp;view=markers" view="markers" img="class:generic"
                   alt="DD_GMaps_Locations/Markers">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_MARKERS</menu>
+            <!-- Extensions -->
+            <menu link="option=com_dd_gmaps_locations&amp;view=extensions" view="markers" img="class:generic"
+                  alt="DD_GMaps_Locations/Extensions">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_EXTENSIONS</menu>
+            <!-- Help -->
+            <menu link="option=com_dd_gmaps_locations&amp;view=help" view="markers" img="class:generic"
+                  alt="DD_GMaps_Locations/Help">COM_DD_GMAPS_LOCATIONS_MENU_SUBMENU_HELP</menu>
         </submenu>
 
         <files folder="admin">

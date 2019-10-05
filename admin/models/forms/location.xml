@@ -43,8 +43,9 @@
            default=""
            label="COM_DD_GMAPS_LOCATIONS_FIELD_CATID_LABEL"
            description="COM_DD_GMAPS_LOCATIONS_CATID_DESC"
+           required="true"
     >
-        <option value="0">JOPTION_SELECT_CATEGORY</option>
+        <option value="">JOPTION_SELECT_CATEGORY</option>
     </field>
 
     <field name="featured" type="list" label="COM_DD_GMAPS_LOCATIONS_FIELD_FEATURED_LABEL"
@@ -249,24 +250,31 @@
                description="JGLOBAL_FIELD_CREATED_DESC"
         />
 
-        <field name="published_up"
-               type="calendar"
-               class="inputbox"
-               size="22"
-               format="%Y-%m-%d %H:%M:%S"
-               filter="user_utc"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_UP_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_UPD_DESC"
+        <field
+                name="created_by"
+                type="user"
+                label="JGLOBAL_FIELD_Created_by_Label"
+                description="JGLOBAL_FIELD_CREATED_BY_DESC"
         />
 
-        <field name="published_down"
+        <field name="publish_up"
                type="calendar"
                class="inputbox"
                size="22"
                format="%Y-%m-%d %H:%M:%S"
                filter="user_utc"
-               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_DOWN_LABEL"
-               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISHED_DOWN_DESC"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_UP_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_UPD_DESC"
+        />
+
+        <field name="publish_down"
+               type="calendar"
+               class="inputbox"
+               size="22"
+               format="%Y-%m-%d %H:%M:%S"
+               filter="user_utc"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_DOWN_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_PUBLISH_DOWN_DESC"
         />
 
         <field name="hits"
@@ -292,6 +300,16 @@
                label="COM_DD_GMAPS_LOCATIONS_FIELD_METAKEY_LABEL"
                description="COM_DD_GMAPS_LOCATIONS_FIELD_METAKEY_DESC"/>
 
+    </fieldset>
+
+    <fieldset class="thirpartyconnect">
+        <field name="ext_c_id"
+               type="number"
+               default="0"
+               min="0"
+               label="COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_LABEL"
+               description="COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_DESC"
+        />
     </fieldset>
 
 </form>

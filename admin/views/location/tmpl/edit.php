@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -75,7 +75,6 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                 </div>
                 <div class="span3">
 					<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
-
                 </div>
             </div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
@@ -182,6 +181,11 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 			                    <?php echo $this->form->getInput('longitude_c'); ?>
                             </div>
                         </div>
+                        <p><a href="javascript:void(0)"
+                              class="btn btn-small btn-danger"
+                              id="geoaddressclear">⚑ <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_GEOHARDCODE_UNSET')?>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -275,6 +279,39 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
             </div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 
+            <?php // Other fields support, like custom fields (excluded from load 'general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing') ?>
+	        <?php $this->ignore_fieldsets = array('general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing'); ?>
+	        <?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+
+	        <?php if($this->params->get('ext_c_connect')): ?>
+                <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-thirparyconnect', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_THIRDPARTYCONNECT')); ?>
+                <div class="row-fluid form-horizontal-desktop">
+                    <div class="span6">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <?php echo $this->form->getLabel('ext_c_id'); ?>
+                            </div>
+                            <div class="controls">
+                                <?php echo $this->form->getInput('ext_c_id'); ?>
+                            </div>
+                        </div>
+
+                        <div class="tab-description alert alert-info">
+                            <span class="icon-info" aria-hidden="true"></span>
+                            <?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_NOTE'); ?>
+                        </div>
+
+                        <p><a href="javascript:void(0)" rel="nofollow"
+                              class="btn btn-small btn-danger"
+                              id="extcclear"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_FIELD_EXT_C_ID_UNSET')?>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+                <?php echo JHtml::_('bootstrap.endTab');?>
+	        <?php endif;?>
+
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_PUBLISHING')); ?>
             <div class="row-fluid form-horizontal-desktop">
                 <div class="span3">
@@ -288,18 +325,26 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_up'); ?>
+			                <?php echo $this->form->getLabel('created_by'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_up'); ?>
+			                <?php echo $this->form->getInput('created_by'); ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="control-label">
-			                <?php echo $this->form->getLabel('published_down'); ?>
+			                <?php echo $this->form->getLabel('publish_up'); ?>
                         </div>
                         <div class="controls">
-			                <?php echo $this->form->getInput('published_down'); ?>
+			                <?php echo $this->form->getInput('publish_up'); ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+			                <?php echo $this->form->getLabel('publish_down'); ?>
+                        </div>
+                        <div class="controls">
+			                <?php echo $this->form->getInput('publish_down'); ?>
                         </div>
                     </div>
                     <div class="control-group">
@@ -335,6 +380,21 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 			<?php echo JHtml::_('bootstrap.endTabSet'); ?>
             <input type="hidden" name="task" value=""/>
 			<?php echo JHtml::_('form.token'); ?>
+
+            <!-- Component Version Info -->
+            <div class="alert alert-success text-center">
+		        <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION', DD_GMaps_LocationsHelper::getComponentVersion()); ?>
+            </div>
+
+            <div class="alert alert-info text-center">
+                <h4><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_VERSION_GET_PRO'); ?></h4>
+            </div>
+
+            <hr>
+            <!-- Component Credits -->
+            <div class="text-center">
+                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS', DD_GMaps_LocationsHelper::getComponentCoyright())); ?></small></p>
+            </div>
         </div>
     </div>
 </form>

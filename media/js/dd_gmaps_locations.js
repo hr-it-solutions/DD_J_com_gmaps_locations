@@ -2,11 +2,30 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
-;function processAjax(val, attrVal){
+; var DD_GMaps_Locations = (function($, document, undefined) {
+
+    var init = function() {
+
+        // jQuery document ready functions todo:
+
+    };
+
+    // init public method
+    return {
+        init:init
+    };
+
+}(jQuery, document, undefined));
+
+/**
+ * processAjax
+ * > global scope required
+ */
+function processAjax(val, attrVal){
 
     var loadmorebutton = jQuery('#load-more');
 
@@ -46,6 +65,7 @@
 
 /**
  * checkNextItems
+ * > global scope required
  */
 function checkNextItems() {
     var next_start = start + 1;
@@ -71,3 +91,10 @@ function checkNextItems() {
             console.log("Ajax problem: " + textStatus + ". " + errorThrown);
         });
 }
+
+(function($) {
+    $(function()
+    {
+        DD_GMaps_Locations.init();
+    });
+})(jQuery);

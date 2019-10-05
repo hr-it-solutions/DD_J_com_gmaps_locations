@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -21,6 +21,8 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 	protected $active_alias;
 
+	protected $overridePath;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -31,7 +33,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 	 * @since Version 1.1.0.0
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$this->app = JFactory::getApplication();
 
@@ -41,6 +43,26 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 
 		$this->sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 		$this->active_alias = $this->app->getMenu()->getActive()->alias;
+
+		$this->overridePath = JPATH_ROOT . '/templates/' . JFactory::getApplication()->getTemplate() . '/html/com_dd_gmaps_locations/locations/default_items.php';
+
+		foreach ($this->items as $key => $item){
+		// Get custom fields
+			JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+			$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $item, true);
+
+			// Assigne custom fields to $item->jcfields
+			if($fields)
+			{
+				foreach ($fields as $field)
+				{
+					if($field->value != '')
+					{
+						$this->items[$key]->jcfields[$field->id] = $field;
+					}
+				}
+			}
+		}
 
 		// Active menu
 		$activeMenu = $this->app->getMenu()->getItem($this->app->getMenu()->getActive()->id);
@@ -63,7 +85,7 @@ class DD_GMaps_LocationsViewLocations extends JViewLegacy
 			$robots = $activeMenu->robots;
 		}
 
-		// Set meta data hedaer from menu : default from item
+		// Set meta data haeder from menu : default from item
 		$doc = JFactory::getDocument();
 		$doc->setMetaData('description', $metadesc);
 		$doc->setMetaData('keywords', $metakey);

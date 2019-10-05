@@ -37,18 +37,8 @@
                     label="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_SELECTION_LABEL"
                     description="COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_SELECTION_DESC"
             >
+                <option value="0">JNO</option>
                 <option value="30">COM_DD_GMAPS_LOCATIONS_COMPONENT_MARK_AS_NEW_DEFAULT_THIRTYDAYS</option>
-            </field>
-
-            <field
-                    name="unit"
-                    type="list"
-                    label="COM_DD_GMAPS_LOCATIONS_COMPONENT_UNIT_LABEL"
-                    description="COM_DD_GMAPS_LOCATIONS_COMPONENT_UNIT_DESC"
-                    default="miles"
-            >
-                <option value="miles">COM_DD_GMAPS_LOCATIONS_COMPONENT_UNIT_MILES</option>
-                <option value="kilometers">COM_DD_GMAPS_LOCATIONS_COMPONENT_UNIT_KM</option>
             </field>
 
             <field
@@ -121,6 +111,26 @@
                label="JCONFIG_PERMISSIONS_LABEL"
                section="component"
         />
+
+    </fieldset>
+
+    <!-- 3rd Party Connect -->
+    <fieldset name="thirdparty_settings"
+              label="COM_DD_GMAPS_LOCATIONS_THIRDPARTY_SETTINGS_LABEL"
+              description="COM_DD_GMAPS_LOCATIONS_THIRDPARTY_SETTINGS_DESC"
+    >
+
+        <field
+                name="ext_c_connect"
+                type="radio"
+                label="COM_DD_GMAPS_LOCATIONS_EXT_C_CONNECT_LABEL"
+                description="COM_DD_GMAPS_LOCATIONS_EXT_C_CONNECT_DESC"
+                default="0"
+                class="btn-group btn-group-yesno"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
     </fieldset>
 </config>

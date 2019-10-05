@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -263,6 +263,13 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 				$data->set('access',
 					$app->input->getInt('access', (!empty($filters['access']) ? $filters['access'] : JFactory::getConfig()->get('access')))
 				);
+
+				// Set default catid for none admins and for new entries (to catid where access to write)
+				if (!JFactory::getUser()->authorise('core.admin'))
+				{
+					$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
+					$data->set('catid', $categories[0]);
+				}
 			}
 		}
 
@@ -272,8 +279,8 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$data->params = $data->params->toArray();
 		}
 
-		// Fill ll cutsom if ll_c is active
-		if ($data->ll_c == 0)
+		// Fill ll custom if ll_c is active
+		if (!empty($data->ll_c) && $data->ll_c === '0')
 		{
 			$data->set('latitude_c', $data->latitude);
 			$data->set('longitude_c', $data->longitude);
@@ -319,6 +326,17 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 			$catid = CategoriesHelper::validateCategoryId($data['catid'], 'com_dd_gmaps_locations');
 		}
 
+		// Check Category access level for save if not core.admin
+		if (!JFactory::getUser()->authorise('core.admin')
+			&& !in_array($catid, JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit')))
+		{
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_WARNING_CATEGORY_ACCESSLEVEL'), 'warning'
+			);
+
+			return false;
+		}
+
 		// Alter the title for save as copy
 		if ($input->get('task') == 'save2copy')
 		{
@@ -349,7 +367,7 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 		// Check and prepare Alias for saving
 		$data['alias'] = DD_GMaps_LocationsHelper::prepareAlias($data);
 
-		if ($data['ll_c'] == 0)
+		if ($data['ll_c'] === '0')
 		{
 			if (DD_GMaps_LocationsHelper::validateLatLong($data['latitude_c'], $data['longitude_c']))
 			{
@@ -374,6 +392,11 @@ class DD_GMaps_LocationsModelLocation extends JModelAdmin
 
 			$data['latitude']  = $latlng['latitude'];
 			$data['longitude'] = $latlng['longitude'];
+		}
+
+		if (JFactory::getApplication()->isClient('site') && $data['id'] == '0')
+		{
+			$data['created_by'] = JFactory::getUser()->id;
 		}
 
 		if (parent::save($data))

@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -21,7 +21,7 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 	protected $alias;
 
-	protected $profile_id;
+	protected $emtpyFlag;
 
 	/**
 	 * Execute and display a template script.
@@ -33,15 +33,32 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 	 * @since Version 1.1.0.0
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Component configuration
 		$this->params     = JComponentHelper::getParams('com_dd_gmaps_locations');
 
 		$this->item = $this->get('Item');
 
-
 		$this->state = $this->get('State');
+
+		$this->emtpyFlag = array('','⚑');
+
+		// Get custom fields
+		JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+		$fields = FieldsHelper::getFields('com_dd_gmaps_locations.location', $this->item, true);
+
+		// Assigne custom fields to $this->item->jcfields
+		if($fields)
+		{
+			foreach ($fields as $key => $field)
+			{
+				if($field->value != '')
+				{
+					$this->item->jcfields[$field->id] = $field;
+				}
+			}
+		}
 
 		if (empty($this->item))
 		{
@@ -51,11 +68,11 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 
 		$params = $this->state->get('params');
 
-		// Set meta data hedaer from menu : default from item @TODO #29
+		// Set meta data header from menu : default from item @TODO #29
 		$doc = JFactory::getDocument();
-		$doc->setTitle($params->get('page_title') ? $params->get('page_title') : $this->item->title);
-		$doc->setMetaData('description', $params->get('menu-meta_description') ? $params->get('menu-meta_description') : $this->item->metadesc);
-		$doc->setMetaData('keywords', $params->get('menu-meta_keywords') ? $params->get('menu-meta_keywords') : $this->item->metakey);
+		$doc->setTitle($this->item->title);
+		$doc->setMetaData('description', $this->item->metadesc);
+		$doc->setMetaData('keywords', $this->item->metakey);
 		$doc->setMetaData('robots', $params->get('robots'));
 
 		// Check for errors.
@@ -65,6 +82,9 @@ class DD_GMaps_LocationsViewProfile extends JViewLegacy {
 		}
 
 		$this->prepareDocument();
+
+		// Input Set Profile ID for GMapsLocations launchInfoWindow
+		JFactory::getApplication()->input->set('profile_id', $this->item->id);
 
 		return parent::display($tpl);
 	}

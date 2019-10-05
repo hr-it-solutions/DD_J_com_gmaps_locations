@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -92,7 +92,8 @@ class DD_GMaps_LocationsRouter extends JComponentRouterBase
 
 		$allowed_views = array(
 			'locations',
-			'profile'
+			'profile',
+			'categories'
 		);
 
 		if (!isset($query['view']) || !in_array($query['view'], $allowed_views))

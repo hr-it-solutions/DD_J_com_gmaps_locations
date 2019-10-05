@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -32,6 +32,18 @@ class DD_GMaps_LocationsTableLocation extends JTable
 	 */
 	public function check()
 	{
+		if (trim($this->alias) == '')
+		{
+			$this->alias = $this->title;
+		}
+
+		$this->alias = JApplicationHelper::stringURLSafe($this->alias);
+
+		if (trim(str_replace('-', '', $this->alias)) == '')
+		{
+			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+		}
+
 		// If there is an ordering column and this is a new row then get the next ordering value
 		if (property_exists($this, 'ordering') && $this->id == 0)
 		{

@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Locations
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -21,6 +21,8 @@ else
 	$app = JFactory::getApplication();
 	$params = $app->getParams('com_dd_gmaps_locations');
 }
+
+$emtpyFlag = array('','⚑');
 
 ?>
 <address class="span6 location well">
@@ -43,7 +45,7 @@ else
 		<?php endif; ?>
 		<?php // Mark as new
 		$mark_as_new = (int) $params->get('mark_as_new', 0);
-		if( strtotime("-$mark_as_new days") < strtotime($item->created)):?>
+		if($mark_as_new AND strtotime("-$mark_as_new days") < strtotime($item->created)):?>
             <span class="label new"><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_NEW'); ?></span>
 		<?php endif; ?>
 		<?php // Featured
@@ -60,21 +62,6 @@ else
     <div class="row-col">
         <div class="span6">
             <div class="page-header map_bar">
-                <?php
-                if (isset($item->distance))
-                {
-	                if ($params->get('unit') == 'kilometers')
-	                {
-		                $item->distance = $item->distance * 1.609;
-		                echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE_KM', round($item->distance, 1));
-
-	                }
-	                else
-                    {
-	                    echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE', round($item->distance, 1));
-                    }
-                }
-                ?>
             </div>
             <?php
             if ($params->get('marker_in_entry') && $item->category_params && json_decode($item->category_params)->image): ?>
@@ -83,8 +70,19 @@ else
                  alt="<?php echo htmlspecialchars(json_decode($item->category_params)->image_alt); ?>">
 	        <?php endif; ?>
 			<?php echo htmlspecialchars($item->company, ENT_QUOTES, 'UTF-8'); ?><br>
-			<?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
-			<?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php if(!in_array($item->street, $emtpyFlag)):?>
+			    <?php echo htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php endif; ?>
+
+	        <?php if(!in_array($item->zip, $emtpyFlag) && !in_array($item->location, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8') . ' '; ?><br>
+	        <?php elseif(!in_array($item->zip, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php elseif(!in_array($item->location, $emtpyFlag)):?>
+		        <?php echo htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8'); ?><br>
+	        <?php endif; ?>
+
+
 			<?php echo $item->federalstate ? htmlspecialchars($item->federalstate, ENT_QUOTES, 'UTF-8') . ', ' : ' '; ?>
 			<?php echo JText::_($item->country); ?>
         </div>
@@ -92,7 +90,7 @@ else
             <div class="page-header map_bar">
 	            <?php // Show on map button
 	            if($params->get('show_on_map')):?>
-                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)">
+                <a class="showOnMap" data-showonmap_action="<?php echo $params->get('show_on_map_action') ?>" id="showID<?php echo $i; ?>" href="javascript:void(0)" rel="nofollow" >
 					<?php echo JText::_('COM_DD_GMAPS_LOCATIONS_SHOW_ON_MAP'); ?>
                 </a>
 	            <?php endif; ?>
