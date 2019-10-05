@@ -84,22 +84,6 @@ class  DD_GMaps_LocationsHelper extends JHelperContent
 			'index.php?option=com_categories&extension=com_dd_gmaps_locations'
 		);
 
-		// Fields
-		if (JComponentHelper::isEnabled('com_fields'))
-		{
-			JHtmlSidebar::addEntry(
-				JText::_('JGLOBAL_FIELDS'),
-				'index.php?option=com_fields&context=com_dd_gmaps_locations.location',
-				$vName == 'fields.fields'
-			);
-
-			JHtmlSidebar::addEntry(
-				JText::_('JGLOBAL_FIELD_GROUPS'),
-				'index.php?option=com_fields&view=groups&context=com_dd_gmaps_locations.location',
-				$vName == 'fields.groups'
-			);
-		}
-
 		// Markers
 		JHtmlSidebar::addEntry(
 			JText::_('COM_DD_GMAPS_LOCATIONS_SIDEBARTITLE_MARKERS'),

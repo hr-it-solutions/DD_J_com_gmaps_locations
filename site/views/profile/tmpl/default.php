@@ -107,24 +107,6 @@ defined('_JEXEC') or die;
     </div>
     <div class="row-fluid">
         <div class="span12 well">
-			<?php // Custom fields ?>
-            <?php if(isset($this->item->jcfields) && count($this->item->jcfields)): ?>
-            <div class="row-fluid">
-                <hr>
-                <h3><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_CUSTOMFIELDS'); ?></h3>
-                <hr>
-            </div>
-			<?php foreach ($this->item->jcfields as $jcfield): ?>
-                <div class="row-fluid">
-                    <div class="span6">
-						<b><?php echo $jcfield->name; ?>:</b>
-                    </div>
-                    <div class="span6">
-						<?php echo $jcfield->value; ?>
-                    </div>
-                </div>
-			<?php endforeach; ?>
-            <?php endif; ?>
 
 			<?php // Description ?>
             <div class="row-fluid">

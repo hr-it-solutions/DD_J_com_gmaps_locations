@@ -62,21 +62,6 @@ $emtpyFlag = array('','⚑');
     <div class="row-col">
         <div class="span6">
             <div class="page-header map_bar">
-                <?php
-                if (isset($item->distance))
-                {
-	                if ($params->get('unit') == 'kilometers')
-	                {
-		                $item->distance = $item->distance * 1.609;
-		                echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE_KM', round($item->distance, 1));
-
-	                }
-	                else
-                    {
-	                    echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_DISCTANCE', round($item->distance, 1));
-                    }
-                }
-                ?>
             </div>
             <?php
             if ($params->get('marker_in_entry') && $item->category_params && json_decode($item->category_params)->image): ?>
