@@ -1,6 +1,6 @@
 # DD_J_com_gmaps_locations
 An extendable Joomla! component for integrating Google Maps Locations.
-Location entries, location profile pages, location search, geolocation distance search, Google Maps module, customization options, etc… More than just maps: A reliable extension for building your own plattform or community based on Google Maps.
+Location entries, location profile pages, location search, geolocation search, Google Maps module, customization options, etc… More than just maps: A reliable extension for building your own plattform or community based on Google Maps.
 
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=102)](https://opensource.org/licenses/GPL-2.0/)
 
