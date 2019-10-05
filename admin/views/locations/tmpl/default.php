@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Locations
  *
  * @author     HR-IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2016 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2016 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -173,12 +173,19 @@ if ($saveOrder)
         <input type="hidden" name="boxchecked" value="0" />
         <?php echo JHtml::_('form.token'); ?>
 
+        <!-- Component Version Info -->
+        <div class="alert alert-success text-center">
+		    <?php echo JText::sprintf('COM_DD_GMAPS_LOCATIONS_VERSION', DD_GMaps_LocationsHelper::getComponentVersion()); ?>
+        </div>
+
+        <div class="alert alert-info text-center">
+            <h4><?php echo JText::_('COM_DD_GMAPS_LOCATIONS_VERSION_GET_PRO'); ?></h4>
+        </div>
+
+        <hr>
         <!-- Component Credits -->
-        <div class="row-fluid">
-            <hr>
-            <div class="text-center">
-                <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS', DD_GMaps_LocationsHelper::getComponentCoyright())); ?></small></p>
-            </div>
+        <div class="text-center">
+            <p><small><?php echo nl2br(JText::sprintf('COM_DD_GMAPS_LOCATIONS_CREDITS', DD_GMaps_LocationsHelper::getComponentCoyright())); ?></small></p>
         </div>
     </div>
 </form>
